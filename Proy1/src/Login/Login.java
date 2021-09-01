@@ -26,7 +26,7 @@ public class Login extends JFrame implements ActionListener{
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
         
         //IMAGEN IMPLEMENTADA EN EL PROGRAMA
-        Image imag = new ImageIcon("Logo.PNG").getImage();
+        Image imag = new ImageIcon("Imagenes/Logo.png").getImage();
         ImageIcon imge = new ImageIcon(imag.getScaledInstance(65, 65, Image.SCALE_SMOOTH));
         img = new JLabel(imge);
         img.setLayout(null);
