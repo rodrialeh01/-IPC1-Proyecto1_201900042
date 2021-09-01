@@ -1,4 +1,5 @@
 package Login;
+import Admin.Admin;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,25 +67,27 @@ public class Login extends JFrame implements ActionListener{
         contraseñas.addActionListener(this);
         this.add(contraseñas);
         
-        //RADIOBUTTON DE ADMIN
-        admin = new JRadioButton("Administrador");
-        admin.setFont(new Font("Arial",Font.PLAIN,15));
-        admin.setBounds(160,270,150,30);
-        admin.setVisible(true);
-        admin.setForeground(Color.BLACK);
-        admin.setBackground(Color.GRAY);
-        admin.addActionListener(this);
-        this.add(admin);
-        
-        //RADIOBUTTON DE VENDEDOR
-        vendedor = new JRadioButton("Vendedor");
-        vendedor.setFont(new Font("Arial",Font.PLAIN,15));
-        vendedor.setBounds(330,270,150,30);
-        vendedor.setVisible(true);
-        vendedor.setForeground(Color.BLACK);
-        vendedor.setBackground(Color.GRAY);
-        vendedor.addActionListener(this);
-        this.add(vendedor);
+//        //RADIOBUTTON DE ADMIN
+//        admin = new JRadioButton("Administrador");
+//        admin.setFont(new Font("Arial",Font.PLAIN,15));
+//        admin.setBounds(160,270,150,30);
+//        admin.setVisible(true);
+//        admin.setSelected(true);
+//        admin.setEnabled(false);
+//        admin.setForeground(Color.BLACK);
+//        admin.setBackground(Color.GRAY);
+//        admin.addActionListener(this);
+//        this.add(admin);
+//        
+//        //RADIOBUTTON DE VENDEDOR
+//        vendedor = new JRadioButton("Vendedor");
+//        vendedor.setFont(new Font("Arial",Font.PLAIN,15));
+//        vendedor.setBounds(330,270,150,30);
+//        vendedor.setVisible(true);
+//        vendedor.setForeground(Color.BLACK);
+//        vendedor.setBackground(Color.GRAY);
+//        vendedor.addActionListener(this);
+//        this.add(vendedor);
         
         //BOTON DE INICIO DE SESIÓN
         inicio = new JButton("Iniciar Sesión");
@@ -106,7 +109,17 @@ public class Login extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        
+        if (ae.getSource()==inicio){
+            usu = usuarios.getText();
+            contra = contraseñas.getText();
+            if (usu.equals("admin") && contra.equals("admin")) {
+                System.out.println("HOLA ADMIN");
+                Admin a = new Admin();
+                this.dispose();
+            }else{
+                System.out.println("ADIOS");
+            }
+        }
     }
     
 }
