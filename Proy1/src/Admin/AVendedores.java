@@ -1,9 +1,15 @@
 package Admin;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import javax.swing.*;
-public class AVendedores extends JPanel{
+public class AVendedores extends JPanel implements ActionListener{
     JButton crearv, cargarv, actualizarv, eliminarv, exportarv;
     JPanel graficav;
+    JTable tablav;
     public AVendedores(){
         //COLORES
         Color gris = new Color(204,201,201);
@@ -22,6 +28,7 @@ public class AVendedores extends JPanel{
         cargarv.setBounds(1100, 10, 150, 50);
         cargarv.setFont(new Font("Arial", Font.PLAIN,15));
         cargarv.setBackground(azulito);
+        cargarv.addActionListener(this);
         cargarv.setVisible(true);
         this.add(cargarv);
         
@@ -56,10 +63,62 @@ public class AVendedores extends JPanel{
         graficav.setBackground(azulito);
         this.add(graficav);
         
-        JLabel lbl1 = new JLabel("Pestaña Vendedores");
-        lbl1.setBounds(10,11,348,14);
-        this.add(lbl1);
+        //TABLA
+        String [] encabezado = {"Código","Nombre","Caja","Ventas","Género"};
+        Object [][] fila1 = {{"1","rodri","100","23","m"}};
+        tablav = new JTable(fila1,encabezado);
+        JScrollPane sp= new JScrollPane(tablav);
+        sp.setBounds(20, 10, 800, 600);
+        this.add(sp);
+        
+        //DISEÑO PANEL
         this.setBackground(gris);
         this.setLayout(null);
+    }
+    
+    String contenido = "";
+    File archivo;
+    FileReader fr;
+    BufferedReader br;
+    
+    //METODO PARA LEER UN ARCHIVO
+    public void leerArchivoV(){        
+        try{
+            //SE USA UN JFILECHOOSER PARA QUE SE ABRA UNA VENTANA QUE ABRA UN ARCHIVO
+            JFileChooser fc = new JFileChooser();
+            int op = fc.showOpenDialog(this);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                System.out.println(fc.getSelectedFile());
+                archivo = fc.getSelectedFile();
+            }
+            //SE LEE EL ARCHIVO
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            // LEERA EL ARCHIVO LINEA POR LINEA
+            while ((linea = br.readLine()) != null) {
+                // Solo agregamos el contenido a un String
+                contenido += linea;
+            }
+            System.out.println(contenido);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "No se pudo abrir el archivo");
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource()==cargarv){
+            leerArchivoV();
+        }
     }
 }

@@ -67,32 +67,10 @@ public class Login extends JFrame implements ActionListener{
         contraseñas.addActionListener(this);
         this.add(contraseñas);
         
-//        //RADIOBUTTON DE ADMIN
-//        admin = new JRadioButton("Administrador");
-//        admin.setFont(new Font("Arial",Font.PLAIN,15));
-//        admin.setBounds(160,270,150,30);
-//        admin.setVisible(true);
-//        admin.setSelected(true);
-//        admin.setEnabled(false);
-//        admin.setForeground(Color.BLACK);
-//        admin.setBackground(Color.GRAY);
-//        admin.addActionListener(this);
-//        this.add(admin);
-//        
-//        //RADIOBUTTON DE VENDEDOR
-//        vendedor = new JRadioButton("Vendedor");
-//        vendedor.setFont(new Font("Arial",Font.PLAIN,15));
-//        vendedor.setBounds(330,270,150,30);
-//        vendedor.setVisible(true);
-//        vendedor.setForeground(Color.BLACK);
-//        vendedor.setBackground(Color.GRAY);
-//        vendedor.addActionListener(this);
-//        this.add(vendedor);
-        
         //BOTON DE INICIO DE SESIÓN
         inicio = new JButton("Iniciar Sesión");
         inicio.setFont(new Font("Arial", Font.PLAIN,15));
-        inicio.setBounds(240,330,150,30);
+        inicio.setBounds(240,280,150,30);
         inicio.setVisible(true);
         inicio.addActionListener(this);
         this.add(inicio);
@@ -117,7 +95,7 @@ public class Login extends JFrame implements ActionListener{
                 Admin a = new Admin();
                 this.dispose();
             }else{
-                System.out.println("ADIOS");
+                JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
             }
         }
     }
