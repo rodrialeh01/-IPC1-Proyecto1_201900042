@@ -9,7 +9,8 @@ public class Admin extends JFrame implements ActionListener{
     private JPanel Panel;
     JButton cierre;
     public Admin(){
-        
+        //COLORES
+        Color rojo = new Color(191,22,22);
         Color azul = new Color(38,36,89);
         
         //PANEL1
@@ -21,6 +22,9 @@ public class Admin extends JFrame implements ActionListener{
         //PESTAÑAS
         JTabbedPane pp = new JTabbedPane(JTabbedPane.TOP);
         pp.setBounds(10,11,1290,650);
+        pp.setBackground(Color.BLACK);
+        pp.setForeground(Color.WHITE);
+        pp.setFont(new Font("Arial", Font.PLAIN,15));
         Panel.add(pp);
         
         //PANEL DE SUCURSALES
@@ -44,11 +48,11 @@ public class Admin extends JFrame implements ActionListener{
         
         //BOTON DE CERRAR SESIÓN
         cierre = new JButton("Cerrar Sesión");
-        cierre.setFont(new Font("Arial", Font.PLAIN,10));
+        cierre.setFont(new Font("Arial", Font.PLAIN,15));
         cierre.setBounds(1150,0,150,30);
         cierre.addActionListener(this);
         cierre.setVisible(true);        
-        cierre.setBackground(Color.RED);
+        cierre.setBackground(rojo);
         cierre.setForeground(Color.WHITE);
         this.add(cierre);
         
