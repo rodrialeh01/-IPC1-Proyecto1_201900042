@@ -12,6 +12,7 @@ public class Proy1 {
     public static void main(String[] args) {
         Login l = new Login();
         //Admin a = new Admin();
+//        Formcs f = new Formcs();
     }
     /**
      * ================================SUCURSALES================================

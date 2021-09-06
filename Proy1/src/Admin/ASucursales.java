@@ -27,6 +27,7 @@ public class ASucursales extends JPanel implements ActionListener{
         crears.setFont(new Font("Arial", Font.PLAIN,15));
         crears.setBackground(azulito);
         crears.setVisible(true);
+        crears.addActionListener(this);
         this.add(crears);
         
         //BOTON CARGA MASIVA
@@ -141,6 +142,8 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON DE CARGA MASIVA
         if (ae.getSource()==cargars){
             leerArchivoS();
+        }else if (ae.getSource()==crears) {
+            Formcs fcs = new Formcs();
         }
     }
 }
