@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 public class Admin extends JFrame implements ActionListener{
     private JPanel Panel;
-    JButton cierre;
+    JButton cierre, actualizar;
     public Admin(){
         //COLORES
         Color rojo = new Color(191,22,22);
@@ -56,6 +56,16 @@ public class Admin extends JFrame implements ActionListener{
         cierre.setForeground(Color.WHITE);
         this.add(cierre);
         
+        //BOTON DE ACTUALIZAR
+        actualizar = new JButton("Actualizar");
+        actualizar.setFont(new Font("Arial", Font.PLAIN,15));
+        actualizar.setBounds(950,0,150,30);
+        actualizar.addActionListener(this);
+        actualizar.setVisible(true);        
+        actualizar.setBackground(Color.GRAY);
+        actualizar.setForeground(Color.WHITE);
+        this.add(actualizar);
+        
         //DISEÑO DE LA VENTANA
         this.setTitle("Administrador | Blue Mall - POS");
         this.setBounds(20,20,1320,700);
@@ -71,6 +81,10 @@ public class Admin extends JFrame implements ActionListener{
         if (ae.getSource()==cierre){
             this.dispose();
             Login l = new Login();
+        }
+        else if (ae.getSource()==actualizar) {
+            this.dispose();
+            Admin a = new Admin();
         }
     }
 }

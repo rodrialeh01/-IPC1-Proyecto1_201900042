@@ -1,4 +1,8 @@
 package Admin;
+import Clases.Vendedores;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,10 +10,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import javax.swing.*;
+import proy1.Proy1;
 public class AVendedores extends JPanel implements ActionListener{
     JButton crearv, cargarv, actualizarv, eliminarv, exportarv;
     JPanel graficav;
-    JTable tablav;
+    static JTable tablav;
+    static Object[][] datos;
     public AVendedores(){
         //COLORES
         Color gris = new Color(204,201,201);
@@ -65,8 +71,9 @@ public class AVendedores extends JPanel implements ActionListener{
         
         //TABLA
         String [] encabezado = {"Código","Nombre","Caja","Ventas","Género"};
-        Object [][] fila1 = {{"1","rodri","100","23","m"}};
-        tablav = new JTable(fila1,encabezado);
+//        Object [][] fila1 = {{"1","rodri","100","23","m"}};
+        datos = Proy1.convertirDVendedores();
+        tablav = new JTable(datos,encabezado);
         JScrollPane sp= new JScrollPane(tablav);
         sp.setBounds(20, 10, 800, 600);
         this.add(sp);
@@ -101,6 +108,7 @@ public class AVendedores extends JPanel implements ActionListener{
                 contenido += linea;
             }
             System.out.println(contenido);
+            convertirjson(contenido);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "No se pudo abrir el archivo");
@@ -114,9 +122,32 @@ public class AVendedores extends JPanel implements ActionListener{
             }
         }
     }
+    
+    //METODO PARA QUE LEA EL ARCHIVO JSON Y LO META DENTRO DE LOS OBJETOS
+    public void convertirjson(String c){
+        JsonParser parser = new JsonParser();
+        JsonArray ja = parser.parse(c).getAsJsonArray();
+        System.out.println("Tiene : " + ja.size() + " objetos");
+        
+        for (int i = 0; i < ja.size(); i++) {
+            JsonObject jobj = ja.get(i).getAsJsonObject();
+            
+            int codigo = jobj.get("codigo").getAsInt();
+            String nombre = jobj.get("nombre").getAsString();
+            int caja = jobj.get("caja").getAsInt();
+            int ventas = jobj.get("ventas").getAsInt();
+            String genero = jobj.get("genero").getAsString();
+            
+            Vendedores nuevo = new Vendedores(codigo,nombre,caja,ventas,genero);
+            Proy1.AgregarVendedor(nuevo);
+        }
+        Proy1.LeerVendedor();
+    }
 
+    //ACCIONES DE LOS BOTONES
     @Override
     public void actionPerformed(ActionEvent ae) {
+        //BOTON CARGA MASIVA
         if (ae.getSource()==cargarv){
             leerArchivoV();
         }

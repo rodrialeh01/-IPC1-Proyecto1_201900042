@@ -1,4 +1,7 @@
 package Admin;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,10 +9,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import javax.swing.*;
+import Clases.Sucursales;
+import proy1.Proy1;
 public class ASucursales extends JPanel implements ActionListener{
-    JButton crears, cargars, actualizars, eliminars, exportars;
-    JTable tablas;
+    JButton crears, cargars, actualizars, eliminars, exportars, actualizarps;
+    static JTable tablas;
     JPanel esptab;
+    static Object[][] datos;
     public ASucursales(){
         //COLORES
         Color gris = new Color(204,201,201);
@@ -56,15 +62,10 @@ public class ASucursales extends JPanel implements ActionListener{
         exportars.setVisible(true);
         this.add(exportars);
         
-//        //PANEL PARA LA TABLA
-//        esptab = new JPanel();
-//        esptab.setBounds(20,10,620,600);
-//        esptab.setBackground(azulito);
-//        this.add(esptab);
-        
         String [] encabezado = {"Código","Nombre","Dirreción","Correo","Teléfono"};
-        Object [][] fila1 = {{"1","Gasolinita","san lucas","gasolinita@g.com","53085107"}};
-        tablas = new JTable(fila1,encabezado);
+        //Object [][] fila1 = {{"1","Gasolinita","san lucas","gasolinita@g.com","53085107"}};
+        datos = Proy1.convertirDSucursales();        
+        tablas = new JTable(datos,encabezado);
         JScrollPane sp= new JScrollPane(tablas);
         sp.setBounds(20, 10, 800, 600);
         this.add(sp);
@@ -98,6 +99,7 @@ public class ASucursales extends JPanel implements ActionListener{
                 contenido += linea;
             }
             System.out.println(contenido);
+            convertirjson(contenido);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "No se pudo abrir el archivo");
@@ -111,9 +113,32 @@ public class ASucursales extends JPanel implements ActionListener{
             }
         }
     }
-
+    
+    //METODO PARA QUE LEA EL ARCHIVO JSON Y LO META DENTRO DE LOS OBJETOS
+    public void convertirjson(String c){
+        JsonParser parser = new JsonParser();
+        JsonArray ja = parser.parse(c).getAsJsonArray();
+        System.out.println("Tiene : " + ja.size() + " objetos");
+        
+        for (int i = 0; i < ja.size(); i++) {
+            JsonObject jobj = ja.get(i).getAsJsonObject();
+            
+            int codigo = jobj.get("codigo").getAsInt();
+            String nombre = jobj.get("nombre").getAsString();
+            String direccion = jobj.get("direccion").getAsString();
+            String correo = jobj.get("correo").getAsString();
+            int telefono = jobj.get("telefono").getAsInt();
+            
+            Sucursales nuevo = new Sucursales(codigo,nombre,direccion,correo,telefono);
+            Proy1.AgregarSucursales(nuevo);
+        }
+        Proy1.LeerSucursales();
+    }
+    
+    //ACCIONES DE LOS BOTONES
     @Override
     public void actionPerformed(ActionEvent ae) {
+        //BOTON DE CARGA MASIVA
         if (ae.getSource()==cargars){
             leerArchivoS();
         }
