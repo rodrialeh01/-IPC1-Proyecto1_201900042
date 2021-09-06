@@ -27,6 +27,7 @@ public class AClientes extends JPanel implements ActionListener{
         crearc.setFont(new Font("Arial", Font.PLAIN,15));
         crearc.setBackground(azulito);
         crearc.setVisible(true);
+        crearc.addActionListener(this);
         this.add(crearc);
         
         //BOTON MODIFICAR
@@ -136,7 +137,7 @@ public class AClientes extends JPanel implements ActionListener{
             String correo = jobj.get("correo").getAsString();
             String genero = jobj.get("genero").getAsString();
             
-            Clientes nuevo = new Clientes(codigo,nombre,nit,correo,genero);
+            Clientes nuevo = new Clientes(codigo,nombre,nit,correo,genero.toUpperCase());
             Proy1.AgregarCliente(nuevo);
         }
         Proy1.LeerCliente();
@@ -148,6 +149,10 @@ public class AClientes extends JPanel implements ActionListener{
         //BOTON DE CARGA MASIVA
         if (ae.getSource()==cargarc){
             leerArchivoC();
+        }
+        //BOTON CREAR CLIENTE
+        else if (ae.getSource()==crearc) {
+            Formcc fcc = new Formcc();
         }
     }
 }

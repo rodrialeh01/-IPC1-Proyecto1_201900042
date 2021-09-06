@@ -142,7 +142,9 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON DE CARGA MASIVA
         if (ae.getSource()==cargars){
             leerArchivoS();
-        }else if (ae.getSource()==crears) {
+        }
+        //BOTON CREAR SUCURSAL
+        else if (ae.getSource()==crears) {
             Formcs fcs = new Formcs();
         }
     }

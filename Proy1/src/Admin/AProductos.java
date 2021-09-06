@@ -29,6 +29,7 @@ public class AProductos extends JPanel implements ActionListener{
         crearp.setFont(new Font("Arial", Font.PLAIN,15));
         crearp.setBackground(azulito);
         crearp.setVisible(true);
+        crearp.addActionListener(this);
         this.add(crearp);
         
         //BOTON MODIFICAR
@@ -150,6 +151,10 @@ public class AProductos extends JPanel implements ActionListener{
         //BOTON CARGA MASIVA
         if (ae.getSource()==cargarp){
             leerArchivoP();
+        }
+        //BOTON CREAR PRODUCTO
+        else if (ae.getSource()==crearp) {
+            Formcp fcp = new Formcp();
         }
     }
 }

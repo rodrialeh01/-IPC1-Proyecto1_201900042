@@ -27,6 +27,7 @@ public class AVendedores extends JPanel implements ActionListener{
         crearv.setFont(new Font("Arial", Font.PLAIN,15));
         crearv.setBackground(azulito);
         crearv.setVisible(true);
+        crearv.addActionListener(this);
         this.add(crearv);
         
         //BOTON MODIFICAR
@@ -138,7 +139,7 @@ public class AVendedores extends JPanel implements ActionListener{
             int ventas = jobj.get("ventas").getAsInt();
             String genero = jobj.get("genero").getAsString();
             
-            Vendedores nuevo = new Vendedores(codigo,nombre,caja,ventas,genero);
+            Vendedores nuevo = new Vendedores(codigo,nombre,caja,ventas,genero.toUpperCase());
             Proy1.AgregarVendedor(nuevo);
         }
         Proy1.LeerVendedor();
@@ -150,6 +151,10 @@ public class AVendedores extends JPanel implements ActionListener{
         //BOTON CARGA MASIVA
         if (ae.getSource()==cargarv){
             leerArchivoV();
+        }
+        //BOTON CREAR VENDEDOR
+        else if (ae.getSource()==crearv) {
+            Formcv fcv = new Formcv();
         }
     }
 }

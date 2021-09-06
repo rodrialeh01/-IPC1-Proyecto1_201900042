@@ -1,22 +1,22 @@
 package Admin;
-import Clases.Sucursales;
+import Clases.Clientes;
 import proy1.Proy1;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-public class Formcs extends JFrame implements ActionListener{
-    JLabel titulo, lcod, lnombre, ldireccion, lcorreo, ltelefono;
-    JTextField tcod, tnombre, tdireccion, tcorreo, ttelefono;
+public class Formcc extends JFrame implements ActionListener{
+    JLabel titulo, lcod, lnombre, lnit, lcorreo, lgenero;
+    JTextField tcod, tnombre, tnit, tcorreo, tgenero;
     JButton agregar;
-    String codigo, nombre, direccion,correo,telefono;
-    public Formcs(){
+    String codigo, nombre, nit,correo,genero;
+    public Formcc(){
         //COLORES
         Color azul = new Color(38,36,89);
         
         //TITULO
-        titulo = new JLabel("Crear nueva Sucursal");
+        titulo = new JLabel("Crear nuevo Cliente");
         titulo.setFont(new Font("Arial", Font.PLAIN,25));
         titulo.setBounds(120,30,250,30);
         titulo.setVisible(true);
@@ -53,22 +53,22 @@ public class Formcs extends JFrame implements ActionListener{
         tnombre.setVisible(true);
         this.add(tnombre);
         
-        //LABEL DE DIRECCION
-        ldireccion = new JLabel("Dirección:");
-        ldireccion.setFont(new Font("Arial", Font.PLAIN,18));
-        ldireccion.setBounds(40,260,100,30);
-        ldireccion.setVisible(true);
-        ldireccion.setForeground(Color.WHITE);
-        this.add(ldireccion);
+        //LABEL DE DESCRIPCION
+        lnit = new JLabel("NIT:");
+        lnit.setFont(new Font("Arial", Font.PLAIN,18));
+        lnit.setBounds(40,260,100,30);
+        lnit.setVisible(true);
+        lnit.setForeground(Color.WHITE);
+        this.add(lnit);
         
-        //TEXTFIELD PARA INGRESAR LA DIRECCION
-        tdireccion = new JTextField();
-        tdireccion.setBounds(140,260,280,30);
-        tdireccion.setFont(new Font("Arial", Font.PLAIN,18));
-        tdireccion.setVisible(true);
-        this.add(tdireccion);
+        //TEXTFIELD PARA INGRESAR LA DESCRIPCION
+        tnit = new JTextField();
+        tnit.setBounds(140,260,280,30);
+        tnit.setFont(new Font("Arial", Font.PLAIN,18));
+        tnit.setVisible(true);
+        this.add(tnit);
         
-        //LABEL DE CORREO
+        //LABEL DE CANTIDAD
         lcorreo = new JLabel("Correo:");
         lcorreo.setFont(new Font("Arial", Font.PLAIN,18));
         lcorreo.setBounds(40,340,100,30);
@@ -76,27 +76,27 @@ public class Formcs extends JFrame implements ActionListener{
         lcorreo.setForeground(Color.WHITE);
         this.add(lcorreo);
         
-        //TEXTFIELD PARA INGRESAR EL CORREO
+        //TEXTFIELD PARA INGRESAR LA CANTIDAD
         tcorreo = new JTextField();
         tcorreo.setBounds(140,340,280,30);
         tcorreo.setFont(new Font("Arial", Font.PLAIN,18));
         tcorreo.setVisible(true);
         this.add(tcorreo);
         
-        //LABEL DE TELEFONO
-        ltelefono = new JLabel("Telefono:");
-        ltelefono.setFont(new Font("Arial", Font.PLAIN,18));
-        ltelefono.setBounds(40,420,100,30);
-        ltelefono.setVisible(true);
-        ltelefono.setForeground(Color.WHITE);
-        this.add(ltelefono);
+        //LABEL DE PRECIO
+        lgenero = new JLabel("Genero:");
+        lgenero.setFont(new Font("Arial", Font.PLAIN,18));
+        lgenero.setBounds(40,420,100,30);
+        lgenero.setVisible(true);
+        lgenero.setForeground(Color.WHITE);
+        this.add(lgenero);
         
-        //TEXTFIELD PARA INGRESAR EL TELEFONO
-        ttelefono = new JTextField();
-        ttelefono.setBounds(140,420,280,30);
-        ttelefono.setFont(new Font("Arial", Font.PLAIN,18));
-        ttelefono.setVisible(true);
-        this.add(ttelefono);
+        //TEXTFIELD PARA INGRESAR EL PRECIO
+        tgenero = new JTextField();
+        tgenero.setBounds(140,420,280,30);
+        tgenero.setFont(new Font("Arial", Font.PLAIN,18));
+        tgenero.setVisible(true);
+        this.add(tgenero);
         
         //BOTON DE AGREGAR
         agregar = new JButton("Agregar");
@@ -111,7 +111,7 @@ public class Formcs extends JFrame implements ActionListener{
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
         
         //DISEÑO DE LA VENTANA
-        this.setTitle("Crear Sucursal | Blue Mall - POS");
+        this.setTitle("Crear Cliente | Blue Mall - POS");
         this.setBounds(450,100,500,600);
         this.getContentPane().setBackground(azul);
         this.setLayout(null);
@@ -119,22 +119,24 @@ public class Formcs extends JFrame implements ActionListener{
         this.setVisible(true);
     }
 
-    //PROGRAMA LAS ACCIONES DE LOS BOTONES
+    //PROGRAMA LAS ACCIONES DEL BOTON
     @Override
     public void actionPerformed(ActionEvent ae) {
-       // BOTON AGREGAR
+        // BOTON AGREGAR
         if (ae.getSource()==agregar){
             codigo = tcod.getText();
             nombre = tnombre.getText();
-            direccion = tdireccion.getText();
+            nit = tnit.getText();
             correo = tcorreo.getText();
-            telefono = ttelefono.getText();
-            if (codigo.equals("") || nombre.equals("") || direccion.equals("") || correo.equals("") || telefono.equals("")) {
-                JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos.");
+            genero = tgenero.getText();
+            if (codigo.equals("") || nombre.equals("") || nit.equals("") || correo.equals("") || genero.equals("")) {
+                JOptionPane.showMessageDialog(this, "Llene todos los espacios");
+            }else if(!genero.equals("F") || !genero.equals("M") || !genero.equals("m") || !genero.equals("f")){
+                JOptionPane.showMessageDialog(this, "Escriba el género unicamente poniendo \"F\" o \"f\" o \"m\" o \"M\"");
             }else{                
-                Sucursales nuevo = new Sucursales(Integer.parseInt(codigo),nombre,direccion,correo,Integer.parseInt(telefono));
-                Proy1.AgregarSucursales(nuevo);
-                JOptionPane.showMessageDialog(this, "Se agregó correctamente la nueva Sucursal");
+                Clientes nuevo = new Clientes(Integer.parseInt(codigo),nombre,Integer.parseInt(nit),correo,genero.toUpperCase());
+                Proy1.AgregarCliente(nuevo);
+                JOptionPane.showMessageDialog(this, "Se agregó correctamente el nuevo Cliente");
                 this.dispose();
             }
         }
