@@ -136,6 +136,7 @@ public class Formcs extends JFrame implements ActionListener{
                     Sucursales nuevo = new Sucursales(Integer.parseInt(codigo), nombre, direccion, correo, Integer.parseInt(telefono));
                     Proy1.AgregarSucursales(nuevo);
                     JOptionPane.showMessageDialog(this, "Se agregó correctamente la nueva Sucursal");
+                    Proy1.LeerSucursales();
                     this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(this, "El código de Sucursal No." + codigo + " ya esta en uso, pruebe con otro");
@@ -146,6 +147,7 @@ public class Formcs extends JFrame implements ActionListener{
         }
         
     }
+    //VERIFICA SI YA EXISTE EL OBJETO
     public boolean verificar(int cods) {
         for (int i = 0; i<Proy1.sucursales.length; i++) {
             if (Proy1.sucursales[i]!=null && Proy1.sucursales[i].getCodigo()==cods) {

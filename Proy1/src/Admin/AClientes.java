@@ -54,6 +54,7 @@ public class AClientes extends JPanel implements ActionListener{
         eliminarc.setFont(new Font("Arial", Font.PLAIN,15));
         eliminarc.setBackground(azulito);
         eliminarc.setVisible(true);
+        eliminarc.addActionListener(this);
         this.add(eliminarc);
         
         //BOTON EXPORTAR
@@ -62,6 +63,7 @@ public class AClientes extends JPanel implements ActionListener{
         exportarc.setFont(new Font("Arial", Font.PLAIN,15));
         exportarc.setBackground(azulito);
         exportarc.setVisible(true);
+        exportarc.addActionListener(this);
         this.add(exportarc);
         
         //PANEL DE GRAFICA
@@ -156,8 +158,8 @@ public class AClientes extends JPanel implements ActionListener{
             Formcc fcc = new Formcc();
         }
         //BOTON ACTUALIZAR CLIENTE
-//        else if (ae.getSource()==actualizarc) {
-//            Formac fac = new Formac();
-//        }
+        else if (ae.getSource()==actualizarc) {
+            Formac fac = new Formac();
+        }
     }
 }

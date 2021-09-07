@@ -54,6 +54,7 @@ public class ASucursales extends JPanel implements ActionListener{
         eliminars.setFont(new Font("Arial", Font.PLAIN,15));
         eliminars.setBackground(azulito);
         eliminars.setVisible(true);
+        eliminars.addActionListener(this);
         this.add(eliminars);
         
         //BOTON EXPORTAR
@@ -62,6 +63,7 @@ public class ASucursales extends JPanel implements ActionListener{
         exportars.setFont(new Font("Arial", Font.PLAIN,15));
         exportars.setBackground(azulito);
         exportars.setVisible(true);
+        exportars.addActionListener(this);
         this.add(exportars);
         
         String [] encabezado = {"Código","Nombre","Dirreción","Correo","Teléfono"};

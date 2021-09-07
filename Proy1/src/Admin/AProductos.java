@@ -47,6 +47,7 @@ public class AProductos extends JPanel implements ActionListener{
         actualizarp.setFont(new Font("Arial", Font.PLAIN,15));
         actualizarp.setBackground(azulito);
         actualizarp.setVisible(true);
+        actualizarp.addActionListener(this);
         this.add(actualizarp);
         
         //BOTON ELIMINAR
@@ -55,6 +56,7 @@ public class AProductos extends JPanel implements ActionListener{
         eliminarp.setFont(new Font("Arial", Font.PLAIN,15));
         eliminarp.setBackground(azulito);
         eliminarp.setVisible(true);
+        eliminarp.addActionListener(this);
         this.add(eliminarp);
         
         //BOTON EXPORTAR
@@ -63,6 +65,7 @@ public class AProductos extends JPanel implements ActionListener{
         exportarp.setFont(new Font("Arial", Font.PLAIN,15));
         exportarp.setBackground(azulito);
         exportarp.setVisible(true);
+        exportarp.addActionListener(this);
         this.add(exportarp);
         
         //PANEL DE GRAFICA
@@ -155,6 +158,10 @@ public class AProductos extends JPanel implements ActionListener{
         //BOTON CREAR PRODUCTO
         else if (ae.getSource()==crearp) {
             Formcp fcp = new Formcp();
+        }
+        //BOTON ACTUALIZAR PRODUCTO
+        else if (ae.getSource()==actualizarp) {
+            Formap fap = new Formap();
         }
     }
 }

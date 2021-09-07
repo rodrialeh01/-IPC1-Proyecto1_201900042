@@ -1,23 +1,21 @@
 package Admin;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import proy1.Proy1;
-
-public class Formas extends JFrame implements ActionListener{
-    JLabel titulo, lcod, lnombre, ldireccion, lcorreo, ltelefono;
-    JTextField tcod, tnombre, tdireccion, tcorreo, ttelefono;
+public class Formac extends JFrame implements ActionListener{
+    JLabel titulo, lcod, lnombre, lnit, lcorreo, lgenero;
+    JTextField tcod, tnombre, tnit, tcorreo, tgenero;
     JButton actualizar, buscar;
-    String codigo, nombre, direccion,correo,telefono;
-    public Formas(){
+    String codigo, nombre, nit,correo,genero;
+    public Formac(){
         //COLORES
         Color azul = new Color(38,36,89);
         
         //TITULO
-        titulo = new JLabel("Actualizar Sucursal");
+        titulo = new JLabel("Actualizar Cliente");
         titulo.setFont(new Font("Arial", Font.PLAIN,25));
         titulo.setBounds(120,30,250,30);
         titulo.setVisible(true);
@@ -63,23 +61,23 @@ public class Formas extends JFrame implements ActionListener{
         tnombre.setEnabled(false);
         this.add(tnombre);
         
-        //LABEL DE DIRECCION
-        ldireccion = new JLabel("Dirección:");
-        ldireccion.setFont(new Font("Arial", Font.PLAIN,18));
-        ldireccion.setBounds(40,260,100,30);
-        ldireccion.setVisible(true);
-        ldireccion.setForeground(Color.WHITE);
-        this.add(ldireccion);
+        //LABEL DE DESCRIPCION
+        lnit = new JLabel("NIT:");
+        lnit.setFont(new Font("Arial", Font.PLAIN,18));
+        lnit.setBounds(40,260,100,30);
+        lnit.setVisible(true);
+        lnit.setForeground(Color.WHITE);
+        this.add(lnit);
         
-        //TEXTFIELD PARA INGRESAR LA DIRECCION
-        tdireccion = new JTextField();
-        tdireccion.setBounds(140,260,280,30);
-        tdireccion.setFont(new Font("Arial", Font.PLAIN,18));
-        tdireccion.setVisible(true);
-        tdireccion.setEnabled(false);
-        this.add(tdireccion);
+        //TEXTFIELD PARA INGRESAR LA DESCRIPCION
+        tnit = new JTextField();
+        tnit.setBounds(140,260,280,30);
+        tnit.setFont(new Font("Arial", Font.PLAIN,18));
+        tnit.setVisible(true);
+        tnit.setEnabled(false);
+        this.add(tnit);
         
-        //LABEL DE CORREO
+        //LABEL DE CANTIDAD
         lcorreo = new JLabel("Correo:");
         lcorreo.setFont(new Font("Arial", Font.PLAIN,18));
         lcorreo.setBounds(40,340,100,30);
@@ -87,7 +85,7 @@ public class Formas extends JFrame implements ActionListener{
         lcorreo.setForeground(Color.WHITE);
         this.add(lcorreo);
         
-        //TEXTFIELD PARA INGRESAR EL CORREO
+        //TEXTFIELD PARA INGRESAR LA CANTIDAD
         tcorreo = new JTextField();
         tcorreo.setBounds(140,340,280,30);
         tcorreo.setFont(new Font("Arial", Font.PLAIN,18));
@@ -95,21 +93,21 @@ public class Formas extends JFrame implements ActionListener{
         tcorreo.setEnabled(false);
         this.add(tcorreo);
         
-        //LABEL DE TELEFONO
-        ltelefono = new JLabel("Telefono:");
-        ltelefono.setFont(new Font("Arial", Font.PLAIN,18));
-        ltelefono.setBounds(40,420,100,30);
-        ltelefono.setVisible(true);
-        ltelefono.setForeground(Color.WHITE);
-        this.add(ltelefono);
+        //LABEL DE PRECIO
+        lgenero = new JLabel("Genero:");
+        lgenero.setFont(new Font("Arial", Font.PLAIN,18));
+        lgenero.setBounds(40,420,100,30);
+        lgenero.setVisible(true);
+        lgenero.setForeground(Color.WHITE);
+        this.add(lgenero);
         
-        //TEXTFIELD PARA INGRESAR EL TELEFONO
-        ttelefono = new JTextField();
-        ttelefono.setBounds(140,420,280,30);
-        ttelefono.setFont(new Font("Arial", Font.PLAIN,18));
-        ttelefono.setVisible(true);
-        ttelefono.setEnabled(false);
-        this.add(ttelefono);
+        //TEXTFIELD PARA INGRESAR EL PRECIO
+        tgenero = new JTextField();
+        tgenero.setBounds(140,420,280,30);
+        tgenero.setFont(new Font("Arial", Font.PLAIN,18));
+        tgenero.setVisible(true);
+        tgenero.setEnabled(false);
+        this.add(tgenero);
         
         //BOTON DE ACTUALIZAR
         actualizar = new JButton("Actualizar");
@@ -125,7 +123,7 @@ public class Formas extends JFrame implements ActionListener{
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
         
         //DISEÑO DE LA VENTANA
-        this.setTitle("Crear Sucursal | Blue Mall - POS");
+        this.setTitle("Actualizar Cliente | Blue Mall - POS");
         this.setBounds(450,100,500,600);
         this.getContentPane().setBackground(azul);
         this.setLayout(null);
@@ -139,49 +137,54 @@ public class Formas extends JFrame implements ActionListener{
         //SE HACE LA LECTURA DE LOS JTEXTFIELD
         codigo = tcod.getText();
         nombre = tnombre.getText();
-        direccion = tdireccion.getText();
+        nit = tnit.getText();
         correo = tcorreo.getText();
-        telefono = ttelefono.getText();
+        genero = tgenero.getText();
         boolean opcion = false;
         //BOTON BUSCAR
         if (ae.getSource()==buscar) {            
-            for (int i = 0; i < Proy1.sucursales.length; i++) {
-                //VALIDAR SI EXISTE LA SUCURSAL
-                if (Proy1.sucursales[i] !=null && Proy1.sucursales[i].getCodigo()== Integer.parseInt(codigo)) {                
+            for (int i = 0; i < Proy1.clientes.length; i++) {
+                //VALIDAR SI EXISTE EL PRODUCTO
+                if (Proy1.clientes[i] !=null && Proy1.clientes[i].getCodigo()== Integer.parseInt(codigo)) {                
                     opcion = true;
                     tcod.setEnabled(false);
                     buscar.setEnabled(false);
                     tnombre.setEnabled(true);
-                    tdireccion.setEnabled(true);
+                    tnit.setEnabled(true);
                     tcorreo.setEnabled(true);
-                    ttelefono.setEnabled(true);
+                    tgenero.setEnabled(true);
                     actualizar.setEnabled(true);
-                    tnombre.setText(Proy1.sucursales[i].getNombre());
-                    tdireccion.setText(Proy1.sucursales[i].getDireccion());
-                    tcorreo.setText(Proy1.sucursales[i].getCorreo());
-                    ttelefono.setText(String.valueOf(Proy1.sucursales[i].getTelefono())); 
+                    tnombre.setText(Proy1.clientes[i].getNombre());
+                    tnit.setText(String.valueOf(Proy1.clientes[i].getNit()));
+                    tcorreo.setText(Proy1.clientes[i].getCorreo());
+                    tgenero.setText(Proy1.clientes[i].getGenero()); 
                 }
             }
             if (opcion == false) {
-                JOptionPane.showMessageDialog(this, "No se encontró la sucursal");
+                JOptionPane.showMessageDialog(this, "No se encontró el Cliente");
             }else{
-                JOptionPane.showMessageDialog(this, "Se encontro la Sucursal");
+                JOptionPane.showMessageDialog(this, "Se encontro al Cliente");
             }
         }
         //BOTON ACTUALIZAR
         else if (ae.getSource()==actualizar) {
             //HACE LA OPERACIÓN DE ACTUALIZAR LOS DATOS DEL OBJETO
-            for (int i = 0; i < Proy1.csucursales; i++) {
-                if (Integer.parseInt(codigo) == Proy1.sucursales[i].getCodigo()) {
-                    Proy1.sucursales[i].setCorreo(correo);
-                    Proy1.sucursales[i].setDireccion(direccion);
-                    Proy1.sucursales[i].setNombre(nombre);
-                    Proy1.sucursales[i].setTelefono(Integer.parseInt(telefono));
+            if(genero.equals("F") || genero.equals("M") || genero.equals("m") || genero.equals("f")){
+                for (int i = 0; i < Proy1.cclientes; i++) {
+                    if (Integer.parseInt(codigo) == Proy1.clientes[i].getCodigo()) {
+                        Proy1.clientes[i].setNombre(nombre);
+                        Proy1.clientes[i].setNit(Integer.parseInt(nit));
+                        Proy1.clientes[i].setCorreo(correo);
+                        Proy1.clientes[i].setGenero(genero.toUpperCase());
+                    }
                 }
-            }
-            Proy1.LeerSucursales();
-            JOptionPane.showMessageDialog(this, "Se ha actualizado la Sucursal con éxito");
-            this.dispose();
+                JOptionPane.showMessageDialog(this, "Se ha actualizado el Cliente con éxito");
+                this.dispose();
+            }else{                
+                JOptionPane.showMessageDialog(this, "Escriba el género unicamente poniendo \"F\" o \"f\" o \"m\" o \"M\"");
+            }                       
+            Proy1.LeerCliente();
         }
-    }    
+    }
+    
 }

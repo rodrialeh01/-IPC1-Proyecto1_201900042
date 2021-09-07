@@ -44,6 +44,7 @@ public class AVendedores extends JPanel implements ActionListener{
         actualizarv.setBounds(900, 70, 150, 50);
         actualizarv.setFont(new Font("Arial", Font.PLAIN,15));
         actualizarv.setBackground(azulito);
+        actualizarv.addActionListener(this);
         actualizarv.setVisible(true);
         this.add(actualizarv);
         
@@ -53,6 +54,7 @@ public class AVendedores extends JPanel implements ActionListener{
         eliminarv.setFont(new Font("Arial", Font.PLAIN,15));
         eliminarv.setBackground(azulito);
         eliminarv.setVisible(true);
+        eliminarv.addActionListener(this);
         this.add(eliminarv);
         
         //BOTON EXPORTAR
@@ -61,6 +63,7 @@ public class AVendedores extends JPanel implements ActionListener{
         exportarv.setFont(new Font("Arial", Font.PLAIN,15));
         exportarv.setBackground(azulito);
         exportarv.setVisible(true);
+        exportarv.addActionListener(this);
         this.add(exportarv);
         
         //PANEL DE GRAFICA
@@ -155,6 +158,10 @@ public class AVendedores extends JPanel implements ActionListener{
         //BOTON CREAR VENDEDOR
         else if (ae.getSource()==crearv) {
             Formcv fcv = new Formcv();
+        }
+        //BOTON ACTUALIZAR VENDEDOR
+        else if (ae.getSource()==actualizarv) {
+            Formav fav = new Formav();
         }
     }
 }

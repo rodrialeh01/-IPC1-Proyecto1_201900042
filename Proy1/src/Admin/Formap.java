@@ -1,23 +1,22 @@
 package Admin;
-import Clases.Productos;
-import proy1.Proy1;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-public class Formcp extends JFrame implements ActionListener{
-    
+import proy1.Proy1;
+public class Formap extends JFrame implements ActionListener{
     JLabel titulo, lcod, lnombre, ldescripcion, lcantidad, lprecio;
     JTextField tcod, tnombre, tdescripcion, tcantidad, tprecio;
-    JButton agregar;
+    JButton actualizar, buscar;
     String codigo, nombre, descripcion,cantidad,precio;
-    public Formcp(){
+    public Formap(){
         //COLORES
         Color azul = new Color(38,36,89);
         
         //TITULO
-        titulo = new JLabel("Crear nuevo Producto");
+        titulo = new JLabel("Actualizar Producto");
         titulo.setFont(new Font("Arial", Font.PLAIN,25));
         titulo.setBounds(120,30,250,30);
         titulo.setVisible(true);
@@ -39,6 +38,14 @@ public class Formcp extends JFrame implements ActionListener{
         tcod.setVisible(true);
         this.add(tcod);
         
+        //BOTON DE BUSCAR
+        buscar = new JButton("Buscar");
+        buscar.setBounds(280,100,100,30);
+        buscar.setFont(new Font("Arial", Font.PLAIN,18));
+        buscar.addActionListener(this);
+        buscar.setVisible(true);
+        this.add(buscar);
+        
         //LABEL DE NOMBRE
         lnombre = new JLabel("Nombre:");
         lnombre.setFont(new Font("Arial", Font.PLAIN,18));
@@ -52,6 +59,7 @@ public class Formcp extends JFrame implements ActionListener{
         tnombre.setBounds(140,180,280,30);
         tnombre.setFont(new Font("Arial", Font.PLAIN,18));
         tnombre.setVisible(true);
+        tnombre.setEnabled(false);
         this.add(tnombre);
         
         //LABEL DE DESCRIPCION
@@ -67,6 +75,7 @@ public class Formcp extends JFrame implements ActionListener{
         tdescripcion.setBounds(140,260,280,30);
         tdescripcion.setFont(new Font("Arial", Font.PLAIN,18));
         tdescripcion.setVisible(true);
+        tdescripcion.setEnabled(false);
         this.add(tdescripcion);
         
         //LABEL DE CANTIDAD
@@ -82,6 +91,7 @@ public class Formcp extends JFrame implements ActionListener{
         tcantidad.setBounds(140,340,280,30);
         tcantidad.setFont(new Font("Arial", Font.PLAIN,18));
         tcantidad.setVisible(true);
+        tcantidad.setEnabled(false);
         this.add(tcantidad);
         
         //LABEL DE PRECIO
@@ -97,61 +107,80 @@ public class Formcp extends JFrame implements ActionListener{
         tprecio.setBounds(140,420,280,30);
         tprecio.setFont(new Font("Arial", Font.PLAIN,18));
         tprecio.setVisible(true);
+        tprecio.setEnabled(false);
         this.add(tprecio);
         
-        //BOTON DE AGREGAR
-        agregar = new JButton("Agregar");
-        agregar.setBounds(100,500,280,40);
-        agregar.setFont(new Font("Arial", Font.PLAIN,15));
-        agregar.setBackground(Color.BLACK);
-        agregar.setForeground(Color.WHITE);
-        agregar.addActionListener(this);
-        this.add(agregar);
+        //BOTON DE ACTUALIZAR
+        actualizar = new JButton("Actualizar");
+        actualizar.setBounds(100,500,280,40);
+        actualizar.setFont(new Font("Arial", Font.PLAIN,15));
+        actualizar.setBackground(Color.BLACK);
+        actualizar.setForeground(Color.WHITE);
+        actualizar.addActionListener(this);
+        actualizar.setEnabled(false);
+        this.add(actualizar);
         
         //ICONO DE LA APLICACION
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
         
         //DISEÑO DE LA VENTANA
-        this.setTitle("Crear Producto | Blue Mall - POS");
+        this.setTitle("Actualizar Producto | Blue Mall - POS");
         this.setBounds(450,100,500,600);
         this.getContentPane().setBackground(azul);
         this.setLayout(null);
         this.setResizable(false);
         this.setVisible(true);
     }
-    //PROGRAMA LAS ACCIONES DEL BOTON
+    
+    //EVENTOS DE LOS BOTONES
     @Override
     public void actionPerformed(ActionEvent ae) {
-        // BOTON AGREGAR
-        if (ae.getSource()==agregar){
-            codigo = tcod.getText();
-            nombre = tnombre.getText();
-            descripcion = tdescripcion.getText();
-            cantidad = tcantidad.getText();
-            precio = tprecio.getText();
-            if (codigo.equals("") || nombre.equals("") || descripcion.equals("") || cantidad.equals("") || precio.equals("")) {
-                JOptionPane.showMessageDialog(this, "Llene todos los espacios");
+        //SE HACE LA LECTURA DE LOS JTEXTFIELD
+        codigo = tcod.getText();
+        nombre = tnombre.getText();
+        descripcion = tdescripcion.getText();
+        cantidad = tcantidad.getText();
+        precio = tprecio.getText();
+        boolean opcion = false;
+        //BOTON BUSCAR
+        if (ae.getSource()==buscar) {            
+            for (int i = 0; i < Proy1.productos.length; i++) {
+                //VALIDAR SI EXISTE EL PRODUCTO
+                if (Proy1.productos[i] !=null && Proy1.productos[i].getCodigo()== Integer.parseInt(codigo)) {                
+                    opcion = true;
+                    tcod.setEnabled(false);
+                    buscar.setEnabled(false);
+                    tnombre.setEnabled(true);
+                    tdescripcion.setEnabled(true);
+                    tcantidad.setEnabled(true);
+                    tprecio.setEnabled(true);
+                    actualizar.setEnabled(true);
+                    tnombre.setText(Proy1.productos[i].getNombre());
+                    tdescripcion.setText(Proy1.productos[i].getDescripcion());
+                    tcantidad.setText(String.valueOf(Proy1.productos[i].getCantidad()));
+                    tprecio.setText(String.valueOf(Proy1.productos[i].getPrecio())); 
+                }
+            }
+            if (opcion == false) {
+                JOptionPane.showMessageDialog(this, "No se encontró el Producto");
             }else{
-                if (verificar(Integer.parseInt(codigo)) == false) {
-                    Productos nuevo = new Productos(Integer.parseInt(codigo),nombre,descripcion,Integer.parseInt(cantidad),Double.parseDouble(precio));
-                    Proy1.AgregarProducto(nuevo);
-                    JOptionPane.showMessageDialog(this, "Se agregó correctamente el nuevo Producto");
-                    Proy1.LeerProducto();
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(this, "El código del Producto No." + codigo + " ya esta en uso, pruebe con otro");
-                    tcod.setText("");
-                }                 
+                JOptionPane.showMessageDialog(this, "Se encontro el Producto");
             }
         }
-    }
-    //VERIFICA SI YA EXISTE EL OBJETO
-    public boolean verificar(int cods) {
-        for (int i = 0; i<Proy1.productos.length; i++) {
-            if (Proy1.productos[i]!=null && Proy1.productos[i].getCodigo()==cods) {
-                return true;
-            }
+        //BOTON ACTUALIZAR
+        else if (ae.getSource()==actualizar) {
+            //HACE LA OPERACIÓN DE ACTUALIZAR LOS DATOS DEL OBJETO
+            for (int i = 0; i < Proy1.cproductos; i++) {
+                if (Integer.parseInt(codigo) == Proy1.productos[i].getCodigo()) {
+                    Proy1.productos[i].setNombre(nombre);
+                    Proy1.productos[i].setCantidad(Integer.parseInt(cantidad));
+                    Proy1.productos[i].setDescripcion(descripcion);
+                    Proy1.productos[i].setPrecio(Double.parseDouble(precio));
+                }
+            }            
+            JOptionPane.showMessageDialog(this, "Se ha actualizado el Producto con éxito");
+            this.dispose();
+            Proy1.LeerProducto();
         }
-        return false;
     }
 }
