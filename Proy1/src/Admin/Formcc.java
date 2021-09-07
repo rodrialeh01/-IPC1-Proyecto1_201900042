@@ -131,13 +131,13 @@ public class Formcc extends JFrame implements ActionListener{
             genero = tgenero.getText();
             if (codigo.equals("") || nombre.equals("") || nit.equals("") || correo.equals("") || genero.equals("")) {
                 JOptionPane.showMessageDialog(this, "Llene todos los espacios");
-            }else if(!genero.equals("F") || !genero.equals("M") || !genero.equals("m") || !genero.equals("f")){
-                JOptionPane.showMessageDialog(this, "Escriba el género unicamente poniendo \"F\" o \"f\" o \"m\" o \"M\"");
-            }else{                
+            }else if(genero.equals("F") || genero.equals("M") || genero.equals("m") || genero.equals("f")){
                 Clientes nuevo = new Clientes(Integer.parseInt(codigo),nombre,Integer.parseInt(nit),correo,genero.toUpperCase());
                 Proy1.AgregarCliente(nuevo);
                 JOptionPane.showMessageDialog(this, "Se agregó correctamente el nuevo Cliente");
-                this.dispose();
+                this.dispose();                
+            }else{                
+                JOptionPane.showMessageDialog(this, "Escriba el género unicamente poniendo \"F\" o \"f\" o \"m\" o \"M\"");
             }
         }
     }

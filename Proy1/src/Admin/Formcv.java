@@ -131,13 +131,13 @@ public class Formcv extends JFrame implements ActionListener{
             genero = tgenero.getText();
             if (codigo.equals("") || nombre.equals("") || caja.equals("") || ventas.equals("") || genero.equals("")) {
                 JOptionPane.showMessageDialog(this, "Llene todos los espacios");
-            }else if(!genero.equals("F") || !genero.equals("M") || !genero.equals("m") || !genero.equals("f")){
-                JOptionPane.showMessageDialog(this, "Escriba el género unicamente poniendo \"F\" o \"f\" o \"m\" o \"M\"");
-            }else{                
+            }else if(genero.equals("F") || genero.equals("M") || genero.equals("m") || genero.equals("f")){
                 Vendedores nuevo = new Vendedores(Integer.parseInt(codigo),nombre,Integer.parseInt(caja),Integer.parseInt(ventas),genero.toUpperCase());
                 Proy1.AgregarVendedor(nuevo);
                 JOptionPane.showMessageDialog(this, "Se agregó correctamente el nuevo Vendedor");
-                this.dispose();
+                this.dispose();                
+            }else{                
+                JOptionPane.showMessageDialog(this, "Escriba el género unicamente poniendo \"F\" o \"f\" o \"m\" o \"M\"");
             }
         }
     }
