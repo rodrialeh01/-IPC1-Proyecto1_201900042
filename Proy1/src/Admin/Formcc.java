@@ -33,7 +33,7 @@ public class Formcc extends JFrame implements ActionListener{
         
         //TEXTFIELD PARA INGRESAR EL CODIGO
         tcod = new JTextField();
-        tcod.setBounds(140,100,280,30);
+        tcod.setBounds(140,100,100,30);
         tcod.setFont(new Font("Arial", Font.PLAIN,18));
         tcod.setVisible(true);
         this.add(tcod);

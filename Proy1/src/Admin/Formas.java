@@ -1,22 +1,23 @@
 package Admin;
-import Clases.Sucursales;
-import proy1.Proy1;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-public class Formcs extends JFrame implements ActionListener{
+import proy1.Proy1;
+
+public class Formas extends JFrame implements ActionListener{
     JLabel titulo, lcod, lnombre, ldireccion, lcorreo, ltelefono;
     JTextField tcod, tnombre, tdireccion, tcorreo, ttelefono;
-    JButton agregar;
+    JButton actualizar, buscar;
     String codigo, nombre, direccion,correo,telefono;
-    public Formcs(){
+    public Formas(){
         //COLORES
         Color azul = new Color(38,36,89);
         
         //TITULO
-        titulo = new JLabel("Crear nueva Sucursal");
+        titulo = new JLabel("Actualizar Sucursal");
         titulo.setFont(new Font("Arial", Font.PLAIN,25));
         titulo.setBounds(120,30,250,30);
         titulo.setVisible(true);
@@ -38,6 +39,14 @@ public class Formcs extends JFrame implements ActionListener{
         tcod.setVisible(true);
         this.add(tcod);
         
+        //BOTON DE BUSCAR
+        buscar = new JButton("Buscar");
+        buscar.setBounds(280,100,100,30);
+        buscar.setFont(new Font("Arial", Font.PLAIN,18));
+        buscar.addActionListener(this);
+        buscar.setVisible(true);
+        this.add(buscar);
+        
         //LABEL DE NOMBRE
         lnombre = new JLabel("Nombre:");
         lnombre.setFont(new Font("Arial", Font.PLAIN,18));
@@ -51,6 +60,7 @@ public class Formcs extends JFrame implements ActionListener{
         tnombre.setBounds(140,180,280,30);
         tnombre.setFont(new Font("Arial", Font.PLAIN,18));
         tnombre.setVisible(true);
+        tnombre.setEnabled(false);
         this.add(tnombre);
         
         //LABEL DE DIRECCION
@@ -66,6 +76,7 @@ public class Formcs extends JFrame implements ActionListener{
         tdireccion.setBounds(140,260,280,30);
         tdireccion.setFont(new Font("Arial", Font.PLAIN,18));
         tdireccion.setVisible(true);
+        tdireccion.setEnabled(false);
         this.add(tdireccion);
         
         //LABEL DE CORREO
@@ -81,6 +92,7 @@ public class Formcs extends JFrame implements ActionListener{
         tcorreo.setBounds(140,340,280,30);
         tcorreo.setFont(new Font("Arial", Font.PLAIN,18));
         tcorreo.setVisible(true);
+        tcorreo.setEnabled(false);
         this.add(tcorreo);
         
         //LABEL DE TELEFONO
@@ -96,16 +108,18 @@ public class Formcs extends JFrame implements ActionListener{
         ttelefono.setBounds(140,420,280,30);
         ttelefono.setFont(new Font("Arial", Font.PLAIN,18));
         ttelefono.setVisible(true);
+        ttelefono.setEnabled(false);
         this.add(ttelefono);
         
-        //BOTON DE AGREGAR
-        agregar = new JButton("Agregar");
-        agregar.setBounds(100,500,280,40);
-        agregar.setFont(new Font("Arial", Font.PLAIN,15));
-        agregar.setBackground(Color.BLACK);
-        agregar.setForeground(Color.WHITE);
-        agregar.addActionListener(this);
-        this.add(agregar);
+        //BOTON DE ACTUALIZAR
+        actualizar = new JButton("Actualizar");
+        actualizar.setBounds(100,500,280,40);
+        actualizar.setFont(new Font("Arial", Font.PLAIN,15));
+        actualizar.setBackground(Color.BLACK);
+        actualizar.setForeground(Color.WHITE);
+        actualizar.addActionListener(this);
+        actualizar.setEnabled(false);
+        this.add(actualizar);
         
         //ICONO DE LA APLICACION
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
@@ -118,40 +132,48 @@ public class Formcs extends JFrame implements ActionListener{
         this.setResizable(false);
         this.setVisible(true);
     }
-
-    //PROGRAMA LAS ACCIONES DE LOS BOTONES
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
-       // BOTON AGREGAR
-        if (ae.getSource()==agregar){
-            codigo = tcod.getText();
-            nombre = tnombre.getText();
-            direccion = tdireccion.getText();
-            correo = tcorreo.getText();
-            telefono = ttelefono.getText();
-            if (codigo.equals("") || nombre.equals("") || direccion.equals("") || correo.equals("") || telefono.equals("")) {
-                JOptionPane.showMessageDialog(this, "Llene todos los campos");
+        codigo = tcod.getText();
+        nombre = tnombre.getText();
+        direccion = tdireccion.getText();
+        correo = tcorreo.getText();
+        telefono = ttelefono.getText();
+        boolean opcion = false;
+        if (ae.getSource()==buscar) {            
+            for (int i = 0; i < Proy1.sucursales.length; i++) {
+                if (Proy1.sucursales[i] !=null && Proy1.sucursales[i].getCodigo()== Integer.parseInt(codigo)) {                
+                    opcion = true;
+                    tcod.setEnabled(false);
+                    tnombre.enable(true);
+                    tdireccion.enable(true);
+                    tcorreo.enable(true);
+                    ttelefono.enable(true);
+                    actualizar.setEnabled(true);
+                    tnombre.setText(Proy1.sucursales[i].getNombre());
+                    tdireccion.setText(Proy1.sucursales[i].getDireccion());
+                    tcorreo.setText(Proy1.sucursales[i].getCorreo());
+                    ttelefono.setText(String.valueOf(Proy1.sucursales[i].getTelefono())); 
+                }
+            }
+            if (opcion == false) {
+                JOptionPane.showMessageDialog(this, "No se encontró la sucursal");
             }else{
-                if (verificar(Integer.parseInt(codigo)) == false) {
-                    Sucursales nuevo = new Sucursales(Integer.parseInt(codigo), nombre, direccion, correo, Integer.parseInt(telefono));
-                    Proy1.AgregarSucursales(nuevo);
-                    JOptionPane.showMessageDialog(this, "Se agregó correctamente la nueva Sucursal");
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(this, "El código de Sucursal No." + codigo + " ya esta en uso, pruebe con otro");
-                    tcod.setText("");
-                }                    
+                JOptionPane.showMessageDialog(this, "Se encontro la Sucursal");
             }
-            
-        }
-        
-    }
-    public boolean verificar(int cods) {
-        for (int i = 0; i<Proy1.sucursales.length; i++) {
-            if (Proy1.sucursales[i]!=null && Proy1.sucursales[i].getCodigo()==cods) {
-                return true;
+        }else if (ae.getSource()==actualizar) {
+            for (int i = 0; i < Proy1.csucursales; i++) {
+                if (Integer.parseInt(codigo) == Proy1.sucursales[i].getCodigo()) {
+                    Proy1.sucursales[i].setCorreo(correo);
+                    Proy1.sucursales[i].setDireccion(direccion);
+                    Proy1.sucursales[i].setNombre(nombre);
+                    Proy1.sucursales[i].setTelefono(Integer.parseInt(telefono));
+                }
             }
+            JOptionPane.showMessageDialog(this, "Se ha actualizado la Sucursal con éxito");
+            this.dispose();
         }
-        return false;
     }
+    
 }

@@ -44,6 +44,7 @@ public class ASucursales extends JPanel implements ActionListener{
         actualizars.setBounds(900, 70, 150, 50);
         actualizars.setFont(new Font("Arial", Font.PLAIN,15));
         actualizars.setBackground(azulito);
+        actualizars.addActionListener(this);
         actualizars.setVisible(true);
         this.add(actualizars);
         
@@ -146,6 +147,10 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON CREAR SUCURSAL
         else if (ae.getSource()==crears) {
             Formcs fcs = new Formcs();
+        }
+        //BOTON ACTUALIZAR SUCURSAL
+        else if (ae.getSource()==actualizars) {
+            Formas fas = new Formas();
         }
     }
 }

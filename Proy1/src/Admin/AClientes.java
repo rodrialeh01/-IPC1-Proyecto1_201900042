@@ -44,6 +44,7 @@ public class AClientes extends JPanel implements ActionListener{
         actualizarc.setBounds(900, 70, 150, 50);
         actualizarc.setFont(new Font("Arial", Font.PLAIN,15));
         actualizarc.setBackground(azulito);
+        actualizarc.addActionListener(this);
         actualizarc.setVisible(true);
         this.add(actualizarc);
         
@@ -154,5 +155,9 @@ public class AClientes extends JPanel implements ActionListener{
         else if (ae.getSource()==crearc) {
             Formcc fcc = new Formcc();
         }
+        //BOTON ACTUALIZAR CLIENTE
+//        else if (ae.getSource()==actualizarc) {
+//            Formac fac = new Formac();
+//        }
     }
 }

@@ -1,7 +1,5 @@
 package proy1;
-import Clases.Sucursales;
 import Clases.*;
-import Clases.Vendedores;
 import Admin.*;
 import Login.Login;
 import javax.swing.*;
@@ -11,8 +9,7 @@ public class Proy1 {
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
         Login l = new Login();
-        //Admin a = new Admin();
-//        Formcs f = new Formcs();
+//        Formas f = new Formas();
     }
     /**
      * ================================SUCURSALES================================
