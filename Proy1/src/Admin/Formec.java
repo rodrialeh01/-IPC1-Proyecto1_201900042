@@ -1,22 +1,22 @@
 package Admin;
-import Clases.Clientes;
-import proy1.Proy1;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-public class Formcc extends JFrame implements ActionListener{
+import proy1.Proy1;
+public class Formec extends JFrame implements ActionListener{
     JLabel titulo, lcod, lnombre, lnit, lcorreo, lgenero;
     JTextField tcod, tnombre, tnit, tcorreo, tgenero;
-    JButton agregar;
+    JButton eliminar, buscar;
     String codigo, nombre, nit,correo,genero;
-    public Formcc(){
+    public Formec(){
         //COLORES
         Color azul = new Color(38,36,89);
         
         //TITULO
-        titulo = new JLabel("Crear nuevo Cliente");
+        titulo = new JLabel("Eliminar Cliente");
         titulo.setFont(new Font("Arial", Font.PLAIN,25));
         titulo.setBounds(120,30,250,30);
         titulo.setVisible(true);
@@ -38,6 +38,14 @@ public class Formcc extends JFrame implements ActionListener{
         tcod.setVisible(true);
         this.add(tcod);
         
+        //BOTON DE BUSCAR
+        buscar = new JButton("Buscar");
+        buscar.setBounds(280,100,100,30);
+        buscar.setFont(new Font("Arial", Font.PLAIN,18));
+        buscar.addActionListener(this);
+        buscar.setVisible(true);
+        this.add(buscar);
+        
         //LABEL DE NOMBRE
         lnombre = new JLabel("Nombre:");
         lnombre.setFont(new Font("Arial", Font.PLAIN,18));
@@ -51,6 +59,7 @@ public class Formcc extends JFrame implements ActionListener{
         tnombre.setBounds(140,180,280,30);
         tnombre.setFont(new Font("Arial", Font.PLAIN,18));
         tnombre.setVisible(true);
+        tnombre.setEnabled(false);
         this.add(tnombre);
         
         //LABEL DE DESCRIPCION
@@ -66,6 +75,7 @@ public class Formcc extends JFrame implements ActionListener{
         tnit.setBounds(140,260,280,30);
         tnit.setFont(new Font("Arial", Font.PLAIN,18));
         tnit.setVisible(true);
+        tnit.setEnabled(false);
         this.add(tnit);
         
         //LABEL DE CANTIDAD
@@ -81,6 +91,7 @@ public class Formcc extends JFrame implements ActionListener{
         tcorreo.setBounds(140,340,280,30);
         tcorreo.setFont(new Font("Arial", Font.PLAIN,18));
         tcorreo.setVisible(true);
+        tcorreo.setEnabled(false);
         this.add(tcorreo);
         
         //LABEL DE PRECIO
@@ -96,69 +107,88 @@ public class Formcc extends JFrame implements ActionListener{
         tgenero.setBounds(140,420,280,30);
         tgenero.setFont(new Font("Arial", Font.PLAIN,18));
         tgenero.setVisible(true);
+        tgenero.setEnabled(false);
         this.add(tgenero);
         
-        //BOTON DE AGREGAR
-        agregar = new JButton("Agregar");
-        agregar.setBounds(100,500,280,40);
-        agregar.setFont(new Font("Arial", Font.PLAIN,15));
-        agregar.setBackground(Color.BLACK);
-        agregar.setForeground(Color.WHITE);
-        agregar.addActionListener(this);
-        this.add(agregar);
+        //BOTON DE ELIMINAR
+        eliminar = new JButton("Eliminar");
+        eliminar.setBounds(100,500,280,40);
+        eliminar.setFont(new Font("Arial", Font.PLAIN,15));
+        eliminar.setBackground(Color.BLACK);
+        eliminar.setForeground(Color.WHITE);
+        eliminar.addActionListener(this);
+        eliminar.setEnabled(false);
+        this.add(eliminar);
         
         //ICONO DE LA APLICACION
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
         
         //DISEÑO DE LA VENTANA
-        this.setTitle("Crear Cliente | Blue Mall - POS");
+        this.setTitle("Eliminar Cliente | Blue Mall - POS");
         this.setBounds(450,100,500,600);
         this.getContentPane().setBackground(azul);
         this.setLayout(null);
         this.setResizable(false);
         this.setVisible(true);
     }
-
-    //PROGRAMA LAS ACCIONES DEL BOTON
+    
+    //EVENTOS DE LOS BOTONES
     @Override
     public void actionPerformed(ActionEvent ae) {
-        // BOTON AGREGAR
-        if (ae.getSource()==agregar){
-            codigo = tcod.getText();
-            nombre = tnombre.getText();
-            nit = tnit.getText();
-            correo = tcorreo.getText();
-            genero = tgenero.getText();
-            if (codigo.equals("") || nombre.equals("") || nit.equals("") || correo.equals("") || genero.equals("")) {
-                JOptionPane.showMessageDialog(this, "Llene todos los espacios");
-            }else if(Proy1.cclientes <= Proy1.clientes.length){
-                if (genero.equals("F") || genero.equals("M") || genero.equals("m") || genero.equals("f")) {
-                    if (verificar(Integer.parseInt(codigo)) == false) {
-                        Clientes nuevo = new Clientes(Integer.parseInt(codigo), nombre, Integer.parseInt(nit), correo, genero.toUpperCase());
-                        Proy1.AgregarCliente(nuevo);
-                        JOptionPane.showMessageDialog(this, "Se agregó correctamente el nuevo Cliente");
-                        Proy1.LeerCliente();
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "El código del Cliente No." + codigo + " ya esta en uso, pruebe con otro");
-                        tcod.setText("");
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(this, "Escriba el género unicamente poniendo \"F\" o \"f\" o \"m\" o \"M\"");
-                }                                              
+        //SE HACE LA LECTURA DE LOS JTEXTFIELD
+        codigo = tcod.getText();
+        nombre = tnombre.getText();
+        nit = tnit.getText();
+        correo = tcorreo.getText();
+        genero = tgenero.getText();
+        boolean opcion = false;
+        //BOTON BUSCAR
+        if (ae.getSource()==buscar) {            
+            for (int i = 0; i < Proy1.clientes.length; i++) {
+                //VALIDAR SI EXISTE EL PRODUCTO
+                if (Proy1.clientes[i] !=null && Proy1.clientes[i].getCodigo()== Integer.parseInt(codigo)) {                
+                    opcion = true;
+                    eliminar.setEnabled(true);
+                    tnombre.setText(Proy1.clientes[i].getNombre());
+                    tnit.setText(String.valueOf(Proy1.clientes[i].getNit()));
+                    tcorreo.setText(Proy1.clientes[i].getCorreo());
+                    tgenero.setText(Proy1.clientes[i].getGenero()); 
+                }
+            }
+            if (opcion == false) {
+                JOptionPane.showMessageDialog(this, "No se encontró el Cliente");
             }else{
-                JOptionPane.showMessageDialog(this, "No se puede agregar otro Cliente, llegó a su capacidad maxima de clientes");
-                this.dispose();
+                JOptionPane.showMessageDialog(this, "Se encontro al Cliente");
             }
         }
-    }
-    //VERIFICA SI YA EXISTE EL OBJETO
-    public boolean verificar(int cods) {
-        for (int i = 0; i<Proy1.clientes.length; i++) {
-            if (Proy1.clientes[i]!=null && Proy1.clientes[i].getCodigo()==cods) {
-                return true;
+        //BOTON ELIMINAR
+        else if (ae.getSource()==eliminar) {
+            //HACE LA OPERACIÓN DE ELIMINAR LOS DATOS DEL OBJETO
+            //HACE QUE EL ESPACIO DONDE SE UBICA EL OBJETO SEA NULO
+            for (int i = 0; i < Proy1.cclientes; i++) {
+                if (Proy1.clientes[i].getCodigo() == Integer.parseInt(codigo)) {
+                    Proy1.clientes[i] = null;                   
+                }                
             }
+            //HACE QUE DESDE EL ESPACIO NULO EN ADELANTE SE MUEVAN LAS CASILLAS HACIA ARRIBA
+            for (int i = 0; i < Proy1.cclientes -1; i++) {
+                if (Proy1.clientes[i] == null) {
+                    for (int j = i; j < Proy1.cclientes-1; j++) {
+                        Proy1.clientes[j] = Proy1.clientes[j + 1];
+                    } 
+                }
+            }
+            //CONTADOR PARA IR DESCONTANDO LA CANTIDAD DE OBJETOS EN EL VECTOR
+            Proy1.cclientes --;
+            //SI LA CANTIDAD DE PRODUCTOS ES IGUAL A 0 ENTONCES QUE TOME QUE LA POSICION VA A SER NUL
+            if (Proy1.cclientes == 0) {
+                Proy1.clientes[0] = null;
+            }
+            //ACTUALIZAR EL VECTOR 
+            repaint();
+            Proy1.LeerSucursales();
+            JOptionPane.showMessageDialog(this, "Se ha eliminado al Cliente con éxito");
+            this.dispose();
         }
-        return false;
     }
 }

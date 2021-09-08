@@ -1,22 +1,22 @@
 package Admin;
-import Clases.Vendedores;
-import proy1.Proy1;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-public class Formcv extends JFrame implements ActionListener{
+import proy1.Proy1;
+public class Formev extends JFrame implements ActionListener{
     JLabel titulo, lcod, lnombre, lcaja, lventas, lgenero;
     JTextField tcod, tnombre, tcaja, tventas, tgenero;
-    JButton agregar;
+    JButton eliminar, buscar;
     String codigo, nombre, caja,ventas,genero;
-    public Formcv(){
+    public Formev(){
         //COLORES
         Color azul = new Color(38,36,89);
         
         //TITULO
-        titulo = new JLabel("Crear nuevo Vendedor");
+        titulo = new JLabel("Actualizar Vendedor");
         titulo.setFont(new Font("Arial", Font.PLAIN,25));
         titulo.setBounds(120,30,350,30);
         titulo.setVisible(true);
@@ -38,6 +38,14 @@ public class Formcv extends JFrame implements ActionListener{
         tcod.setVisible(true);
         this.add(tcod);
         
+        //BOTON DE BUSCAR
+        buscar = new JButton("Buscar");
+        buscar.setBounds(280,100,100,30);
+        buscar.setFont(new Font("Arial", Font.PLAIN,18));
+        buscar.addActionListener(this);
+        buscar.setVisible(true);
+        this.add(buscar);
+        
         //LABEL DE NOMBRE
         lnombre = new JLabel("Nombre:");
         lnombre.setFont(new Font("Arial", Font.PLAIN,18));
@@ -51,6 +59,7 @@ public class Formcv extends JFrame implements ActionListener{
         tnombre.setBounds(140,180,280,30);
         tnombre.setFont(new Font("Arial", Font.PLAIN,18));
         tnombre.setVisible(true);
+        tnombre.setEnabled(false);
         this.add(tnombre);
         
         //LABEL DE DESCRIPCION
@@ -66,6 +75,7 @@ public class Formcv extends JFrame implements ActionListener{
         tcaja.setBounds(140,260,280,30);
         tcaja.setFont(new Font("Arial", Font.PLAIN,18));
         tcaja.setVisible(true);
+        tcaja.setEnabled(false);
         this.add(tcaja);
         
         //LABEL DE CANTIDAD
@@ -81,6 +91,7 @@ public class Formcv extends JFrame implements ActionListener{
         tventas.setBounds(140,340,280,30);
         tventas.setFont(new Font("Arial", Font.PLAIN,18));
         tventas.setVisible(true);
+        tventas.setEnabled(false);
         this.add(tventas);
         
         //LABEL DE PRECIO
@@ -96,22 +107,24 @@ public class Formcv extends JFrame implements ActionListener{
         tgenero.setBounds(140,420,280,30);
         tgenero.setFont(new Font("Arial", Font.PLAIN,18));
         tgenero.setVisible(true);
+        tgenero.setEnabled(false);
         this.add(tgenero);
         
-        //BOTON DE AGREGAR
-        agregar = new JButton("Agregar");
-        agregar.setBounds(100,500,280,40);
-        agregar.setFont(new Font("Arial", Font.PLAIN,15));
-        agregar.setBackground(Color.BLACK);
-        agregar.setForeground(Color.WHITE);
-        agregar.addActionListener(this);
-        this.add(agregar);
+        //BOTON DE ACTUALIZAR
+        eliminar = new JButton("Actualizar");
+        eliminar.setBounds(100,500,280,40);
+        eliminar.setFont(new Font("Arial", Font.PLAIN,15));
+        eliminar.setBackground(Color.BLACK);
+        eliminar.setForeground(Color.WHITE);
+        eliminar.addActionListener(this);
+        eliminar.setEnabled(false);
+        this.add(eliminar);
         
         //ICONO DE LA APLICACION
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
         
         //DISEÑO DE LA VENTANA
-        this.setTitle("Crear Vendedor | Blue Mall - POS");
+        this.setTitle("Actualizar Vendedor | Blue Mall - POS");
         this.setBounds(450,100,500,600);
         this.getContentPane().setBackground(azul);
         this.setLayout(null);
@@ -119,45 +132,63 @@ public class Formcv extends JFrame implements ActionListener{
         this.setVisible(true);
     }
     
-    //SE PROGRAMA EL BOTON AGREGAR
+    //EVENTOS DE LOS BOTONES
     @Override
     public void actionPerformed(ActionEvent ae) {
-        // BOTON AGREGAR
-        if (ae.getSource()==agregar){
-            codigo = tcod.getText();
-            nombre = tnombre.getText();
-            caja = tcaja.getText();
-            ventas = tventas.getText();
-            genero = tgenero.getText();
-            if (codigo.equals("") || nombre.equals("") || caja.equals("") || ventas.equals("") || genero.equals("")) {
-                JOptionPane.showMessageDialog(this, "Llene todos los espacios");
-            }else if(Proy1.cvendedores<= Proy1.vendedores.length){
-                if (genero.equals("F") || genero.equals("M") || genero.equals("m") || genero.equals("f")) {
-                    if (verificar(Integer.parseInt(codigo)) == false) {
-                        Vendedores nuevo = new Vendedores(Integer.parseInt(codigo), nombre, Integer.parseInt(caja), Integer.parseInt(ventas), genero.toUpperCase());
-                        Proy1.AgregarVendedor(nuevo);
-                        JOptionPane.showMessageDialog(this, "Se agregó correctamente el nuevo Vendedor");
-                        Proy1.LeerVendedor();
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "El código del Vendedor No." + codigo + " ya esta en uso, pruebe con otro");
-                        tcod.setText("");
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(this, "Escriba el género unicamente poniendo \"F\" o \"f\" o \"m\" o \"M\"");
-                }                               
-            }else{                
-                JOptionPane.showMessageDialog(this, "Se llegó al limite de Vendedores");
+        //SE HACE LA LECTURA DE LOS JTEXTFIELD
+        codigo = tcod.getText();
+        nombre = tnombre.getText();
+        caja = tcaja.getText();
+        ventas = tventas.getText();
+        genero = tgenero.getText();
+        boolean opcion = false;
+        //BOTON BUSCAR
+        if (ae.getSource()==buscar) {            
+            for (int i = 0; i < Proy1.vendedores.length; i++) {
+                //VALIDAR SI EXISTE EL PRODUCTO
+                if (Proy1.vendedores[i] !=null && Proy1.vendedores[i].getCodigo()== Integer.parseInt(codigo)) {                
+                    opcion = true;
+                    eliminar.setEnabled(true);
+                    tnombre.setText(Proy1.vendedores[i].getNombre());
+                    tcaja.setText(String.valueOf(Proy1.vendedores[i].getCaja()));
+                    tventas.setText(String.valueOf(Proy1.vendedores[i].getVentas()));
+                    tgenero.setText(Proy1.vendedores[i].getGenero()); 
+                }
+            }
+            if (opcion == false) {
+                JOptionPane.showMessageDialog(this, "No se encontró al Vendedor");
+            }else{
+                JOptionPane.showMessageDialog(this, "Se encontro al Vendedor");
             }
         }
-    }
-    //VERIFICA SI YA EXISTE EL OBJETO
-    public boolean verificar(int cods) {
-        for (int i = 0; i<Proy1.vendedores.length; i++) {
-            if (Proy1.vendedores[i]!=null && Proy1.vendedores[i].getCodigo()==cods) {
-                return true;
+        //BOTON ELIMINAR
+        else if (ae.getSource()==eliminar) {
+            //HACE LA OPERACIÓN DE ELIMINAR LOS DATOS DEL OBJETO
+            //HACE QUE EL ESPACIO DONDE SE UBICA EL OBJETO SEA NULO
+            for (int i = 0; i < Proy1.cvendedores; i++) {
+                if (Proy1.vendedores[i].getCodigo() == Integer.parseInt(codigo)) {
+                    Proy1.vendedores[i] = null;                   
+                }                
             }
+            //HACE QUE DESDE EL ESPACIO NULO EN ADELANTE SE MUEVAN LAS CASILLAS HACIA ARRIBA
+            for (int i = 0; i < Proy1.cvendedores -1; i++) {
+                if (Proy1.vendedores[i] == null) {
+                    for (int j = i; j < Proy1.cvendedores-1; j++) {
+                        Proy1.vendedores[j] = Proy1.vendedores[j + 1];
+                    } 
+                }
+            }
+            //CONTADOR PARA IR DESCONTANDO LA CANTIDAD DE OBJETOS EN EL VECTOR
+            Proy1.cvendedores --;
+            //SI LA CANTIDAD DE PRODUCTOS ES IGUAL A 0 ENTONCES QUE TOME QUE LA POSICION VA A SER NUL
+            if (Proy1.cvendedores == 0) {
+                Proy1.vendedores[0] = null;
+            }
+            //ACTUALIZAR EL VECTOR 
+            repaint();
+            Proy1.LeerSucursales();
+            JOptionPane.showMessageDialog(this, "Se ha eliminado al Vendedor con éxito");
+            this.dispose();
         }
-        return false;
     }
 }

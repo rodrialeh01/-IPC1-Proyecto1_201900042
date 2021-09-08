@@ -135,6 +135,7 @@ public class Formes extends JFrame implements ActionListener{
         this.setVisible(true);
     }
     
+    //PROGRAMACION DE BOTONES
     @Override
     public void actionPerformed(ActionEvent ae) {
         //SE HACE LA LECTURA DE LOS JTEXTFIELD
@@ -163,7 +164,7 @@ public class Formes extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(this, "Se encontro la Sucursal");
             }
         }
-        //BOTON ACTUALIZAR
+        //BOTON ELIMINAR
         else if (ae.getSource()==eliminar) {
             //HACE LA OPERACIÓN DE ELIMINAR LOS DATOS DEL OBJETO
             //HACE QUE EL ESPACIO DONDE SE UBICA EL OBJETO SEA NULO
@@ -189,9 +190,5 @@ public class Formes extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(this, "Se ha eliminado la Sucursal con éxito");
             this.dispose();
         }
-    }
-    public void eliminar(Sucursales[] suc, String cod){
-        
-        
     }
 }

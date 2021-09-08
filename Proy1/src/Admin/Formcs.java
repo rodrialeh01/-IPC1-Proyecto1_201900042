@@ -132,16 +132,21 @@ public class Formcs extends JFrame implements ActionListener{
             if (codigo.equals("") || nombre.equals("") || direccion.equals("") || correo.equals("") || telefono.equals("")) {
                 JOptionPane.showMessageDialog(this, "Llene todos los campos");
             }else{
-                if (verificar(Integer.parseInt(codigo)) == false) {
-                    Sucursales nuevo = new Sucursales(Integer.parseInt(codigo), nombre, direccion, correo, Integer.parseInt(telefono));
-                    Proy1.AgregarSucursales(nuevo);
-                    JOptionPane.showMessageDialog(this, "Se agregó correctamente la nueva Sucursal");
-                    Proy1.LeerSucursales();
-                    this.dispose();
+                if (Proy1.csucursales <= Proy1.sucursales.length) {
+                    if (verificar(Integer.parseInt(codigo)) == false) {
+                        Sucursales nuevo = new Sucursales(Integer.parseInt(codigo), nombre, direccion, correo, Integer.parseInt(telefono));
+                        Proy1.AgregarSucursales(nuevo);
+                        JOptionPane.showMessageDialog(this, "Se agregó correctamente la nueva Sucursal");
+                        Proy1.LeerSucursales();
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El código de Sucursal No." + codigo + " ya esta en uso, pruebe con otro");
+                        tcod.setText("");
+                    }
                 }else{
-                    JOptionPane.showMessageDialog(this, "El código de Sucursal No." + codigo + " ya esta en uso, pruebe con otro");
-                    tcod.setText("");
-                }                    
+                    JOptionPane.showMessageDialog(this, "Ya se llegó al limite de Sucursales");
+                    this.dispose();
+                }                                   
             }
             
         }

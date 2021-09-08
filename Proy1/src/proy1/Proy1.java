@@ -4,7 +4,7 @@ import Admin.*;
 import Login.Login;
 import javax.swing.*;
 public class Proy1 {
-    public static Sucursales[] sucursales = new Sucursales[5];
+    public static Sucursales[] sucursales = new Sucursales[50];
     public static int csucursales = 0;
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
@@ -13,7 +13,6 @@ public class Proy1 {
     }
     /**
      * ================================SUCURSALES================================
-     * @param sucursal 
      */
     //METODO PARA AÑADIR UN NUEVO OBJETO SUCURSALES
     public static void AgregarSucursales(Sucursales sucursal){
@@ -29,6 +28,8 @@ public class Proy1 {
     
     //METODO PARA MOSTRAR LOS SUCURSALES
     public static void LeerSucursales(){
+        System.out.println("=====================================");
+        System.out.println("==      LISTADO DE SUCURSALES      ==");
         for (int i = 0; i < csucursales; i++) {
             if (sucursales[i] !=null) {
                 sucursales[i].MostrarSucursales();
@@ -73,8 +74,13 @@ public class Proy1 {
      */
     //METODO PARA MOSTRAR LOS PRODUCTOS
     public static void LeerProducto(){
+        System.out.println("=====================================");
+        System.out.println("==       LISTADO DE PRODUCTOS      ==");
         for (int i = 0; i < cproductos; i++) {
             productos[i].MostrarProductos();
+        }
+        if (productos == null) {
+            System.out.println("NO HAY PRODUCTOS");
         }
     }
     
@@ -112,8 +118,13 @@ public class Proy1 {
     
     //METODO PARA MOSTRAR LOS CLIENTES
     public static void LeerCliente(){
+        System.out.println("=====================================");
+        System.out.println("==       LISTADO DE CLIENTES       ==");
         for (int i = 0; i < cclientes; i++) {
             clientes[i].MostrarClientes();
+        }
+        if (clientes == null) {
+            System.out.println("NO HAY CLIENTES");
         }
     }
     
@@ -151,8 +162,13 @@ public class Proy1 {
     
     //METODO PARA MOSTRAR LOS VENDEDORES
     public static void LeerVendedor(){
+        System.out.println("=====================================");
+        System.out.println("==      LISTADO DE VENDEDORES      ==");
         for (int i = 0; i < cvendedores; i++) {
             vendedores[i].MostrarVendedores();
+        }
+        if (vendedores == null) {
+            System.out.println("NO HAY VENDEDORES");
         }
     }
     

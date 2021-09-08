@@ -163,5 +163,9 @@ public class AVendedores extends JPanel implements ActionListener{
         else if (ae.getSource()==actualizarv) {
             Formav fav = new Formav();
         }
+        //BOTON ELIMINAR VENDEDOR
+        else if (ae.getSource()==eliminarv) {
+            Formev fev = new Formev();
+        }
     }
 }

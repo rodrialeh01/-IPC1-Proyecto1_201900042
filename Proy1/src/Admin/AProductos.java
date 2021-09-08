@@ -163,5 +163,9 @@ public class AProductos extends JPanel implements ActionListener{
         else if (ae.getSource()==actualizarp) {
             Formap fap = new Formap();
         }
+        //BOTON ELIMINAR PRODUCTO
+        else if (ae.getSource()==eliminarp) {
+            Formep fep = new Formep();
+        }
     }
 }

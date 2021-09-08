@@ -161,5 +161,9 @@ public class AClientes extends JPanel implements ActionListener{
         else if (ae.getSource()==actualizarc) {
             Formac fac = new Formac();
         }
+        //BOTON ELIMINAR CLIENTE
+        else if (ae.getSource()==eliminarc) {
+            Formec fec = new Formec();
+        }
     }
 }
