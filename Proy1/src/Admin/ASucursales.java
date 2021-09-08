@@ -1,16 +1,24 @@
 package Admin;
+
+//==================LIBRERIAS===============
+//LECTURA DE UN ARCHIVO JSON
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+//AWT-SWING
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+//LECTURA DE ARCHIVOS
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import javax.swing.*;
+
+//==================PAQUETES===============
 import Clases.Sucursales;
 import proy1.Proy1;
+import Listados.ListadoSucursales;
 public class ASucursales extends JPanel implements ActionListener{
     JButton crears, cargars, actualizars, eliminars, exportars, actualizarps;
     static JTable tablas;
@@ -160,6 +168,11 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON ELIMINAR SUCURSAL
         else if (ae.getSource()==eliminars) {
             Formes fes = new Formes();
+        }
+        //BOTON EXPORTAR LISTA DE SUCURSALES EN PDF
+        else if (ae.getSource()==exportars) {
+            ListadoSucursales ls = new ListadoSucursales();
+            ls.CrearPDFS();
         }
     }
 }
