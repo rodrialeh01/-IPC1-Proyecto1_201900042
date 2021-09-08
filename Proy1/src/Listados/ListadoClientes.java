@@ -22,9 +22,9 @@ import javax.swing.JOptionPane;
 //============PAQUETES============
 import proy1.Proy1;
 
-public class ListadoSucursales {
+public class ListadoClientes {
     //CREACIÓN DEL DOCUMENTO
-    Document documentos = new Document(PageSize.LETTER);
+    Document documentoc = new Document(PageSize.LETTER);
     //COLORES PARA ADAPTAR EN EL PDF
     public static BaseColor azul = new BaseColor(38,36,89);
     public static BaseColor blanco = new BaseColor(234,255,246);
@@ -34,21 +34,21 @@ public class ListadoSucursales {
     public static Font Tmediano = new Font(Font.FontFamily.HELVETICA,13,Font.BOLD,blanco);
     public static Font Tpequeño = new Font(Font.FontFamily.COURIER,10,Font.NORMAL,negro);
     //METODO PARA CREAR EL ARCHIVO PDF
-    public void CrearPDFS(){
+    public void CrearPDFC(){
         //SE AÑADE UN TRY CATCH PARA EVITAR ERRORES EN LA CREACION DEL PDF
         try{
             //SE LE AÑADE LA RUTA DEL ARCHIVO
-            PdfWriter.getInstance(documentos, new FileOutputStream("ListadosPDF/Sucursales.pdf"));
+            PdfWriter.getInstance(documentoc, new FileOutputStream("ListadosPDF/Clientes.pdf"));
             //SE ABRE EL DOCUMENTO
-            documentos.open();
+            documentoc.open();
             //SE LLAMA AL METODO CONTENIDO PARA ESCRIBIR EL CONTENIDO DEL PDF
-            Contenido(documentos);
+            Contenido(documentoc);
             //SE CIERRA EL DOCUMENTO
-            documentos.close();
+            documentoc.close();
         }catch(Exception e){
             //MENSAJE DE ERROR EN LA EJECUCIÓN DE LA EXPORTACION PDF
             JOptionPane.showMessageDialog(null,"Hubo un error al exportar la lista");
-            documentos.close();
+            documentoc.close();
         }
     }
     
@@ -63,7 +63,7 @@ public class ListadoSucursales {
         }        
         //SE AÑADE UN PARAGRAPH PARA PONER EL TITULO DEL PDF
         Paragraph titulo = new Paragraph();
-        titulo.add(new Paragraph("Listado de Sucursales", Tgrande));
+        titulo.add(new Paragraph("Listado de Clientes", Tgrande));
         
         //SE LLAMA AL METODO ESPACIO PARA AGREGAR ESPACIO ENTRE EL TITULO Y LA TABLA
         Espacio(titulo, 2);
@@ -92,8 +92,8 @@ public class ListadoSucursales {
         columna2.setPaddingBottom(5);
         tabla.addCell(columna2);
         
-        //COLUMNA 3 == DIRECCIÓN        
-        PdfPCell columna3 = new PdfPCell(new Phrase("Dirección",Tmediano));
+        //COLUMNA 3 == NIT        
+        PdfPCell columna3 = new PdfPCell(new Phrase("NIT",Tmediano));
         columna3.setHorizontalAlignment(Element.ALIGN_CENTER);
         columna3.setVerticalAlignment(Element.ALIGN_MIDDLE);
         columna3.setBackgroundColor(azul);
@@ -110,8 +110,8 @@ public class ListadoSucursales {
         columna4.setPaddingBottom(5);
         tabla.addCell(columna4);
         
-        //COLUMNA 5 == TELÉFONO
-        PdfPCell columna5 = new PdfPCell(new Phrase("Teléfono",Tmediano));
+        //COLUMNA 5 == GÉNERO
+        PdfPCell columna5 = new PdfPCell(new Phrase("Género",Tmediano));
         columna5.setHorizontalAlignment(Element.ALIGN_CENTER);
         columna5.setVerticalAlignment(Element.ALIGN_MIDDLE);
         columna5.setBackgroundColor(azul);
@@ -123,15 +123,15 @@ public class ListadoSucursales {
         tabla.setHeaderRows(1);
         //SE CREA UN ARREGLO DE TIPO FLOAT PARA LOS PORCENTAJES DE TAMAÑO DE CADA COLUMNA
         //{COLUMNA1,COLUMNA2,COLUMNA3,COLUMNA4,COLUMNA5}
-        float[] tamañocolumna = {0.10f, 0.20f, 0.30f, 0.20f,0.20f};
+        float[] tamañocolumna = {0.20f, 0.20f, 0.20f, 0.20f,0.20f};
         //SE LLAMA AL METODO PARA ADAPTAR EL TAMAÑO DE LAS COLUMNAS DE LA TABLA
         tabla.setWidths(tamañocolumna);
         
         //================================SE LLAMAN A LOS OBJETOS PARA QUE SE IMPRIMAN========================
-        for (int i = 0; i < Proy1.csucursales; i++) {
-            if (Proy1.sucursales[i] !=null) {
+        for (int i = 0; i < Proy1.cclientes; i++) {
+            if (Proy1.clientes[i] !=null) {
                 //COLUMNA1 = CODIGOS
-                columna1 = new PdfPCell(new Phrase(String.valueOf(Proy1.sucursales[i].getCodigo()),Tpequeño));
+                columna1 = new PdfPCell(new Phrase(String.valueOf(Proy1.clientes[i].getCodigo()),Tpequeño));
                 columna1.setHorizontalAlignment(Element.ALIGN_CENTER);
                 columna1.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 columna1.setBorderColor(negro);
@@ -140,15 +140,15 @@ public class ListadoSucursales {
                 tabla.addCell(columna1);
                 
                 //COLUMNA2 = NOMBRES
-                columna2 = new PdfPCell(new Phrase(Proy1.sucursales[i].getNombre(),Tpequeño));
+                columna2 = new PdfPCell(new Phrase(Proy1.clientes[i].getNombre(),Tpequeño));
                 columna2.setHorizontalAlignment(Element.ALIGN_CENTER);
                 columna2.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 columna2.setBorderColor(negro);
                 columna2.setPaddingBottom(3);
                 tabla.addCell(columna2);
                 
-                //COLUMNA3 = DIRECCIONES
-                columna3 = new PdfPCell(new Phrase(Proy1.sucursales[i].getDireccion(),Tpequeño));
+                //COLUMNA3 = NITS
+                columna3 = new PdfPCell(new Phrase(String.valueOf(Proy1.clientes[i].getNit()),Tpequeño));
                 columna3.setHorizontalAlignment(Element.ALIGN_CENTER);
                 columna3.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 columna3.setBorderColor(negro);
@@ -156,15 +156,15 @@ public class ListadoSucursales {
                 tabla.addCell(columna3);
                 
                 //COLUMNA4 = CORREOS
-                columna4 = new PdfPCell(new Phrase(Proy1.sucursales[i].getCorreo(),Tpequeño));
+                columna4 = new PdfPCell(new Phrase(Proy1.clientes[i].getCorreo(),Tpequeño));
                 columna4.setHorizontalAlignment(Element.ALIGN_CENTER);
                 columna4.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 columna4.setBorderColor(negro);
                 columna4.setPaddingBottom(3);
                 tabla.addCell(columna4);
                 
-                //COLUMNA5 = TELEFONOS
-                columna5 = new PdfPCell(new Phrase(String.valueOf(Proy1.sucursales[i].getTelefono()),Tpequeño));
+                //COLUMNA5 = GÉNEROS
+                columna5 = new PdfPCell(new Phrase(Proy1.clientes[i].getGenero(),Tpequeño));
                 columna5.setHorizontalAlignment(Element.ALIGN_CENTER);
                 columna5.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 columna5.setBorderColor(negro);

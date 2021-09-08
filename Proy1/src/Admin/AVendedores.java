@@ -24,6 +24,7 @@ import org.jfree.chart.plot.PlotOrientation;
 //==================PAQUETES===============
 import proy1.Proy1;
 import Clases.Vendedores;
+import Listados.ListadoVendedores;
 
 public class AVendedores extends JPanel implements ActionListener{
     JButton crearv, cargarv, actualizarv, eliminarv, exportarv;
@@ -225,6 +226,11 @@ public class AVendedores extends JPanel implements ActionListener{
         //BOTON ELIMINAR VENDEDOR
         else if (ae.getSource()==eliminarv) {
             Formev fev = new Formev();
+        }
+        //BOTON EXPORTAR LISTA DE VENDEDORES EN PDF
+        else if (ae.getSource()==exportarv) {
+            ListadoVendedores lv = new ListadoVendedores();
+            lv.CrearPDFV();
         }
     }
 }

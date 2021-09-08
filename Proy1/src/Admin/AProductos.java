@@ -23,6 +23,7 @@ import org.jfree.chart.plot.PlotOrientation;
 
 //==================PAQUETES===============
 import Clases.Productos;
+import Listados.ListadoProductos;
 import proy1.Proy1;
 
 public class AProductos extends JPanel implements ActionListener{
@@ -225,6 +226,11 @@ public class AProductos extends JPanel implements ActionListener{
         //BOTON ELIMINAR PRODUCTO
         else if (ae.getSource()==eliminarp) {
             Formep fep = new Formep();
+        }
+        //BOTON EXPORTAR LISTA DE PRODUCTOS EN PDF
+        else if (ae.getSource()==exportarp) {
+            ListadoProductos lp = new ListadoProductos();
+            lp.CrearPDFP();
         }
     }
 }

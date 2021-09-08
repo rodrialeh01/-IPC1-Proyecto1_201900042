@@ -19,6 +19,7 @@ import java.io.FileReader;
 import Clases.Sucursales;
 import proy1.Proy1;
 import Listados.ListadoSucursales;
+
 public class ASucursales extends JPanel implements ActionListener{
     JButton crears, cargars, actualizars, eliminars, exportars, actualizarps;
     static JTable tablas;

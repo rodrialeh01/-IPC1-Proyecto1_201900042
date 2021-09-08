@@ -24,6 +24,7 @@ import org.jfree.data.general.DefaultPieDataset;
 //==================PAQUETES===============
 import proy1.Proy1;
 import Clases.Clientes;
+import Listados.ListadoClientes;
 
 public class AClientes extends JPanel implements ActionListener{
     JButton crearc, cargarc, actualizarc, eliminarc, exportarc;
@@ -211,6 +212,11 @@ public class AClientes extends JPanel implements ActionListener{
         //BOTON ELIMINAR CLIENTE
         else if (ae.getSource()==eliminarc) {
             Formec fec = new Formec();
+        }
+        //BOTON EXPORTAR LISTA DE CLIENTES EN PDF
+        else if (ae.getSource()==exportarc) {
+            ListadoClientes lc = new ListadoClientes();
+            lc.CrearPDFC();
         }
     }
 }
