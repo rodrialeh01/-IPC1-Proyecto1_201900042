@@ -68,11 +68,14 @@ public class ASucursales extends JPanel implements ActionListener{
         
         String [] encabezado = {"Código","Nombre","Dirreción","Correo","Teléfono"};
         //Object [][] fila1 = {{"1","Gasolinita","san lucas","gasolinita@g.com","53085107"}};
-        datos = Proy1.convertirDSucursales();        
-        tablas = new JTable(datos,encabezado);
-        JScrollPane sp= new JScrollPane(tablas);
+        datos = Proy1.convertirDSucursales();
+        if (datos!=null) {
+            tablas = new JTable(datos, encabezado);            
+        }
+        JScrollPane sp = new JScrollPane(tablas);
         sp.setBounds(20, 10, 800, 600);
         this.add(sp);
+        
         
         //DISEÑO PANEL
         this.setLayout(null);
@@ -153,6 +156,10 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON ACTUALIZAR SUCURSAL
         else if (ae.getSource()==actualizars) {
             Formas fas = new Formas();
+        }
+        //BOTON ELIMINAR SUCURSAL
+        else if (ae.getSource()==eliminars) {
+            Formes fes = new Formes();
         }
     }
 }

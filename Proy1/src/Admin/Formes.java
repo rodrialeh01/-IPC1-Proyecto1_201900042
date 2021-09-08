@@ -4,20 +4,22 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Clases.Sucursales;
 import javax.swing.*;
 import proy1.Proy1;
 
-public class Formas extends JFrame implements ActionListener{
+public class Formes extends JFrame implements ActionListener{
+    
     JLabel titulo, lcod, lnombre, ldireccion, lcorreo, ltelefono;
     JTextField tcod, tnombre, tdireccion, tcorreo, ttelefono;
-    JButton actualizar, buscar;
+    JButton eliminar, buscar;
     String codigo, nombre, direccion,correo,telefono;
-    public Formas(){
+    public Formes(){
         //COLORES
         Color azul = new Color(38,36,89);
         
         //TITULO
-        titulo = new JLabel("Actualizar Sucursal");
+        titulo = new JLabel("Eliminar Sucursal");
         titulo.setFont(new Font("Arial", Font.PLAIN,25));
         titulo.setBounds(120,30,250,30);
         titulo.setVisible(true);
@@ -112,20 +114,20 @@ public class Formas extends JFrame implements ActionListener{
         this.add(ttelefono);
         
         //BOTON DE ACTUALIZAR
-        actualizar = new JButton("Actualizar");
-        actualizar.setBounds(100,500,280,40);
-        actualizar.setFont(new Font("Arial", Font.PLAIN,15));
-        actualizar.setBackground(Color.BLACK);
-        actualizar.setForeground(Color.WHITE);
-        actualizar.addActionListener(this);
-        actualizar.setEnabled(false);
-        this.add(actualizar);
+        eliminar = new JButton("Eliminar");
+        eliminar.setBounds(100,500,280,40);
+        eliminar.setFont(new Font("Arial", Font.PLAIN,15));
+        eliminar.setBackground(Color.BLACK);
+        eliminar.setForeground(Color.WHITE);
+        eliminar.addActionListener(this);
+        eliminar.setEnabled(false);
+        this.add(eliminar);
         
         //ICONO DE LA APLICACION
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
         
         //DISEÑO DE LA VENTANA
-        this.setTitle("Actualizar Sucursal | Blue Mall - POS");
+        this.setTitle("Eliminar Sucursal | Blue Mall - POS");
         this.setBounds(450,100,500,600);
         this.getContentPane().setBackground(azul);
         this.setLayout(null);
@@ -133,7 +135,6 @@ public class Formas extends JFrame implements ActionListener{
         this.setVisible(true);
     }
     
-    //EVENTOS DE LOS BOTONES
     @Override
     public void actionPerformed(ActionEvent ae) {
         //SE HACE LA LECTURA DE LOS JTEXTFIELD
@@ -149,13 +150,7 @@ public class Formas extends JFrame implements ActionListener{
                 //VALIDAR SI EXISTE LA SUCURSAL
                 if (Proy1.sucursales[i] !=null && Proy1.sucursales[i].getCodigo()== Integer.parseInt(codigo)) {                
                     opcion = true;
-                    tcod.setEnabled(false);
-                    buscar.setEnabled(false);
-                    tnombre.setEnabled(true);
-                    tdireccion.setEnabled(true);
-                    tcorreo.setEnabled(true);
-                    ttelefono.setEnabled(true);
-                    actualizar.setEnabled(true);
+                    eliminar.setEnabled(true);
                     tnombre.setText(Proy1.sucursales[i].getNombre());
                     tdireccion.setText(Proy1.sucursales[i].getDireccion());
                     tcorreo.setText(Proy1.sucursales[i].getCorreo());
@@ -169,19 +164,34 @@ public class Formas extends JFrame implements ActionListener{
             }
         }
         //BOTON ACTUALIZAR
-        else if (ae.getSource()==actualizar) {
-            //HACE LA OPERACIÓN DE ACTUALIZAR LOS DATOS DEL OBJETO
+        else if (ae.getSource()==eliminar) {
+            //HACE LA OPERACIÓN DE ELIMINAR LOS DATOS DEL OBJETO
+            //HACE QUE EL ESPACIO DONDE SE UBICA EL OBJETO SEA NULO
             for (int i = 0; i < Proy1.csucursales; i++) {
-                if (Integer.parseInt(codigo) == Proy1.sucursales[i].getCodigo()) {
-                    Proy1.sucursales[i].setCorreo(correo);
-                    Proy1.sucursales[i].setDireccion(direccion);
-                    Proy1.sucursales[i].setNombre(nombre);
-                    Proy1.sucursales[i].setTelefono(Integer.parseInt(telefono));
+                if (Proy1.sucursales[i].getCodigo() == Integer.parseInt(codigo)) {
+                    Proy1.sucursales[i] = null;                   
+                }                
+            }
+            //HACE QUE DESDE EL ESPACIO NULO EN ADELANTE SE MUEVAN LAS CASILLAS HACIA ARRIBA
+            for (int i = 0; i < Proy1.csucursales -1; i++) {
+                if (Proy1.sucursales[i] == null) {
+                    for (int j = i; j < Proy1.csucursales-1; j++) {
+                        Proy1.sucursales[j] = Proy1.sucursales[j + 1];
+                    } 
                 }
             }
+            Proy1.csucursales --;
+            if (Proy1.csucursales == 0) {
+                Proy1.sucursales[0] = null;
+            }
+            repaint();
             Proy1.LeerSucursales();
-            JOptionPane.showMessageDialog(this, "Se ha actualizado la Sucursal con éxito");
+            JOptionPane.showMessageDialog(this, "Se ha eliminado la Sucursal con éxito");
             this.dispose();
         }
-    }    
+    }
+    public void eliminar(Sucursales[] suc, String cod){
+        
+        
+    }
 }

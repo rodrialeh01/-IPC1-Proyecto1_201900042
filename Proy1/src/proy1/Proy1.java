@@ -4,7 +4,7 @@ import Admin.*;
 import Login.Login;
 import javax.swing.*;
 public class Proy1 {
-    public static Sucursales[] sucursales = new Sucursales[50];
+    public static Sucursales[] sucursales = new Sucursales[5];
     public static int csucursales = 0;
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
@@ -30,19 +30,26 @@ public class Proy1 {
     //METODO PARA MOSTRAR LOS SUCURSALES
     public static void LeerSucursales(){
         for (int i = 0; i < csucursales; i++) {
-            sucursales[i].MostrarSucursales();
+            if (sucursales[i] !=null) {
+                sucursales[i].MostrarSucursales();
+            }            
+        }
+        if (sucursales == null) {
+            System.out.println("NO HAY SUCURSALES");
         }
     }
     
     //ARMA UNA MATRIZ DE OBJETOS DE LAS SUCURSALES PARA MOSTRARLO EN TABLA
-    public static Object[][] convertirDSucursales(){
+    public static Object[][] convertirDSucursales() {
         Object[][] content = new Object[Proy1.csucursales][5];
         for (int i = 0; i < Proy1.csucursales; i++) {
-            content[i][0] = Proy1.sucursales[i].getCodigo();
-            content[i][1] = Proy1.sucursales[i].getNombre();
-            content[i][2] = Proy1.sucursales[i].getDireccion();
-            content[i][3] = Proy1.sucursales[i].getCorreo();
-            content[i][4] = Proy1.sucursales[i].getTelefono();
+            if (sucursales[i] != null) {
+                content[i][0] = Proy1.sucursales[i].getCodigo();
+                content[i][1] = Proy1.sucursales[i].getNombre();
+                content[i][2] = Proy1.sucursales[i].getDireccion();
+                content[i][3] = Proy1.sucursales[i].getCorreo();
+                content[i][4] = Proy1.sucursales[i].getTelefono();
+            }
         }
         return content;
     }
