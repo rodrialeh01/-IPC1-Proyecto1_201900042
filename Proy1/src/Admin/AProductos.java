@@ -1,15 +1,27 @@
 package Admin;
 
+//==================LIBRERIAS===============
+//LECTURA DE UN ARCHIVO JSON
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+//AWT-SWING
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//LECTURA DE ARCHIVOS
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+//JFREECHART(GRAFICAS)
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.plot.PlotOrientation;
+
+//==================PAQUETES===============
 import Clases.Productos;
 import proy1.Proy1;
 
@@ -18,10 +30,11 @@ public class AProductos extends JPanel implements ActionListener{
     JPanel graficap;
     static JTable tablap;
     static Object[][] datos;
+    Color azulito = new Color(112,114,231);
     public AProductos(){
         //COLORES
         Color gris = new Color(204,201,201);
-        Color azulito = new Color(112,114,231);
+        
         
         //BOTON CREAR
         crearp = new JButton("Crear");
@@ -70,10 +83,10 @@ public class AProductos extends JPanel implements ActionListener{
         
         //PANEL DE GRAFICA
         graficap = new JPanel();
-        graficap.setLayout(new BorderLayout());
 	graficap.setBounds(900,220,350,300);
         graficap.setBackground(azulito);
         this.add(graficap);
+        pg();
         
         //TABLA
         String [] encabezado = {"Código","Nombre","Cantidad","Descripcion","Precio"};
@@ -88,6 +101,52 @@ public class AProductos extends JPanel implements ActionListener{
         this.setBackground(gris);
         this.setLayout(null);
     }
+    
+    //=============================================GRAFICA=====================================================
+    //MOSTRAR LO QUE TENGA QUE MOSTRAR EN EL PANEL DE GRAFICA
+    public void pg(){
+        JLabel nulo = new JLabel("No hay ningun producto registrado");
+        nulo.setBounds(180,135,200,30);
+        nulo.setFont(new Font("Arial", Font.PLAIN,20));
+        graficap.add(nulo);
+        if (Proy1.productos[0] == null) {
+            graficap.setVisible(true);
+        }else{
+            graficap.setVisible(false);
+            mostrargrafica();
+        }        
+    }
+    
+    //SE CREA UN ARREGLO TEMPORAL PARA ACTUAR EL ORDENAMIENTO
+    public static Productos[] arraytempg = new Productos[200];
+    
+    //MOSTRAR LA GRAFICA
+    public void mostrargrafica(){
+        //SE MANDAN LOS DATOS DEL ARREGLO DE PRODUCTOS AL ARREGLO TEMPORAL        
+        for (int i = 0; i < Proy1.productos.length; i++) {
+            arraytempg[i]=Proy1.productos[i];
+        }
+        //SE LLAMA AL METODO DE ORDENAMIENTO PARA QUE ORDENE LOS OBJETOS POR CANTIDAD
+        Proy1.ordenamientoProductos(arraytempg);
+        //SE MANDAN LOS DATOS PARA LA GRAFICA PONIENDO SOLO 3
+        DefaultCategoryDataset datosbarra = new DefaultCategoryDataset();
+        for (int i = 0; i < 3; i++) {
+            if (arraytempg!=null && arraytempg[i].getCantidad() != 0) {
+                datosbarra.setValue(arraytempg[i].getCantidad(), arraytempg[i].getNombre(), String.valueOf(arraytempg[i].getCantidad()));
+            }
+        }
+        //SE DIBUJA LA GRAFICA
+        JFreeChart barras = ChartFactory.createBarChart("Top 3 - Productos con mas disponibilidad","Productos", "Cantidad", datosbarra,PlotOrientation.VERTICAL,true,false, false);
+        barras.setBackgroundPaint(azulito);
+        barras.getTitle().setPaint(Color.BLACK);
+        barras.getTitle().setFont(new Font("Arial", Font.PLAIN,20)); 
+        ChartPanel chartPanel = new ChartPanel(barras);
+        chartPanel.setBounds(900,220,350,300);
+        this.add(chartPanel);
+    }
+    
+    //=======================================LECTURA DE ARCHIVOS JSON===========================================
+    
     String contenido = "";
     File archivo;
     FileReader fr;

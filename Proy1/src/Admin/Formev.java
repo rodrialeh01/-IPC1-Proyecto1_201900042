@@ -16,7 +16,7 @@ public class Formev extends JFrame implements ActionListener{
         Color azul = new Color(38,36,89);
         
         //TITULO
-        titulo = new JLabel("Actualizar Vendedor");
+        titulo = new JLabel("Eliminar Vendedor");
         titulo.setFont(new Font("Arial", Font.PLAIN,25));
         titulo.setBounds(120,30,350,30);
         titulo.setVisible(true);
@@ -111,7 +111,7 @@ public class Formev extends JFrame implements ActionListener{
         this.add(tgenero);
         
         //BOTON DE ACTUALIZAR
-        eliminar = new JButton("Actualizar");
+        eliminar = new JButton("Eliminar");
         eliminar.setBounds(100,500,280,40);
         eliminar.setFont(new Font("Arial", Font.PLAIN,15));
         eliminar.setBackground(Color.BLACK);
@@ -124,7 +124,7 @@ public class Formev extends JFrame implements ActionListener{
         setIconImage(new ImageIcon(getClass().getResource("Logo.png")).getImage());
         
         //DISEÑO DE LA VENTANA
-        this.setTitle("Actualizar Vendedor | Blue Mall - POS");
+        this.setTitle("Eliminar Vendedor | Blue Mall - POS");
         this.setBounds(450,100,500,600);
         this.getContentPane().setBackground(azul);
         this.setLayout(null);

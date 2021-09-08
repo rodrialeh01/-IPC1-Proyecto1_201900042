@@ -84,18 +84,7 @@ public class Login extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
-    }boolean logueado = false;
-//            for (int i = 0; i < Proy1.vendedores.length; i++) {
-//                if (usu.equals(String.valueOf((Proy1.vendedores[i].getCodigo()))) && contra.equals("1234")) {
-//                    logueado = true;
-//                    System.out.println("Entró el usuario " + Proy1.vendedores[i].getCodigo());
-//                }
-//            }
-//            if (logueado == true) {
-//                JOptionPane.showMessageDialog(this, "Logueado");
-//            }else{
-//                JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
-//            }
+    }
     
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -108,8 +97,7 @@ public class Login extends JFrame implements ActionListener{
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
-            }
-//            
+            }  
         }
     }
     

@@ -9,7 +9,6 @@ public class Proy1 {
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
         Login l = new Login();
-//        Formas f = new Formas();
     }
     /**
      * ================================SUCURSALES================================
@@ -55,6 +54,10 @@ public class Proy1 {
         return content;
     }
     
+    /**
+     * ================================PRODUCTOS================================
+     */
+    
     public static Productos[] productos = new Productos[200];
     public static int cproductos = 0;
     
@@ -69,9 +72,7 @@ public class Proy1 {
             System.out.println("LLEGÓ A LA CANTIDAD MAXIMA DE PRODUCTOS");
         }
     }
-    /**
-     * ================================PRODUCTOS================================
-     */
+    
     //METODO PARA MOSTRAR LOS PRODUCTOS
     public static void LeerProducto(){
         System.out.println("=====================================");
@@ -95,6 +96,23 @@ public class Proy1 {
             contentp[i][4] = Proy1.productos[i].getPrecio();
         }
         return contentp;
+    }
+    
+    //SE ORDENARAN LOS OBJETOS DE MAYOR CANTIDAD HASTA MENOR CANTIDAD USANDO UN ALGORITMO DE ORDENAMIENTO
+    public static void ordenamientoProductos(Productos[] prod){
+        try{
+            for (int i = 1; i < prod.length; i++) {
+                for (int j = i - 1; j >= 0; j--) {
+                    if (prod[i].getCantidad() > prod[j].getCantidad()) {
+                        Productos aux = prod[i];
+                        prod[i] = prod[j];
+                        prod[j] = aux;
+                        i--;
+                    }
+                }
+            }
+        }catch(Exception e){            
+        }
     }
     
     /**
@@ -141,6 +159,27 @@ public class Proy1 {
         return contentc;
     }
     
+    //METODO PARA CONTAR EL GENERO M
+    public static int ContadorCM(){
+        int contadorm = 0;
+        for (int i = 0; i < cclientes; i++) {
+            if (clientes[i].getGenero().equals("M")) {
+                contadorm++;
+            }
+        }
+        return contadorm;
+    }
+    
+    //METODO PARA CONTAR EL GENERO F
+    public static int ContadorCF(){
+        int contadorf = 0;
+        for (int i = 0; i < cclientes; i++) {
+            if (clientes[i].getGenero().equals("F")) {
+                contadorf++;
+            }
+        }
+        return contadorf;
+    }
     /**
      * ================================VENDEDORES================================
      */
@@ -183,5 +222,22 @@ public class Proy1 {
             contentv[i][4] = Proy1.vendedores[i].getGenero();
         }
         return contentv;
+    }
+    
+    //SE ORDENARAN LOS OBJETOS DE MAYOR CANTIDAD DE VENTAS HASTA MENOR CANTIDAD DE VENTAS USANDO UN ALGORITMO DE ORDENAMIENTO
+    public static void ordenamientoVendedores(Vendedores[] ventas){
+        try{
+            for (int i = 1; i < ventas.length; i++) {
+                for (int j = i - 1; j >= 0; j--) {
+                    if (ventas[i].getVentas() > ventas[j].getVentas()) {
+                        Vendedores aux = ventas[i];
+                        ventas[i] = ventas[j];
+                        ventas[j] = aux;
+                        i--;
+                    }
+                }
+            }
+        }catch(Exception e){            
+        }
     }
 }

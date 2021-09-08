@@ -1,25 +1,40 @@
 package Admin;
-import Clases.Vendedores;
+
+//==================LIBRERIAS===============
+//LECTURA DE UN ARCHIVO JSON
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+//AWT-SWING
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+//LECTURA DE ARCHIVOS
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import javax.swing.*;
+//JFREECHART(GRAFICAS)
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.plot.PlotOrientation;
+
+//==================PAQUETES===============
 import proy1.Proy1;
+import Clases.Vendedores;
+
 public class AVendedores extends JPanel implements ActionListener{
     JButton crearv, cargarv, actualizarv, eliminarv, exportarv;
     JPanel graficav;
     static JTable tablav;
     static Object[][] datos;
+    Color azulito = new Color(112,114,231);
     public AVendedores(){
         //COLORES
         Color gris = new Color(204,201,201);
-        Color azulito = new Color(112,114,231);
+        
         
         //BOTON CREAR
         crearv = new JButton("Crear");
@@ -68,10 +83,10 @@ public class AVendedores extends JPanel implements ActionListener{
         
         //PANEL DE GRAFICA
         graficav = new JPanel();
-        graficav.setLayout(new BorderLayout());
 	graficav.setBounds(900,220,350,300);
         graficav.setBackground(azulito);
         this.add(graficav);
+        pg();
         
         //TABLA
         String [] encabezado = {"Código","Nombre","Caja","Ventas","Género"};
@@ -86,6 +101,50 @@ public class AVendedores extends JPanel implements ActionListener{
         this.setBackground(gris);
         this.setLayout(null);
     }
+    //=============================================GRAFICA=====================================================
+    //MOSTRAR LO QUE TENGA QUE MOSTRAR EN EL PANEL DE GRAFICA
+    public void pg(){
+        JLabel nulo = new JLabel("No hay ningun vendedor registrado");
+        nulo.setBounds(180,135,200,30);
+        nulo.setFont(new Font("Arial", Font.PLAIN,20));
+        graficav.add(nulo);
+        if (Proy1.vendedores[0] == null) {
+            graficav.setVisible(true);
+        }else{
+            graficav.setVisible(false);
+            mostrargrafica();
+        }        
+    }
+    
+    //SE CREA UN ARREGLO TEMPORAL PARA ACTUAR EL ORDENAMIENTO
+    public static Vendedores[] arraytempg = new Vendedores[400];
+    
+    //MOSTRAR LA GRAFICA
+    public void mostrargrafica(){
+        //SE MANDAN LOS DATOS DEL ARREGLO DE PRODUCTOS AL ARREGLO TEMPORAL        
+        for (int i = 0; i < Proy1.vendedores.length; i++) {
+            arraytempg[i]=Proy1.vendedores[i];
+        }
+        //SE LLAMA AL METODO DE ORDENAMIENTO PARA QUE ORDENE LOS OBJETOS POR CANTIDAD DE VENTAS
+        Proy1.ordenamientoVendedores(arraytempg);
+        //SE MANDAN LOS DATOS PARA LA GRAFICA PONIENDO SOLO 3
+        DefaultCategoryDataset datosbarra = new DefaultCategoryDataset();
+        for (int i = 0; i < 3; i++) {
+            if (arraytempg!=null && arraytempg[i].getVentas() != 0) {
+                datosbarra.setValue(arraytempg[i].getVentas(), arraytempg[i].getNombre(), String.valueOf(arraytempg[i].getVentas()));
+            }
+        }
+        //SE DIBUJA LA GRAFICA
+        JFreeChart barras = ChartFactory.createBarChart("Top 3 - Vendedores con más Ventas","Vendedores", "Ventas", datosbarra,PlotOrientation.VERTICAL,true,false, false);
+        barras.setBackgroundPaint(azulito);
+        barras.getTitle().setPaint(Color.BLACK);
+        barras.getTitle().setFont(new Font("Arial", Font.PLAIN,20)); 
+        ChartPanel chartPanel = new ChartPanel(barras);
+        chartPanel.setBounds(900,220,350,300);
+        this.add(chartPanel);
+    }
+    
+    //=======================================LECTURA DE ARCHIVOS JSON===========================================
     
     String contenido = "";
     File archivo;

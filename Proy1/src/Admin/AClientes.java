@@ -1,25 +1,40 @@
 package Admin;
-import Clases.Clientes;
+
+//==================LIBRERIAS===============
+//LECTURA DE UN ARCHIVO JSON
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+//AWT-SWING
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//LECTURA DE ARCHIVOS
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+//JFREECHART(GRAFICAS)
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.general.DefaultPieDataset;
+
+//==================PAQUETES===============
 import proy1.Proy1;
+import Clases.Clientes;
+
 public class AClientes extends JPanel implements ActionListener{
     JButton crearc, cargarc, actualizarc, eliminarc, exportarc;
     static JPanel graficac;
     static JTable tablac;
     static Object[][] datos;
+    Color azulito = new Color(112,114,231);
     public AClientes(){
         //COLORES
         Color gris = new Color(204,201,201);
-        Color azulito = new Color(112,114,231);
+        
         
         //BOTON CREAR
         crearc = new JButton("Crear");
@@ -68,10 +83,10 @@ public class AClientes extends JPanel implements ActionListener{
         
         //PANEL DE GRAFICA
         graficac = new JPanel();
-        graficac.setLayout(new BorderLayout());
 	graficac.setBounds(900,220,350,300);
         graficac.setBackground(azulito);
         this.add(graficac);
+        pg();
         
         //TABLA
         String [] encabezado = {"Código","Nombre","NIT","Correo","Género"};
@@ -86,6 +101,8 @@ public class AClientes extends JPanel implements ActionListener{
         this.setLayout(null);
         this.setBackground(gris);
     }
+    
+    //=======================================LECTURA DE ARCHIVOS JSON===========================================
     String contenido = "";
     File archivo;
     FileReader fr;
@@ -144,6 +161,36 @@ public class AClientes extends JPanel implements ActionListener{
             Proy1.AgregarCliente(nuevo);
         }
         Proy1.LeerCliente();
+    }
+    
+    //================METODO PARA LA GRAFICA====================
+    //MOSTRAR LO QUE TENGA QUE MOSTRAR EN EL PANEL DE GRAFICA
+    public void pg(){
+        JLabel nulo = new JLabel("No hay ningun cliente registrado");
+        nulo.setBounds(180,135,200,30);
+        nulo.setFont(new Font("Arial", Font.PLAIN,20));
+        graficac.add(nulo);
+        if (Proy1.clientes[0] == null) {
+            graficac.setVisible(true);
+        }else{
+            graficac.setVisible(false);
+            mostrargrafica();
+        }        
+    }
+    
+    //MOSTRAR LA GRAFICA
+    public void mostrargrafica(){
+        DefaultPieDataset datosgraph = new DefaultPieDataset();
+        datosgraph.setValue("Hombres", Proy1.ContadorCM());
+        datosgraph.setValue("Mujeres", Proy1.ContadorCF());
+        JFreeChart grafica = ChartFactory.createPieChart3D("Genero de Clientes", datosgraph);
+        PiePlot3D pastel =(PiePlot3D)grafica.getPlot();
+        pastel.setForegroundAlpha(0.40f);
+        pastel.setInteriorGap(0.05);
+        pastel.setBackgroundPaint(azulito);        
+        ChartPanel panelgraph = new ChartPanel(grafica);
+        panelgraph.setBounds(900,220,350,300);
+        this.add(panelgraph);
     }
     
     //ACCION DE LOS BOTONES
