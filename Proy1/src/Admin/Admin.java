@@ -1,10 +1,14 @@
 package Admin;
-import Login.Login;
+//==================LIBRERIAS===============
+//AWT-SWING
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+//==================PAQUETES================
+import Login.Login;
+
 public class Admin extends JFrame implements ActionListener{
     private JPanel Panel;
     JButton cierre, actualizar;

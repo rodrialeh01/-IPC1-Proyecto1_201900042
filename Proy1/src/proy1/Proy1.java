@@ -2,13 +2,15 @@ package proy1;
 import Clases.*;
 import Admin.*;
 import Login.Login;
+import VVendedores.VPrincipal;
 import javax.swing.*;
 public class Proy1 {
     public static Sucursales[] sucursales = new Sucursales[50];
     public static int csucursales = 0;
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
-        Login l = new Login();
+//        Login l = new Login();
+          VPrincipal vp = new VPrincipal();
     }
     /**
      * ================================SUCURSALES================================
