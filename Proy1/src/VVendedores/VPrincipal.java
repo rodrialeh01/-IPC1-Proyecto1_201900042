@@ -2,6 +2,7 @@ package VVendedores;
 
 //==================LIBRERIAS===============
 //AWT-SWING
+import Login.Login;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,9 +51,13 @@ public class VPrincipal extends JFrame implements ActionListener{
         cerrars.setForeground(Color.WHITE);
         this.add(cerrars);
         
-        bienvenida = new JLabel("¡Bienvenido ");
+        if (Login.genv.equals("M")) {
+            bienvenida = new JLabel("¡Bienvenido " + Login.usuv + "!");
+        }else if (Login.genv.equals("F")) {
+            bienvenida = new JLabel("¡Bienvenida " + Login.usuv + "!");
+        }        
         bienvenida.setFont(new Font("Arial", Font.BOLD,15));
-        bienvenida.setBounds(850,5,150,30);
+        bienvenida.setBounds(850,5,250,30);
         bienvenida.setVisible(true);
         bienvenida.setForeground(Color.BLACK);
         this.add(bienvenida);
@@ -72,6 +77,9 @@ public class VPrincipal extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        
+        if (ae.getSource()==cerrars) {
+            Login l = new Login();
+            this.dispose();
+        }
     }    
 }

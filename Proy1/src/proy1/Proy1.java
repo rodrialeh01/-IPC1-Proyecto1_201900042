@@ -242,4 +242,36 @@ public class Proy1 {
         }catch(Exception e){            
         }
     }
+    
+    //LOGIN DE LOS VENDEDORES
+    
+    //VERIFICA SI EXISTE EL VENDEDOR
+    public static boolean verificar(int codv) {
+        for (int i = 0; i<vendedores.length; i++) {
+            if (vendedores[i]!=null && vendedores[i].getCodigo()==codv) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    //FUNCION PARA QUE RETORNE EL NOMBRE DEL VENDEDOR QUE QUIERE LOGUEAR
+    public static String nombrev(int codv){
+        for (int i = 0; i<vendedores.length; i++) {
+            if (vendedores[i]!=null && vendedores[i].getCodigo()==codv) {
+                return vendedores[i].getNombre();
+            }
+        }
+        return null;
+    }
+    
+    //FUNCION PARA QUE RETORNE EL GENERO DEL VENDEDOR QUE QUIERE LOGUEAR
+    public static String generov(int codv){
+        for (int i = 0; i<vendedores.length; i++) {
+            if (vendedores[i]!=null && vendedores[i].getCodigo()==codv) {
+                return vendedores[i].getGenero();
+            }
+        }
+        return null;
+    }
 }

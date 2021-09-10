@@ -1,16 +1,23 @@
 package Login;
-import Admin.Admin;
+//=============LIBRERIAS==============
+//AWT-SWING
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+//==================PAQUETES===============
+import Admin.Admin;
+import VVendedores.VPrincipal;
 import proy1.Proy1;
+
 public class Login extends JFrame implements ActionListener{
     JLabel title, us, pas, img;
     static JTextField usuarios;
     static JPasswordField contraseñas;
     JRadioButton admin, vendedor;
-    String usu, contra;
+    static String usu, contra;
+    public static String usuv, genv;
     JButton inicio;
     public Login(){
         
@@ -91,11 +98,32 @@ public class Login extends JFrame implements ActionListener{
         if (ae.getSource()==inicio){
             usu = usuarios.getText();
             contra = contraseñas.getText();
+            //VERIFICA LA ENTRADA DEL ADMINISTRADOR
             if (usu.equals("admin") && contra.equals("admin")) {
                 System.out.println("HOLA ADMIN");
+                JOptionPane.showMessageDialog(this, "Bienvenido Administrador");
                 Admin a = new Admin();
                 this.dispose();
-            }else{
+            }
+            //VERIFICA LA ENTRADA DEL VENDEDOR
+            else if (Proy1.verificar(Integer.parseInt(usu)) == true && contra.equals("1234")) {
+                usuv = Proy1.nombrev(Integer.parseInt(usu));
+                if (usuv !=null) {
+                    genv =Proy1.generov(Integer.parseInt(usu));
+                    if (genv.equals("M")) {
+                        System.out.println("Bienvenido " + usuv);
+                        JOptionPane.showMessageDialog(this, "Bienvenido " + usuv);
+                        VPrincipal vp = new VPrincipal();
+                        this.dispose();
+                    }else if (genv.equals("F")) {
+                        System.out.println("Bienvenida " + usuv);
+                        JOptionPane.showMessageDialog(this, "Bienvenida " + usuv);
+                        VPrincipal vp = new VPrincipal();
+                        this.dispose();
+                    }                    
+                }                
+            }
+            else{
                 JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
             }  
         }
