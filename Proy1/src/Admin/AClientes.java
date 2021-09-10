@@ -25,6 +25,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import proy1.Proy1;
 import Clases.Clientes;
 import Listados.ListadoClientes;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class AClientes extends JPanel implements ActionListener{
     JButton crearc, cargarc, actualizarc, eliminarc, exportarc;
@@ -91,11 +92,19 @@ public class AClientes extends JPanel implements ActionListener{
         
         //TABLA
         String [] encabezado = {"Código","Nombre","NIT","Correo","Género"};
-//        Object [][] fila1 = {{"1","ale","1234567","rodrialehdl@gmail.com", "m"}};
         datos = Proy1.convertirDClientes();
         tablac = new JTable(datos,encabezado);
         JScrollPane sp= new JScrollPane(tablac);
         sp.setBounds(20, 10, 800, 600);
+        //CENTRAR LOS DATOS DE LA TABLA
+        DefaultTableCellRenderer renderc = new DefaultTableCellRenderer();
+        renderc.setHorizontalAlignment(SwingConstants.CENTER);
+        tablac.getColumnModel().getColumn(0).setCellRenderer(renderc);
+        tablac.getColumnModel().getColumn(1).setCellRenderer(renderc);
+        tablac.getColumnModel().getColumn(2).setCellRenderer(renderc);
+        tablac.getColumnModel().getColumn(3).setCellRenderer(renderc);
+        tablac.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablac.setEnabled(false);
         this.add(sp);
         
         //DISEÑO PANEL

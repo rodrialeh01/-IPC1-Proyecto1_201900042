@@ -24,6 +24,7 @@ import org.jfree.chart.plot.PlotOrientation;
 //==================PAQUETES===============
 import Clases.Productos;
 import Listados.ListadoProductos;
+import javax.swing.table.DefaultTableCellRenderer;
 import proy1.Proy1;
 
 public class AProductos extends JPanel implements ActionListener{
@@ -91,11 +92,19 @@ public class AProductos extends JPanel implements ActionListener{
         
         //TABLA
         String [] encabezado = {"Código","Nombre","Cantidad","Descripcion","Precio"};
-//        Object [][] fila1 = {{"1","martillo","300","herramienta","5.00"}};
         datos = Proy1.convertirDProductos();
         tablap = new JTable(datos,encabezado);
         JScrollPane sp= new JScrollPane(tablap);
         sp.setBounds(20, 10, 800, 600);
+        //CENTRAR LOS DATOS DE LA TABLA
+        DefaultTableCellRenderer renderc = new DefaultTableCellRenderer();
+        renderc.setHorizontalAlignment(SwingConstants.CENTER);
+        tablap.getColumnModel().getColumn(0).setCellRenderer(renderc);
+        tablap.getColumnModel().getColumn(1).setCellRenderer(renderc);
+        tablap.getColumnModel().getColumn(2).setCellRenderer(renderc);
+        tablap.getColumnModel().getColumn(3).setCellRenderer(renderc);
+        tablap.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablap.setEnabled(false);
         this.add(sp);
         
         //DISEÑO PANEL

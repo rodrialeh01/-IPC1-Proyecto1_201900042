@@ -9,8 +9,8 @@ public class Proy1 {
     public static int csucursales = 0;
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
-//        Login l = new Login();
-          VPrincipal vp = new VPrincipal();
+        Login l = new Login();
+//          VPrincipal vp = new VPrincipal();
     }
     /**
      * ================================SUCURSALES================================

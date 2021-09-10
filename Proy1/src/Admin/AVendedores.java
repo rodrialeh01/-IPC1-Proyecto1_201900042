@@ -25,6 +25,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import proy1.Proy1;
 import Clases.Vendedores;
 import Listados.ListadoVendedores;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class AVendedores extends JPanel implements ActionListener{
     JButton crearv, cargarv, actualizarv, eliminarv, exportarv;
@@ -91,11 +92,19 @@ public class AVendedores extends JPanel implements ActionListener{
         
         //TABLA
         String [] encabezado = {"Código","Nombre","Caja","Ventas","Género"};
-//        Object [][] fila1 = {{"1","rodri","100","23","m"}};
         datos = Proy1.convertirDVendedores();
         tablav = new JTable(datos,encabezado);
         JScrollPane sp= new JScrollPane(tablav);
         sp.setBounds(20, 10, 800, 600);
+        //CENTRAR LOS DATOS DE LA TABLA
+        DefaultTableCellRenderer renderc = new DefaultTableCellRenderer();
+        renderc.setHorizontalAlignment(SwingConstants.CENTER);
+        tablav.getColumnModel().getColumn(0).setCellRenderer(renderc);
+        tablav.getColumnModel().getColumn(1).setCellRenderer(renderc);
+        tablav.getColumnModel().getColumn(2).setCellRenderer(renderc);
+        tablav.getColumnModel().getColumn(3).setCellRenderer(renderc);
+        tablav.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablav.setEnabled(false);
         this.add(sp);
         
         //DISEÑO PANEL

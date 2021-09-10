@@ -19,6 +19,7 @@ import java.io.FileReader;
 import Clases.Sucursales;
 import proy1.Proy1;
 import Listados.ListadoSucursales;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class ASucursales extends JPanel implements ActionListener{
     JButton crears, cargars, actualizars, eliminars, exportars, actualizarps;
@@ -76,13 +77,19 @@ public class ASucursales extends JPanel implements ActionListener{
         this.add(exportars);
         
         String [] encabezado = {"Código","Nombre","Dirreción","Correo","Teléfono"};
-        //Object [][] fila1 = {{"1","Gasolinita","san lucas","gasolinita@g.com","53085107"}};
         datos = Proy1.convertirDSucursales();
-        if (datos!=null) {
-            tablas = new JTable(datos, encabezado);            
-        }
+        tablas = new JTable(datos, encabezado);  
         JScrollPane sp = new JScrollPane(tablas);
         sp.setBounds(20, 10, 800, 600);
+        //CENTRAR LOS DATOS DE LA TABLA
+        DefaultTableCellRenderer renderc = new DefaultTableCellRenderer();
+        renderc.setHorizontalAlignment(SwingConstants.CENTER);
+        tablas.getColumnModel().getColumn(0).setCellRenderer(renderc);
+        tablas.getColumnModel().getColumn(1).setCellRenderer(renderc);
+        tablas.getColumnModel().getColumn(2).setCellRenderer(renderc);
+        tablas.getColumnModel().getColumn(3).setCellRenderer(renderc);
+        tablas.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablas.setEnabled(false);
         this.add(sp);
         
         
