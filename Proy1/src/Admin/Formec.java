@@ -186,7 +186,7 @@ public class Formec extends JFrame implements ActionListener{
             }
             //ACTUALIZAR EL VECTOR 
             repaint();
-            Proy1.LeerSucursales();
+            Proy1.LeerCliente();
             JOptionPane.showMessageDialog(this, "Se ha eliminado al Cliente con éxito");
             this.dispose();
         }

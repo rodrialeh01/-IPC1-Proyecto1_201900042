@@ -24,6 +24,7 @@ public class VNuevaV extends JPanel implements ActionListener{
     JLabel filtrar, nombref, nitf, correof, generof, filtra2, clientef;
     JTextField nombreft, nitft, correoft,generoft;
     JComboBox clientescb;
+    String nombre, nit, correo,genero;
     
     //PANEL INFERIOR
     JLabel Fecha, Contador, codigoap, cantidadap, totalap;
@@ -72,6 +73,7 @@ public class VNuevaV extends JPanel implements ActionListener{
         nombreft = new JTextField();
         nombreft.setForeground(Color.BLACK);
         nombreft.setBounds(270,45,300,25);
+        nombreft.addActionListener(this);
         nombreft.setFont(new Font("Arial", Font.PLAIN,15));
         sc.add(nombreft);
         
@@ -86,6 +88,7 @@ public class VNuevaV extends JPanel implements ActionListener{
         nitft = new JTextField();
         nitft.setForeground(Color.BLACK);
         nitft.setBounds(740,45,300,25);
+        nitft.addActionListener(this);
         nitft.setFont(new Font("Arial", Font.PLAIN,15));
         sc.add(nitft);
         
@@ -100,6 +103,7 @@ public class VNuevaV extends JPanel implements ActionListener{
         correoft = new JTextField();
         correoft.setForeground(Color.BLACK);
         correoft.setBounds(270,75,300,25);
+        correoft.addActionListener(this);
         correoft.setFont(new Font("Arial", Font.PLAIN,15));
         sc.add(correoft);
         
@@ -114,6 +118,7 @@ public class VNuevaV extends JPanel implements ActionListener{
         generoft = new JTextField();
         generoft.setForeground(Color.BLACK);
         generoft.setBounds(740,75,300,25);
+        generoft.addActionListener(this);
         generoft.setFont(new Font("Arial", Font.PLAIN,15));
         sc.add(generoft);
         
@@ -122,6 +127,7 @@ public class VNuevaV extends JPanel implements ActionListener{
         aplicarf.setForeground(Color.BLACK);
         aplicarf.setBounds(190,115,850,25);
         aplicarf.setFont(new Font("Arial", Font.PLAIN,15));
+        aplicarf.addActionListener(this);
         sc.add(aplicarf);
         
         //LABEL DE FILTRADOS CON SUBRAYADO
@@ -147,12 +153,14 @@ public class VNuevaV extends JPanel implements ActionListener{
         clientescb.setForeground(Color.BLACK);
         clientescb.setBounds(270,150,500,25);
         clientescb.setFont(new Font("Arial", Font.PLAIN,15));
+        llenar();
         sc.add(clientescb);
         
         //BOTON DE NUEVO CLIENTE
         ncliente = new JButton("Nuevo Cliente");
         ncliente.setForeground(Color.BLACK);
         ncliente.setBounds(800,150,240,25);
+        ncliente.addActionListener(this);
         ncliente.setFont(new Font("Arial", Font.PLAIN,15));
         sc.add(ncliente);
         
@@ -270,7 +278,22 @@ public class VNuevaV extends JPanel implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        
+        nombre = nombref.getText();
+        nit = nitf.getText();
+        correo = correof.getText();
+        genero = generof.getText();
+        if (ae.getSource() == aplicarf) {       
+            this.repaint();            
+        }
     }
-    
+    public void llenar(){
+        if (Proy1.cclientes != 0) {
+            try {
+                for (int j = 0; j < Proy1.cclientes; j++) {
+                    clientescb.addItem(Proy1.clientes[j].getNombre());
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
 }
