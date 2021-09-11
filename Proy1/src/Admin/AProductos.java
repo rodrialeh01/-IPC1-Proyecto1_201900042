@@ -36,7 +36,7 @@ public class AProductos extends JPanel implements ActionListener{
     public AProductos(){
         //COLORES
         Color gris = new Color(204,201,201);
-        
+        Color azul = new Color(38,36,89);
         
         //BOTON CREAR
         crearp = new JButton("Crear");
@@ -104,6 +104,9 @@ public class AProductos extends JPanel implements ActionListener{
         tablap.getColumnModel().getColumn(2).setCellRenderer(renderc);
         tablap.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablap.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablap.getTableHeader().setFont(new Font("Century Gothic", Font.PLAIN,15));
+        tablap.getTableHeader().setBackground(azul);
+        tablap.getTableHeader().setForeground(Color.WHITE);
         tablap.setEnabled(false);
         tablap.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);

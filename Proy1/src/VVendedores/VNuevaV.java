@@ -19,6 +19,7 @@ public class VNuevaV extends JPanel implements ActionListener{
     JPanel sc, ap;
     Color azul = new Color(38,36,89);
     Color verde = new Color(10,95,6);
+    Color azulfachero = new Color(97,176,242);
     //PANEL SUPERIOR
     JButton name1, name2, aplicarf, ncliente;    
     JLabel filtrar, nombref, nitf, correof, generof, filtra2, clientef;
@@ -247,8 +248,11 @@ public class VNuevaV extends JPanel implements ActionListener{
         comproductos.getColumnModel().getColumn(2).setCellRenderer(renderc);
         comproductos.getColumnModel().getColumn(3).setCellRenderer(renderc);
         comproductos.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        comproductos.getTableHeader().setFont(new Font("Century Gothic", Font.PLAIN,15));
+        comproductos.getTableHeader().setBackground(azulfachero);
+        comproductos.getTableHeader().setForeground(Color.BLACK);
         comproductos.setEnabled(false);
-        comproductos.setFont(new Font("Century Gothic", Font.PLAIN,12));
+        comproductos.setFont(new Font("Century Gothic", Font.PLAIN,13));
         ap.add(sp);
         
         //TEXTFIELD DE TOTAL

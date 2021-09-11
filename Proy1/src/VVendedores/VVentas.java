@@ -20,6 +20,7 @@ public class VVentas extends JPanel implements ActionListener{
     JTable vfiltrados;
     Object[][] ventas;    
     Color azul = new Color(38,36,89);
+    Color azulfachero = new Color(97,176,242);
     public VVentas(){
         //PANEL BLANCO
         generalp = new JPanel();
@@ -138,8 +139,11 @@ public class VVentas extends JPanel implements ActionListener{
         vfiltrados.getColumnModel().getColumn(3).setCellRenderer(renderc);
         vfiltrados.getColumnModel().getColumn(4).setCellRenderer(renderc);
         vfiltrados.getColumnModel().getColumn(5).setCellRenderer(renderc);
+        vfiltrados.getTableHeader().setFont(new Font("Century Gothic", Font.PLAIN,15));
+        vfiltrados.getTableHeader().setBackground(azulfachero);
+        vfiltrados.getTableHeader().setForeground(Color.BLACK);
         vfiltrados.setEnabled(false);
-        vfiltrados.setFont(new Font("Century Gothic", Font.PLAIN,12));
+        vfiltrados.setFont(new Font("Century Gothic", Font.PLAIN,14));
         generalp.add(sp);
         
         //DISEÑO DEL PANEL

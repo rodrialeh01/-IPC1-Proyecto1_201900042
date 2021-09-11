@@ -30,6 +30,7 @@ public class ASucursales extends JPanel implements ActionListener{
         //COLORES
         Color gris = new Color(204,201,201);
         Color azulito = new Color(112,114,231);
+        Color azul = new Color(38,36,89);
         
         //BOTON CREAR
         crears = new JButton("Crear");
@@ -89,6 +90,9 @@ public class ASucursales extends JPanel implements ActionListener{
         tablas.getColumnModel().getColumn(2).setCellRenderer(renderc);
         tablas.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablas.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablas.getTableHeader().setFont(new Font("Century Gothic", Font.PLAIN,15));
+        tablas.getTableHeader().setBackground(azul);
+        tablas.getTableHeader().setForeground(Color.WHITE);
         tablas.setEnabled(false);
         tablas.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);

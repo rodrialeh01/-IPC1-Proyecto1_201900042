@@ -37,7 +37,7 @@ public class AVendedores extends JPanel implements ActionListener{
     public AVendedores(){
         //COLORES
         Color gris = new Color(204,201,201);
-        
+        Color azul = new Color(38,36,89);
         
         //BOTON CREAR
         crearv = new JButton("Crear");
@@ -96,7 +96,7 @@ public class AVendedores extends JPanel implements ActionListener{
         datos = Proy1.convertirDVendedores();
         tablav = new JTable(datos,encabezado);
         JScrollPane sp= new JScrollPane(tablav);
-        sp.setBounds(20, 10, 800, 600);
+        sp.setBounds(20, 10, 850, 600);
         //CENTRAR LOS DATOS DE LA TABLA
         DefaultTableCellRenderer renderc = new DefaultTableCellRenderer();
         renderc.setHorizontalAlignment(SwingConstants.CENTER);
@@ -106,6 +106,9 @@ public class AVendedores extends JPanel implements ActionListener{
         tablav.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablav.getColumnModel().getColumn(4).setCellRenderer(renderc);
         tablav.getColumnModel().getColumn(5).setCellRenderer(renderc);
+        tablav.getTableHeader().setFont(new Font("Century Gothic", Font.PLAIN,15));
+        tablav.getTableHeader().setBackground(azul);
+        tablav.getTableHeader().setForeground(Color.WHITE);
         tablav.setEnabled(false);
         tablav.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);

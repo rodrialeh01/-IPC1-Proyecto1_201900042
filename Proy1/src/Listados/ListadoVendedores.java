@@ -69,7 +69,7 @@ public class ListadoVendedores {
         Espacio(titulo, 2);
         doc.add(titulo);
         //SE CREA LA TABLA DE 5 COLUMNAS
-        PdfPTable tabla = new PdfPTable(5);
+        PdfPTable tabla = new PdfPTable(6);
         tabla.setWidthPercentage(100f);
         
         //======================ENCABEZADO==============================
@@ -119,11 +119,20 @@ public class ListadoVendedores {
         columna5.setPaddingBottom(5);
         tabla.addCell(columna5);
         
+        //COLUMNA 6 == CONTRASEÑA
+        PdfPCell columna6 = new PdfPCell(new Phrase("Contraseña",Tmediano));
+        columna6.setHorizontalAlignment(Element.ALIGN_CENTER);
+        columna6.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        columna6.setBackgroundColor(azul);
+        columna6.setBorderColor(negro);
+        columna6.setPaddingBottom(5);
+        tabla.addCell(columna6);
+        
         //SE DEFINE EL ENCABEZADO
         tabla.setHeaderRows(1);
         //SE CREA UN ARREGLO DE TIPO FLOAT PARA LOS PORCENTAJES DE TAMAÑO DE CADA COLUMNA
         //{COLUMNA1,COLUMNA2,COLUMNA3,COLUMNA4,COLUMNA5}
-        float[] tamañocolumna = {0.20f, 0.20f, 0.20f, 0.20f,0.20f};
+        float[] tamañocolumna = {0.10f, 0.20f, 0.10f, 0.20f,0.20f, 0.20f};
         //SE LLAMA AL METODO PARA ADAPTAR EL TAMAÑO DE LAS COLUMNAS DE LA TABLA
         tabla.setWidths(tamañocolumna);
         
@@ -170,6 +179,14 @@ public class ListadoVendedores {
                 columna5.setBorderColor(negro);
                 columna5.setPaddingBottom(3);
                 tabla.addCell(columna5);
+                
+                //COLUMNA6 = CONTRASEÑAS
+                columna6 = new PdfPCell(new Phrase(Proy1.vendedores[i].getPassword(),Tpequeño));
+                columna6.setHorizontalAlignment(Element.ALIGN_CENTER);
+                columna6.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                columna6.setBorderColor(negro);
+                columna6.setPaddingBottom(3);
+                tabla.addCell(columna6);
             }
         }      
         //SE AÑADE LA TABLA AL DOCUMENTO

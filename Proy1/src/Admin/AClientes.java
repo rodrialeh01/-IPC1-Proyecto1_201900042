@@ -36,7 +36,7 @@ public class AClientes extends JPanel implements ActionListener{
     public AClientes(){
         //COLORES
         Color gris = new Color(204,201,201);
-        
+        Color azul = new Color(38,36,89);
         
         //BOTON CREAR
         crearc = new JButton("Crear");
@@ -104,6 +104,9 @@ public class AClientes extends JPanel implements ActionListener{
         tablac.getColumnModel().getColumn(2).setCellRenderer(renderc);
         tablac.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablac.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablac.getTableHeader().setFont(new Font("Century Gothic", Font.PLAIN,15));
+        tablac.getTableHeader().setBackground(azul);
+        tablac.getTableHeader().setForeground(Color.WHITE);
         tablac.setEnabled(false);
         tablac.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);
