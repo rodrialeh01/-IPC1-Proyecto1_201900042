@@ -92,7 +92,7 @@ public class AVendedores extends JPanel implements ActionListener{
         pg();
         
         //TABLA
-        String [] encabezado = {"Código","Nombre","Caja","Ventas","Género"};
+        String [] encabezado = {"Código","Nombre","Caja","Ventas","Género","Contraseña"};
         datos = Proy1.convertirDVendedores();
         tablav = new JTable(datos,encabezado);
         JScrollPane sp= new JScrollPane(tablav);
@@ -105,6 +105,7 @@ public class AVendedores extends JPanel implements ActionListener{
         tablav.getColumnModel().getColumn(2).setCellRenderer(renderc);
         tablav.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablav.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablav.getColumnModel().getColumn(5).setCellRenderer(renderc);
         tablav.setEnabled(false);
         tablav.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);
@@ -212,8 +213,9 @@ public class AVendedores extends JPanel implements ActionListener{
             int caja = jobj.get("caja").getAsInt();
             int ventas = jobj.get("ventas").getAsInt();
             String genero = jobj.get("genero").getAsString();
+            String password = jobj.get("password").getAsString();
             
-            Vendedores nuevo = new Vendedores(codigo,nombre,caja,ventas,genero.toUpperCase());
+            Vendedores nuevo = new Vendedores(codigo,nombre,caja,ventas,genero.toUpperCase(),password);
             Proy1.AgregarVendedor(nuevo);
         }
         Proy1.LeerVendedor();

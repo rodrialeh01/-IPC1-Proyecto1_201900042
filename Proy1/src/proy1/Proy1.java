@@ -10,7 +10,6 @@ public class Proy1 {
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
         Login l = new Login();
-//          VPrincipal vp = new VPrincipal();
     }
     /**
      * ================================SUCURSALES================================
@@ -215,13 +214,14 @@ public class Proy1 {
     
     //ARMA UNA MATRIZ DE OBJETOS DE LOS VENDEDORES PARA MOSTRARLO EN TABLA
     public static Object[][] convertirDVendedores(){
-        Object[][] contentv = new Object[Proy1.cvendedores][5];
+        Object[][] contentv = new Object[Proy1.cvendedores][6];
         for (int i = 0; i < Proy1.cvendedores; i++) {
             contentv[i][0] = Proy1.vendedores[i].getCodigo();
             contentv[i][1] = Proy1.vendedores[i].getNombre();
             contentv[i][2] = Proy1.vendedores[i].getCaja();
             contentv[i][3] = Proy1.vendedores[i].getVentas();
             contentv[i][4] = Proy1.vendedores[i].getGenero();
+            contentv[i][5] = Proy1.vendedores[i].getPassword();
         }
         return contentv;
     }
@@ -249,6 +249,16 @@ public class Proy1 {
     public static boolean verificar(int codv) {
         for (int i = 0; i<vendedores.length; i++) {
             if (vendedores[i]!=null && vendedores[i].getCodigo()==codv) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    //VERIFICA USUARIO Y CONTRASEÑA ES CORRETA
+    public static boolean verificarUPV(int codv,String pv) {
+        for (int i = 0; i<vendedores.length; i++) {
+            if (vendedores[i]!=null && vendedores[i].getPassword().equals(pv) && vendedores[i].getCodigo()==codv) {
                 return true;
             }
         }

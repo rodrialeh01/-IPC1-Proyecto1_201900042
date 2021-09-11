@@ -7,10 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 public class Formcv extends JFrame implements ActionListener{
-    JLabel titulo, lcod, lnombre, lcaja, lventas, lgenero;
-    JTextField tcod, tnombre, tcaja, tventas, tgenero;
+    JLabel titulo, lcod, lnombre, lcaja, lventas, lgenero, lpassword;
+    JTextField tcod, tnombre, tcaja, tventas, tgenero, tpassword;
     JButton agregar;
-    String codigo, nombre, caja,ventas,genero;
+    String codigo, nombre, caja,ventas,genero, password;
     public Formcv(){
         //COLORES
         Color azul = new Color(38,36,89);
@@ -41,62 +41,77 @@ public class Formcv extends JFrame implements ActionListener{
         //LABEL DE NOMBRE
         lnombre = new JLabel("Nombre:");
         lnombre.setFont(new Font("Century Gothic", Font.PLAIN,18));
-        lnombre.setBounds(40,180,100,30);
+        lnombre.setBounds(40,150,100,30);
         lnombre.setVisible(true);
         lnombre.setForeground(Color.WHITE);
         this.add(lnombre);
         
         //TEXTFIELD PARA INGRESAR EL NOMBRE
         tnombre = new JTextField();
-        tnombre.setBounds(140,180,280,30);
+        tnombre.setBounds(140,150,280,30);
         tnombre.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tnombre.setVisible(true);
         this.add(tnombre);
         
-        //LABEL DE DESCRIPCION
+        //LABEL DE CAJA
         lcaja = new JLabel("Caja:");
         lcaja.setFont(new Font("Century Gothic", Font.PLAIN,18));
-        lcaja.setBounds(40,260,100,30);
+        lcaja.setBounds(40,220,100,30);
         lcaja.setVisible(true);
         lcaja.setForeground(Color.WHITE);
         this.add(lcaja);
         
-        //TEXTFIELD PARA INGRESAR LA DESCRIPCION
+        //TEXTFIELD PARA INGRESAR NO. DE CAJA
         tcaja = new JTextField();
-        tcaja.setBounds(140,260,280,30);
+        tcaja.setBounds(140,220,280,30);
         tcaja.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tcaja.setVisible(true);
         this.add(tcaja);
         
-        //LABEL DE CANTIDAD
+        //LABEL DE VENTAS
         lventas = new JLabel("Ventas:");
         lventas.setFont(new Font("Century Gothic", Font.PLAIN,18));
-        lventas.setBounds(40,340,100,30);
+        lventas.setBounds(40,290,100,30);
         lventas.setVisible(true);
         lventas.setForeground(Color.WHITE);
         this.add(lventas);
         
-        //TEXTFIELD PARA INGRESAR LA CANTIDAD
+        //TEXTFIELD PARA INGRESAR LA CANTIDAD DE VENTAS
         tventas = new JTextField();
-        tventas.setBounds(140,340,280,30);
+        tventas.setBounds(140,290,280,30);
         tventas.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tventas.setVisible(true);
         this.add(tventas);
         
-        //LABEL DE PRECIO
+        //LABEL DE GENERO
         lgenero = new JLabel("Genero:");
         lgenero.setFont(new Font("Century Gothic", Font.PLAIN,18));
-        lgenero.setBounds(40,420,100,30);
+        lgenero.setBounds(40,360,100,30);
         lgenero.setVisible(true);
         lgenero.setForeground(Color.WHITE);
         this.add(lgenero);
         
-        //TEXTFIELD PARA INGRESAR EL PRECIO
+        //TEXTFIELD PARA INGRESAR EL GENERO
         tgenero = new JTextField();
-        tgenero.setBounds(140,420,280,30);
+        tgenero.setBounds(140,360,280,30);
         tgenero.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tgenero.setVisible(true);
         this.add(tgenero);
+        
+        //LABEL DE PASSWORD
+        lpassword = new JLabel("Contraseña:");
+        lpassword.setFont(new Font("Century Gothic", Font.PLAIN,15));
+        lpassword.setBounds(40,430,100,30);
+        lpassword.setVisible(true);
+        lpassword.setForeground(Color.WHITE);
+        this.add(lpassword);
+        
+        //TEXTFIELD PARA INGRESAR EL PASSWORD
+        tpassword = new JTextField();
+        tpassword.setBounds(140,430,280,30);
+        tpassword.setFont(new Font("Century Gothic", Font.PLAIN,18));
+        tpassword.setVisible(true);
+        this.add(tpassword);
         
         //BOTON DE AGREGAR
         agregar = new JButton("Agregar");
@@ -129,12 +144,13 @@ public class Formcv extends JFrame implements ActionListener{
             caja = tcaja.getText();
             ventas = tventas.getText();
             genero = tgenero.getText();
-            if (codigo.equals("") || nombre.equals("") || caja.equals("") || ventas.equals("") || genero.equals("")) {
+            password = tpassword.getText();
+            if (codigo.equals("") || nombre.equals("") || caja.equals("") || ventas.equals("") || genero.equals("") || password.equals("")) {
                 JOptionPane.showMessageDialog(this, "Llene todos los espacios");
             }else if(Proy1.cvendedores<= Proy1.vendedores.length){
                 if (genero.equals("F") || genero.equals("M") || genero.equals("m") || genero.equals("f")) {
-                    if (verificar(Integer.parseInt(codigo)) == false) {
-                        Vendedores nuevo = new Vendedores(Integer.parseInt(codigo), nombre, Integer.parseInt(caja), Integer.parseInt(ventas), genero.toUpperCase());
+                    if (Proy1.verificar(Integer.parseInt(codigo)) == false) {
+                        Vendedores nuevo = new Vendedores(Integer.parseInt(codigo), nombre, Integer.parseInt(caja), Integer.parseInt(ventas), genero.toUpperCase(), password);
                         Proy1.AgregarVendedor(nuevo);
                         JOptionPane.showMessageDialog(this, "Se agregó correctamente el nuevo Vendedor");
                         Proy1.LeerVendedor();
@@ -150,14 +166,5 @@ public class Formcv extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(this, "Se llegó al limite de Vendedores");
             }
         }
-    }
-    //VERIFICA SI YA EXISTE EL OBJETO
-    public boolean verificar(int cods) {
-        for (int i = 0; i<Proy1.vendedores.length; i++) {
-            if (Proy1.vendedores[i]!=null && Proy1.vendedores[i].getCodigo()==cods) {
-                return true;
-            }
-        }
-        return false;
     }
 }

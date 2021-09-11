@@ -7,13 +7,15 @@ public class Vendedores {
     private int caja;
     private int ventas;
     private String genero;
+    private String password;
 
-    public Vendedores(int codigo, String nombre, int caja, int ventas, String genero) {
+    public Vendedores(int codigo, String nombre, int caja, int ventas, String genero, String password) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.caja = caja;
         this.ventas = ventas;
         this.genero = genero;
+        this.password = password;
     }
     
     public void MostrarVendedores(){
@@ -23,7 +25,8 @@ public class Vendedores {
         System.out.println("Nombre: " + nombre);
         System.out.println("Caja: " + caja);
         System.out.println("Ventas: " + ventas);
-        System.out.println("Genero: "+ genero);
+        System.out.println("Genero: " + genero);
+        System.out.println("Contraseña: " + password);
     }
     
     //ENCAPSULAMIENTO
@@ -97,4 +100,17 @@ public class Vendedores {
         this.genero = genero;
     }
     
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the genero to set
+     */
+    public void setPassword(String genero) {
+        this.password = password;
+    }
 }

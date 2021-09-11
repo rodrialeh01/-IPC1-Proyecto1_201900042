@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import proy1.Proy1;
 public class Formev extends JFrame implements ActionListener{
-    JLabel titulo, lcod, lnombre, lcaja, lventas, lgenero;
-    JTextField tcod, tnombre, tcaja, tventas, tgenero;
+    JLabel titulo, lcod, lnombre, lcaja, lventas, lgenero, lpassword;
+    JTextField tcod, tnombre, tcaja, tventas, tgenero, tpassword;
     JButton eliminar, buscar;
-    String codigo, nombre, caja,ventas,genero;
+    String codigo, nombre, caja,ventas,genero, password;
     public Formev(){
         //COLORES
         Color azul = new Color(38,36,89);
@@ -49,14 +49,14 @@ public class Formev extends JFrame implements ActionListener{
         //LABEL DE NOMBRE
         lnombre = new JLabel("Nombre:");
         lnombre.setFont(new Font("Century Gothic", Font.PLAIN,18));
-        lnombre.setBounds(40,180,100,30);
+        lnombre.setBounds(40,150,100,30);
         lnombre.setVisible(true);
         lnombre.setForeground(Color.WHITE);
         this.add(lnombre);
         
         //TEXTFIELD PARA INGRESAR EL NOMBRE
         tnombre = new JTextField();
-        tnombre.setBounds(140,180,280,30);
+        tnombre.setBounds(140,150,280,30);
         tnombre.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tnombre.setVisible(true);
         tnombre.setEnabled(false);
@@ -65,14 +65,14 @@ public class Formev extends JFrame implements ActionListener{
         //LABEL DE DESCRIPCION
         lcaja = new JLabel("Caja:");
         lcaja.setFont(new Font("Century Gothic", Font.PLAIN,18));
-        lcaja.setBounds(40,260,100,30);
+        lcaja.setBounds(40,220,100,30);
         lcaja.setVisible(true);
         lcaja.setForeground(Color.WHITE);
         this.add(lcaja);
         
         //TEXTFIELD PARA INGRESAR LA DESCRIPCION
         tcaja = new JTextField();
-        tcaja.setBounds(140,260,280,30);
+        tcaja.setBounds(140,220,280,30);
         tcaja.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tcaja.setVisible(true);
         tcaja.setEnabled(false);
@@ -81,14 +81,14 @@ public class Formev extends JFrame implements ActionListener{
         //LABEL DE CANTIDAD
         lventas = new JLabel("Ventas:");
         lventas.setFont(new Font("Century Gothic", Font.PLAIN,18));
-        lventas.setBounds(40,340,100,30);
+        lventas.setBounds(40,290,100,30);
         lventas.setVisible(true);
         lventas.setForeground(Color.WHITE);
         this.add(lventas);
         
         //TEXTFIELD PARA INGRESAR LA CANTIDAD
         tventas = new JTextField();
-        tventas.setBounds(140,340,280,30);
+        tventas.setBounds(140,290,280,30);
         tventas.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tventas.setVisible(true);
         tventas.setEnabled(false);
@@ -97,18 +97,34 @@ public class Formev extends JFrame implements ActionListener{
         //LABEL DE PRECIO
         lgenero = new JLabel("Genero:");
         lgenero.setFont(new Font("Century Gothic", Font.PLAIN,18));
-        lgenero.setBounds(40,420,100,30);
+        lgenero.setBounds(40,360,100,30);
         lgenero.setVisible(true);
         lgenero.setForeground(Color.WHITE);
         this.add(lgenero);
         
         //TEXTFIELD PARA INGRESAR EL PRECIO
         tgenero = new JTextField();
-        tgenero.setBounds(140,420,280,30);
+        tgenero.setBounds(140,360,280,30);
         tgenero.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tgenero.setVisible(true);
         tgenero.setEnabled(false);
         this.add(tgenero);
+        
+        //LABEL DE PASSWORD
+        lpassword = new JLabel("Contraseña:");
+        lpassword.setFont(new Font("Century Gothic", Font.PLAIN,15));
+        lpassword.setBounds(40,430,100,30);
+        lpassword.setVisible(true);
+        lpassword.setForeground(Color.WHITE);
+        this.add(lpassword);
+        
+        //TEXTFIELD PARA INGRESAR EL PASSWORD
+        tpassword = new JTextField();
+        tpassword.setBounds(140,430,280,30);
+        tpassword.setFont(new Font("Century Gothic", Font.PLAIN,18));
+        tpassword.setVisible(true);
+        tpassword.setEnabled(false);
+        this.add(tpassword);
         
         //BOTON DE ACTUALIZAR
         eliminar = new JButton("Eliminar");
@@ -141,6 +157,7 @@ public class Formev extends JFrame implements ActionListener{
         caja = tcaja.getText();
         ventas = tventas.getText();
         genero = tgenero.getText();
+        password = tpassword.getText();
         boolean opcion = false;
         //BOTON BUSCAR
         if (ae.getSource()==buscar) {            
@@ -153,6 +170,7 @@ public class Formev extends JFrame implements ActionListener{
                     tcaja.setText(String.valueOf(Proy1.vendedores[i].getCaja()));
                     tventas.setText(String.valueOf(Proy1.vendedores[i].getVentas()));
                     tgenero.setText(Proy1.vendedores[i].getGenero()); 
+                    tpassword.setText(Proy1.vendedores[i].getPassword());
                 }
             }
             if (opcion == false) {

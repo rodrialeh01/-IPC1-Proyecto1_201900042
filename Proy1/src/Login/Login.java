@@ -106,7 +106,7 @@ public class Login extends JFrame implements ActionListener{
                     Admin a = new Admin();
                     this.dispose();
                 } //VERIFICA LA ENTRADA DEL VENDEDOR
-                else if (Proy1.verificar(Integer.parseInt(usu)) == true && contra.equals("1234")) {
+                else if (Proy1.verificarUPV(Integer.parseInt(usu),contra) == true) {
                     usuv = Proy1.nombrev(Integer.parseInt(usu));
                     if (usuv != null) {
                         genv = Proy1.generov(Integer.parseInt(usu));
