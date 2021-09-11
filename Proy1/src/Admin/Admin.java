@@ -52,7 +52,7 @@ public class Admin extends JFrame implements ActionListener{
         
         //BOTON DE CERRAR SESIÓN
         cierre = new JButton("Cerrar Sesión");
-        cierre.setFont(new Font("Arial", Font.PLAIN,15));
+        cierre.setFont(new Font("Century Gothic", Font.PLAIN,15));
         cierre.setBounds(1150,0,150,30);
         cierre.addActionListener(this);
         cierre.setVisible(true);        
@@ -62,7 +62,7 @@ public class Admin extends JFrame implements ActionListener{
         
         //BOTON DE ACTUALIZAR
         actualizar = new JButton("Actualizar");
-        actualizar.setFont(new Font("Arial", Font.PLAIN,15));
+        actualizar.setFont(new Font("Century Gothic", Font.PLAIN,15));
         actualizar.setBounds(950,0,150,30);
         actualizar.addActionListener(this);
         actualizar.setVisible(true);        

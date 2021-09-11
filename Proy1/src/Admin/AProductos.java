@@ -41,7 +41,7 @@ public class AProductos extends JPanel implements ActionListener{
         //BOTON CREAR
         crearp = new JButton("Crear");
         crearp.setBounds(900, 10, 150, 50);
-        crearp.setFont(new Font("Arial", Font.PLAIN,15));
+        crearp.setFont(new Font("Century Gothic", Font.PLAIN,15));
         crearp.setBackground(azulito);
         crearp.setVisible(true);
         crearp.addActionListener(this);
@@ -50,7 +50,7 @@ public class AProductos extends JPanel implements ActionListener{
         //BOTON MODIFICAR
         cargarp = new JButton("Carga Masiva");
         cargarp.setBounds(1100, 10, 150, 50);
-        cargarp.setFont(new Font("Arial", Font.PLAIN,15));
+        cargarp.setFont(new Font("Century Gothic", Font.PLAIN,15));
         cargarp.setBackground(azulito);
         cargarp.addActionListener(this);
         cargarp.setVisible(true);
@@ -68,7 +68,7 @@ public class AProductos extends JPanel implements ActionListener{
         //BOTON ELIMINAR
         eliminarp = new JButton("Eliminar");
         eliminarp.setBounds(1100, 70, 150, 50);
-        eliminarp.setFont(new Font("Arial", Font.PLAIN,15));
+        eliminarp.setFont(new Font("Century Gothic", Font.PLAIN,15));
         eliminarp.setBackground(azulito);
         eliminarp.setVisible(true);
         eliminarp.addActionListener(this);
@@ -77,7 +77,7 @@ public class AProductos extends JPanel implements ActionListener{
         //BOTON EXPORTAR
         exportarp = new JButton("Exportar Listado PDF");
         exportarp.setBounds(900, 130, 350, 50);
-        exportarp.setFont(new Font("Arial", Font.PLAIN,15));
+        exportarp.setFont(new Font("Century Gothic", Font.PLAIN,15));
         exportarp.setBackground(azulito);
         exportarp.setVisible(true);
         exportarp.addActionListener(this);
@@ -105,6 +105,7 @@ public class AProductos extends JPanel implements ActionListener{
         tablap.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablap.getColumnModel().getColumn(4).setCellRenderer(renderc);
         tablap.setEnabled(false);
+        tablap.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);
         
         //DISEÑO PANEL
@@ -117,7 +118,7 @@ public class AProductos extends JPanel implements ActionListener{
     public void pg(){
         JLabel nulo = new JLabel("No hay ningun producto registrado");
         nulo.setBounds(180,135,200,30);
-        nulo.setFont(new Font("Arial", Font.PLAIN,20));
+        nulo.setFont(new Font("Century Gothic", Font.PLAIN,20));
         graficap.add(nulo);
         if (Proy1.productos[0] == null) {
             graficap.setVisible(true);

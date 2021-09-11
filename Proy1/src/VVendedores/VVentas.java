@@ -30,6 +30,7 @@ public class VVentas extends JPanel implements ActionListener{
         
         //BOTON DE TITULO
         lg = new JButton("Listado General");
+        lg.setFont(new Font("Century Gothic", Font.BOLD,15));
         lg.setBounds(0,0,150,30);
         lg.setBackground(Color.WHITE);
         lg.setForeground(Color.BLACK);
@@ -40,7 +41,7 @@ public class VVentas extends JPanel implements ActionListener{
         filtrar = new JLabel("Filtrar por:");
         filtrar.setForeground(Color.BLACK);
         filtrar.setBounds(75,40,150,30);
-        filtrar.setFont(new Font("Arial", Font.BOLD,15));
+        filtrar.setFont(new Font("Century Gothic", Font.BOLD,15));
         Font subray = filtrar.getFont();
         Map Atributos = subray.getAttributes();
         Atributos.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
@@ -51,70 +52,70 @@ public class VVentas extends JPanel implements ActionListener{
         nfacturaf = new JLabel("No. Factura:");
         nfacturaf.setForeground(Color.BLACK);
         nfacturaf.setBounds(190,47,100,20);
-        nfacturaf.setFont(new Font("Arial", Font.PLAIN,15));
+        nfacturaf.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(nfacturaf);
         
         //TEXTFIELD DE NO. FACTURA
         nfacturaft = new JTextField();
         nfacturaft.setForeground(Color.BLACK);
         nfacturaft.setBounds(290,45,300,25);
-        nfacturaft.setFont(new Font("Arial", Font.PLAIN,15));
+        nfacturaft.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(nfacturaft);
         
         //LABEL DE NIT
         nitf = new JLabel("NIT:");
         nitf.setForeground(Color.BLACK);
         nitf.setBounds(670,47,100,20);
-        nitf.setFont(new Font("Arial", Font.PLAIN,15));
+        nitf.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(nitf);
         
         //TEXTFIELD DE NIT
         nitft = new JTextField();
         nitft.setForeground(Color.BLACK);
         nitft.setBounds(740,45,300,25);
-        nitft.setFont(new Font("Arial", Font.PLAIN,15));
+        nitft.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(nitft);
         
         //LABEL DE NOMBRE
         nombref = new JLabel("Nombre:");
         nombref.setForeground(Color.BLACK);
         nombref.setBounds(190,97,300,25);
-        nombref.setFont(new Font("Arial", Font.PLAIN,15));
+        nombref.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(nombref);
         
         //TEXTFIELD DE NOMBRE
         nombreft = new JTextField();
         nombreft.setForeground(Color.BLACK);
         nombreft.setBounds(290,95,300,25);
-        nombreft.setFont(new Font("Arial", Font.PLAIN,15));
+        nombreft.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(nombreft);
         
         //LABEL DE FECHA
         fechaf = new JLabel("Fecha:");
         fechaf.setForeground(Color.BLACK);
         fechaf.setBounds(670,97,300,25);
-        fechaf.setFont(new Font("Arial", Font.PLAIN,15));
+        fechaf.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(fechaf);
         
         //TEXTFIELD DE FECHA
         fechaft = new JTextField();
         fechaft.setForeground(Color.BLACK);
         fechaft.setBounds(740,95,300,25);
-        fechaft.setFont(new Font("Arial", Font.PLAIN,15));
+        fechaft.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(fechaft);
         
         //BOTON DE APLICAR FILTRO
         aplicarf = new JButton("Aplicar Filtro");
         aplicarf.setForeground(Color.BLACK);
         aplicarf.setBounds(190,145,850,25);
-        aplicarf.setFont(new Font("Arial", Font.PLAIN,15));
+        aplicarf.setFont(new Font("Century Gothic", Font.PLAIN,15));
         generalp.add(aplicarf);
         
         //LABEL DE FILTRADOS CON SUBRAYADO
         filtra2 = new JLabel("Filtrados:");
         filtra2.setForeground(Color.BLACK);
         filtra2.setBounds(75,170,150,30);
-        filtra2.setFont(new Font("Arial", Font.BOLD,15));
+        filtra2.setFont(new Font("Century Gothic", Font.PLAIN,15));
         Font subray2 = filtra2.getFont();
         Map Atributos2 = subray2.getAttributes();
         Atributos2.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
@@ -138,6 +139,7 @@ public class VVentas extends JPanel implements ActionListener{
         vfiltrados.getColumnModel().getColumn(4).setCellRenderer(renderc);
         vfiltrados.getColumnModel().getColumn(5).setCellRenderer(renderc);
         vfiltrados.setEnabled(false);
+        vfiltrados.setFont(new Font("Century Gothic", Font.PLAIN,12));
         generalp.add(sp);
         
         //DISEÑO DEL PANEL

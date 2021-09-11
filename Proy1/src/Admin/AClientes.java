@@ -41,7 +41,7 @@ public class AClientes extends JPanel implements ActionListener{
         //BOTON CREAR
         crearc = new JButton("Crear");
         crearc.setBounds(900, 10, 150, 50);
-        crearc.setFont(new Font("Arial", Font.PLAIN,15));
+        crearc.setFont(new Font("Century Gothic", Font.PLAIN,15));
         crearc.setBackground(azulito);
         crearc.setVisible(true);
         crearc.addActionListener(this);
@@ -50,7 +50,7 @@ public class AClientes extends JPanel implements ActionListener{
         //BOTON MODIFICAR
         cargarc = new JButton("Carga Masiva");
         cargarc.setBounds(1100, 10, 150, 50);
-        cargarc.setFont(new Font("Arial", Font.PLAIN,15));
+        cargarc.setFont(new Font("Century Gothic", Font.PLAIN,15));
         cargarc.setBackground(azulito);
         cargarc.setVisible(true);
         cargarc.addActionListener(this);
@@ -59,7 +59,7 @@ public class AClientes extends JPanel implements ActionListener{
         //BOTON ACTUALIZAR
         actualizarc = new JButton("Actualizar");
         actualizarc.setBounds(900, 70, 150, 50);
-        actualizarc.setFont(new Font("Arial", Font.PLAIN,15));
+        actualizarc.setFont(new Font("Century Gothic", Font.PLAIN,15));
         actualizarc.setBackground(azulito);
         actualizarc.addActionListener(this);
         actualizarc.setVisible(true);
@@ -68,7 +68,7 @@ public class AClientes extends JPanel implements ActionListener{
         //BOTON ELIMINAR
         eliminarc = new JButton("Eliminar");
         eliminarc.setBounds(1100, 70, 150, 50);
-        eliminarc.setFont(new Font("Arial", Font.PLAIN,15));
+        eliminarc.setFont(new Font("Century Gothic", Font.PLAIN,15));
         eliminarc.setBackground(azulito);
         eliminarc.setVisible(true);
         eliminarc.addActionListener(this);
@@ -77,7 +77,7 @@ public class AClientes extends JPanel implements ActionListener{
         //BOTON EXPORTAR
         exportarc = new JButton("Exportar Listado PDF");
         exportarc.setBounds(900, 130, 350, 50);
-        exportarc.setFont(new Font("Arial", Font.PLAIN,15));
+        exportarc.setFont(new Font("Century Gothic", Font.PLAIN,15));
         exportarc.setBackground(azulito);
         exportarc.setVisible(true);
         exportarc.addActionListener(this);
@@ -105,6 +105,7 @@ public class AClientes extends JPanel implements ActionListener{
         tablac.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablac.getColumnModel().getColumn(4).setCellRenderer(renderc);
         tablac.setEnabled(false);
+        tablac.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);
         
         //DISEÑO PANEL
@@ -178,7 +179,7 @@ public class AClientes extends JPanel implements ActionListener{
     public void pg(){
         JLabel nulo = new JLabel("No hay ningun cliente registrado");
         nulo.setBounds(180,135,200,30);
-        nulo.setFont(new Font("Arial", Font.PLAIN,20));
+        nulo.setFont(new Font("Century Gothic", Font.PLAIN,20));
         graficac.add(nulo);
         if (Proy1.clientes[0] == null) {
             graficac.setVisible(true);

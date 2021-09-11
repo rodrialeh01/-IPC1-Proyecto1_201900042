@@ -17,7 +17,7 @@ public class Formcc extends JFrame implements ActionListener{
         
         //TITULO
         titulo = new JLabel("Crear nuevo Cliente");
-        titulo.setFont(new Font("Arial", Font.PLAIN,25));
+        titulo.setFont(new Font("Century Gothic", Font.PLAIN,25));
         titulo.setBounds(120,30,250,30);
         titulo.setVisible(true);
         titulo.setForeground(Color.WHITE);
@@ -25,7 +25,7 @@ public class Formcc extends JFrame implements ActionListener{
         
         //LABEL DE CODIGO
         lcod = new JLabel("Código:");
-        lcod.setFont(new Font("Arial", Font.PLAIN,18));
+        lcod.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lcod.setBounds(40,100,100,30);
         lcod.setVisible(true);
         lcod.setForeground(Color.WHITE);
@@ -34,13 +34,13 @@ public class Formcc extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR EL CODIGO
         tcod = new JTextField();
         tcod.setBounds(140,100,100,30);
-        tcod.setFont(new Font("Arial", Font.PLAIN,18));
+        tcod.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tcod.setVisible(true);
         this.add(tcod);
         
         //LABEL DE NOMBRE
         lnombre = new JLabel("Nombre:");
-        lnombre.setFont(new Font("Arial", Font.PLAIN,18));
+        lnombre.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lnombre.setBounds(40,180,100,30);
         lnombre.setVisible(true);
         lnombre.setForeground(Color.WHITE);
@@ -49,13 +49,13 @@ public class Formcc extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR EL NOMBRE
         tnombre = new JTextField();
         tnombre.setBounds(140,180,280,30);
-        tnombre.setFont(new Font("Arial", Font.PLAIN,18));
+        tnombre.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tnombre.setVisible(true);
         this.add(tnombre);
         
         //LABEL DE DESCRIPCION
         lnit = new JLabel("NIT:");
-        lnit.setFont(new Font("Arial", Font.PLAIN,18));
+        lnit.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lnit.setBounds(40,260,100,30);
         lnit.setVisible(true);
         lnit.setForeground(Color.WHITE);
@@ -64,13 +64,13 @@ public class Formcc extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR LA DESCRIPCION
         tnit = new JTextField();
         tnit.setBounds(140,260,280,30);
-        tnit.setFont(new Font("Arial", Font.PLAIN,18));
+        tnit.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tnit.setVisible(true);
         this.add(tnit);
         
         //LABEL DE CANTIDAD
         lcorreo = new JLabel("Correo:");
-        lcorreo.setFont(new Font("Arial", Font.PLAIN,18));
+        lcorreo.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lcorreo.setBounds(40,340,100,30);
         lcorreo.setVisible(true);
         lcorreo.setForeground(Color.WHITE);
@@ -79,13 +79,13 @@ public class Formcc extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR LA CANTIDAD
         tcorreo = new JTextField();
         tcorreo.setBounds(140,340,280,30);
-        tcorreo.setFont(new Font("Arial", Font.PLAIN,18));
+        tcorreo.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tcorreo.setVisible(true);
         this.add(tcorreo);
         
         //LABEL DE PRECIO
         lgenero = new JLabel("Genero:");
-        lgenero.setFont(new Font("Arial", Font.PLAIN,18));
+        lgenero.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lgenero.setBounds(40,420,100,30);
         lgenero.setVisible(true);
         lgenero.setForeground(Color.WHITE);
@@ -94,14 +94,14 @@ public class Formcc extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR EL PRECIO
         tgenero = new JTextField();
         tgenero.setBounds(140,420,280,30);
-        tgenero.setFont(new Font("Arial", Font.PLAIN,18));
+        tgenero.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tgenero.setVisible(true);
         this.add(tgenero);
         
         //BOTON DE AGREGAR
         agregar = new JButton("Agregar");
         agregar.setBounds(100,500,280,40);
-        agregar.setFont(new Font("Arial", Font.PLAIN,15));
+        agregar.setFont(new Font("Century Gothic", Font.PLAIN,15));
         agregar.setBackground(Color.BLACK);
         agregar.setForeground(Color.WHITE);
         agregar.addActionListener(this);

@@ -34,7 +34,7 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON CREAR
         crears = new JButton("Crear");
         crears.setBounds(900, 10, 150, 50);
-        crears.setFont(new Font("Arial", Font.PLAIN,15));
+        crears.setFont(new Font("Century Gothic", Font.PLAIN,15));
         crears.setBackground(azulito);
         crears.setVisible(true);
         crears.addActionListener(this);
@@ -43,7 +43,7 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON CARGA MASIVA
         cargars = new JButton("Carga Masiva");
         cargars.setBounds(1100, 10, 150, 50);
-        cargars.setFont(new Font("Arial", Font.PLAIN,15));
+        cargars.setFont(new Font("Century Gothic", Font.PLAIN,15));
         cargars.setBackground(azulito);
         cargars.setVisible(true);
         cargars.addActionListener(this);
@@ -61,7 +61,7 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON ELIMINAR
         eliminars = new JButton("Eliminar");
         eliminars.setBounds(1100, 70, 150, 50);
-        eliminars.setFont(new Font("Arial", Font.PLAIN,15));
+        eliminars.setFont(new Font("Century Gothic", Font.PLAIN,15));
         eliminars.setBackground(azulito);
         eliminars.setVisible(true);
         eliminars.addActionListener(this);
@@ -70,7 +70,7 @@ public class ASucursales extends JPanel implements ActionListener{
         //BOTON EXPORTAR
         exportars = new JButton("Exportar Listado PDF");
         exportars.setBounds(900, 130, 350, 50);
-        exportars.setFont(new Font("Arial", Font.PLAIN,15));
+        exportars.setFont(new Font("Century Gothic", Font.PLAIN,15));
         exportars.setBackground(azulito);
         exportars.setVisible(true);
         exportars.addActionListener(this);
@@ -90,6 +90,7 @@ public class ASucursales extends JPanel implements ActionListener{
         tablas.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablas.getColumnModel().getColumn(4).setCellRenderer(renderc);
         tablas.setEnabled(false);
+        tablas.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);
         
         

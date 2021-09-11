@@ -24,10 +24,10 @@ public class Login extends JFrame implements ActionListener{
         Color azul = new Color(38,36,89);
         
         //LABEL DE TITULO
-        title = new JLabel("LOGIN");
-        title.setFont(new Font("Arial Black", Font.PLAIN, 50));
+        title = new JLabel("LOGIN - POS");
+        title.setFont(new Font("Century Gothic", Font.BOLD, 50));
         title.setForeground(azul);
-        title.setBounds(260,10,200,90);
+        title.setBounds(200,10,400,90);
         title.setVisible(true);
         this.add(title);
         
@@ -39,13 +39,13 @@ public class Login extends JFrame implements ActionListener{
         ImageIcon imge = new ImageIcon(imag.getScaledInstance(65, 65, Image.SCALE_SMOOTH));
         img = new JLabel(imge);
         img.setLayout(null);
-        img.setBounds(100,10, 200, 90);
+        img.setBounds(50,10, 200, 90);
         img.setVisible(true);
         this.add(img);
         
         //LABEL DE USUARIO
         us = new JLabel("Usuario: ");
-        us.setFont(new Font("Arial", Font.PLAIN, 15));
+        us.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         us.setForeground(Color.BLACK);
         us.setBounds(50,130,100,30);
         us.setVisible(true);
@@ -53,7 +53,7 @@ public class Login extends JFrame implements ActionListener{
         
         //TEXTFIELD DE USUARIOS
         usuarios = new JTextField();
-        usuarios.setFont(new Font("Segoe UI Semibold",Font.PLAIN,15));
+        usuarios.setFont(new Font("Century Gothic",Font.PLAIN,15));
         usuarios.setBounds(160,130,350,25);
         usuarios.setVisible(true);
         usuarios.addActionListener(this);
@@ -61,7 +61,7 @@ public class Login extends JFrame implements ActionListener{
         
         //LABEL DE CONTRASEÑA
         pas = new JLabel("Contraseña: ");
-        pas.setFont(new Font("Arial", Font.PLAIN, 15));
+        pas.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         pas.setForeground(Color.BLACK);
         pas.setBounds(50,200,100,30);
         pas.setVisible(true);
@@ -69,7 +69,7 @@ public class Login extends JFrame implements ActionListener{
         
         //TEXTFIELD DE CONTRASEÑAS
         contraseñas = new JPasswordField();
-        contraseñas.setFont(new Font("Segoe UI Semibold",Font.PLAIN,15));
+        contraseñas.setFont(new Font("Century Gothic",Font.PLAIN,15));
         contraseñas.setBounds(160,200,350,25);
         contraseñas.setVisible(true);
         contraseñas.addActionListener(this);
@@ -77,7 +77,7 @@ public class Login extends JFrame implements ActionListener{
         
         //BOTON DE INICIO DE SESIÓN
         inicio = new JButton("Iniciar Sesión");
-        inicio.setFont(new Font("Arial", Font.PLAIN,15));
+        inicio.setFont(new Font("Century Gothic", Font.PLAIN,15));
         inicio.setBounds(240,280,150,30);
         inicio.setVisible(true);
         inicio.addActionListener(this);
@@ -95,37 +95,39 @@ public class Login extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource()==inicio){
-            usu = usuarios.getText();
-            contra = contraseñas.getText();
-            //VERIFICA LA ENTRADA DEL ADMINISTRADOR
-            if (usu.equals("admin") && contra.equals("admin")) {
-                System.out.println("HOLA ADMIN");
-                JOptionPane.showMessageDialog(this, "Bienvenido Administrador");
-                Admin a = new Admin();
-                this.dispose();
+        try {
+            if (ae.getSource() == inicio) {
+                usu = usuarios.getText();
+                contra = contraseñas.getText();
+                //VERIFICA LA ENTRADA DEL ADMINISTRADOR
+                if (usu.equals("admin") && contra.equals("admin")) {
+                    System.out.println("HOLA ADMIN");
+                    JOptionPane.showMessageDialog(this, "Bienvenido Administrador");
+                    Admin a = new Admin();
+                    this.dispose();
+                } //VERIFICA LA ENTRADA DEL VENDEDOR
+                else if (Proy1.verificar(Integer.parseInt(usu)) == true && contra.equals("1234")) {
+                    usuv = Proy1.nombrev(Integer.parseInt(usu));
+                    if (usuv != null) {
+                        genv = Proy1.generov(Integer.parseInt(usu));
+                        if (genv.equals("M")) {
+                            System.out.println("Bienvenido " + usuv);
+                            JOptionPane.showMessageDialog(this, "Bienvenido " + usuv);
+                            VPrincipal vp = new VPrincipal();
+                            this.dispose();
+                        } else if (genv.equals("F")) {
+                            System.out.println("Bienvenida " + usuv);
+                            JOptionPane.showMessageDialog(this, "Bienvenida " + usuv);
+                            VPrincipal vp = new VPrincipal();
+                            this.dispose();
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
+                }
             }
-            //VERIFICA LA ENTRADA DEL VENDEDOR
-            else if (Proy1.verificar(Integer.parseInt(usu)) == true && contra.equals("1234")) {
-                usuv = Proy1.nombrev(Integer.parseInt(usu));
-                if (usuv !=null) {
-                    genv =Proy1.generov(Integer.parseInt(usu));
-                    if (genv.equals("M")) {
-                        System.out.println("Bienvenido " + usuv);
-                        JOptionPane.showMessageDialog(this, "Bienvenido " + usuv);
-                        VPrincipal vp = new VPrincipal();
-                        this.dispose();
-                    }else if (genv.equals("F")) {
-                        System.out.println("Bienvenida " + usuv);
-                        JOptionPane.showMessageDialog(this, "Bienvenida " + usuv);
-                        VPrincipal vp = new VPrincipal();
-                        this.dispose();
-                    }                    
-                }                
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
-            }  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
         }
     }
     

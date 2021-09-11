@@ -16,7 +16,7 @@ public class Formav extends JFrame implements ActionListener{
         
         //TITULO
         titulo = new JLabel("Actualizar Vendedor");
-        titulo.setFont(new Font("Arial", Font.PLAIN,25));
+        titulo.setFont(new Font("Century Gothic", Font.PLAIN,25));
         titulo.setBounds(120,30,350,30);
         titulo.setVisible(true);
         titulo.setForeground(Color.WHITE);
@@ -24,7 +24,7 @@ public class Formav extends JFrame implements ActionListener{
         
         //LABEL DE CODIGO
         lcod = new JLabel("Código:");
-        lcod.setFont(new Font("Arial", Font.PLAIN,18));
+        lcod.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lcod.setBounds(40,100,100,30);
         lcod.setVisible(true);
         lcod.setForeground(Color.WHITE);
@@ -33,21 +33,21 @@ public class Formav extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR EL CODIGO
         tcod = new JTextField();
         tcod.setBounds(140,100,100,30);
-        tcod.setFont(new Font("Arial", Font.PLAIN,18));
+        tcod.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tcod.setVisible(true);
         this.add(tcod);
         
         //BOTON DE BUSCAR
         buscar = new JButton("Buscar");
         buscar.setBounds(280,100,100,30);
-        buscar.setFont(new Font("Arial", Font.PLAIN,18));
+        buscar.setFont(new Font("Century Gothic", Font.PLAIN,18));
         buscar.addActionListener(this);
         buscar.setVisible(true);
         this.add(buscar);
         
         //LABEL DE NOMBRE
         lnombre = new JLabel("Nombre:");
-        lnombre.setFont(new Font("Arial", Font.PLAIN,18));
+        lnombre.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lnombre.setBounds(40,180,100,30);
         lnombre.setVisible(true);
         lnombre.setForeground(Color.WHITE);
@@ -56,14 +56,14 @@ public class Formav extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR EL NOMBRE
         tnombre = new JTextField();
         tnombre.setBounds(140,180,280,30);
-        tnombre.setFont(new Font("Arial", Font.PLAIN,18));
+        tnombre.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tnombre.setVisible(true);
         tnombre.setEnabled(false);
         this.add(tnombre);
         
         //LABEL DE DESCRIPCION
         lcaja = new JLabel("Caja:");
-        lcaja.setFont(new Font("Arial", Font.PLAIN,18));
+        lcaja.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lcaja.setBounds(40,260,100,30);
         lcaja.setVisible(true);
         lcaja.setForeground(Color.WHITE);
@@ -72,14 +72,14 @@ public class Formav extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR LA DESCRIPCION
         tcaja = new JTextField();
         tcaja.setBounds(140,260,280,30);
-        tcaja.setFont(new Font("Arial", Font.PLAIN,18));
+        tcaja.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tcaja.setVisible(true);
         tcaja.setEnabled(false);
         this.add(tcaja);
         
         //LABEL DE CANTIDAD
         lventas = new JLabel("Ventas:");
-        lventas.setFont(new Font("Arial", Font.PLAIN,18));
+        lventas.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lventas.setBounds(40,340,100,30);
         lventas.setVisible(true);
         lventas.setForeground(Color.WHITE);
@@ -88,14 +88,14 @@ public class Formav extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR LA CANTIDAD
         tventas = new JTextField();
         tventas.setBounds(140,340,280,30);
-        tventas.setFont(new Font("Arial", Font.PLAIN,18));
+        tventas.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tventas.setVisible(true);
         tventas.setEnabled(false);
         this.add(tventas);
         
         //LABEL DE PRECIO
         lgenero = new JLabel("Genero:");
-        lgenero.setFont(new Font("Arial", Font.PLAIN,18));
+        lgenero.setFont(new Font("Century Gothic", Font.PLAIN,18));
         lgenero.setBounds(40,420,100,30);
         lgenero.setVisible(true);
         lgenero.setForeground(Color.WHITE);
@@ -104,7 +104,7 @@ public class Formav extends JFrame implements ActionListener{
         //TEXTFIELD PARA INGRESAR EL PRECIO
         tgenero = new JTextField();
         tgenero.setBounds(140,420,280,30);
-        tgenero.setFont(new Font("Arial", Font.PLAIN,18));
+        tgenero.setFont(new Font("Century Gothic", Font.PLAIN,18));
         tgenero.setVisible(true);
         tgenero.setEnabled(false);
         this.add(tgenero);

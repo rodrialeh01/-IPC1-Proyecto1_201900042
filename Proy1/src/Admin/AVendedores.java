@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 //LECTURA DE ARCHIVOS
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,7 +26,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import proy1.Proy1;
 import Clases.Vendedores;
 import Listados.ListadoVendedores;
-import javax.swing.table.DefaultTableCellRenderer;
+
 
 public class AVendedores extends JPanel implements ActionListener{
     JButton crearv, cargarv, actualizarv, eliminarv, exportarv;
@@ -41,7 +42,7 @@ public class AVendedores extends JPanel implements ActionListener{
         //BOTON CREAR
         crearv = new JButton("Crear");
         crearv.setBounds(900, 10, 150, 50);
-        crearv.setFont(new Font("Arial", Font.PLAIN,15));
+        crearv.setFont(new Font("Century Gothic", Font.PLAIN,15));
         crearv.setBackground(azulito);
         crearv.setVisible(true);
         crearv.addActionListener(this);
@@ -50,7 +51,7 @@ public class AVendedores extends JPanel implements ActionListener{
         //BOTON MODIFICAR
         cargarv = new JButton("Carga Masiva");
         cargarv.setBounds(1100, 10, 150, 50);
-        cargarv.setFont(new Font("Arial", Font.PLAIN,15));
+        cargarv.setFont(new Font("Century Gothic", Font.PLAIN,15));
         cargarv.setBackground(azulito);
         cargarv.addActionListener(this);
         cargarv.setVisible(true);
@@ -59,7 +60,7 @@ public class AVendedores extends JPanel implements ActionListener{
         //BOTON ACTUALIZAR
         actualizarv = new JButton("Actualizar");
         actualizarv.setBounds(900, 70, 150, 50);
-        actualizarv.setFont(new Font("Arial", Font.PLAIN,15));
+        actualizarv.setFont(new Font("Century Gothic", Font.PLAIN,15));
         actualizarv.setBackground(azulito);
         actualizarv.addActionListener(this);
         actualizarv.setVisible(true);
@@ -68,7 +69,7 @@ public class AVendedores extends JPanel implements ActionListener{
         //BOTON ELIMINAR
         eliminarv = new JButton("Eliminar");
         eliminarv.setBounds(1100, 70, 150, 50);
-        eliminarv.setFont(new Font("Arial", Font.PLAIN,15));
+        eliminarv.setFont(new Font("Century Gothic", Font.PLAIN,15));
         eliminarv.setBackground(azulito);
         eliminarv.setVisible(true);
         eliminarv.addActionListener(this);
@@ -77,7 +78,7 @@ public class AVendedores extends JPanel implements ActionListener{
         //BOTON EXPORTAR
         exportarv = new JButton("Exportar Listado PDF");
         exportarv.setBounds(900, 130, 350, 50);
-        exportarv.setFont(new Font("Arial", Font.PLAIN,15));
+        exportarv.setFont(new Font("Century Gothic", Font.PLAIN,15));
         exportarv.setBackground(azulito);
         exportarv.setVisible(true);
         exportarv.addActionListener(this);
@@ -105,6 +106,7 @@ public class AVendedores extends JPanel implements ActionListener{
         tablav.getColumnModel().getColumn(3).setCellRenderer(renderc);
         tablav.getColumnModel().getColumn(4).setCellRenderer(renderc);
         tablav.setEnabled(false);
+        tablav.setFont(new Font("Century Gothic", Font.PLAIN,12));
         this.add(sp);
         
         //DISEÑO PANEL
@@ -116,7 +118,7 @@ public class AVendedores extends JPanel implements ActionListener{
     public void pg(){
         JLabel nulo = new JLabel("No hay ningun vendedor registrado");
         nulo.setBounds(180,135,200,30);
-        nulo.setFont(new Font("Arial", Font.PLAIN,20));
+        nulo.setFont(new Font("Century Gothic", Font.PLAIN,20));
         graficav.add(nulo);
         if (Proy1.vendedores[0] == null) {
             graficav.setVisible(true);

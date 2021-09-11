@@ -30,7 +30,7 @@ public class VPrincipal extends JFrame implements ActionListener{
         pp.setBounds(20,21,1280,640);
         pp.setBackground(azulito);
         pp.setForeground(Color.WHITE);
-        pp.setFont(new Font("Arial", Font.PLAIN,15));
+        pp.setFont(new Font("Century Gothic", Font.PLAIN,15));
         Panel.add(pp);
         
         //PANEL DE NUEVA VENTA
@@ -43,7 +43,7 @@ public class VPrincipal extends JFrame implements ActionListener{
         
         //BOTON DE CERRAR SESIÓN
         cerrars = new JButton("Cerrar Sesión");
-        cerrars.setFont(new Font("Arial", Font.PLAIN,15));
+        cerrars.setFont(new Font("Century Gothic", Font.PLAIN,15));
         cerrars.setBounds(1150,0,150,30);
         cerrars.addActionListener(this);
         cerrars.setVisible(true);        
@@ -56,7 +56,7 @@ public class VPrincipal extends JFrame implements ActionListener{
         }else if (Login.genv.equals("F")) {
             bienvenida = new JLabel("¡Bienvenida " + Login.usuv + "!");
         }        
-        bienvenida.setFont(new Font("Arial", Font.BOLD,15));
+        bienvenida.setFont(new Font("Century Gothic", Font.BOLD,15));
         bienvenida.setBounds(850,5,250,30);
         bienvenida.setVisible(true);
         bienvenida.setForeground(Color.BLACK);
