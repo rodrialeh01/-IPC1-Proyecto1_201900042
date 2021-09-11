@@ -134,7 +134,7 @@ public class Formcp extends JFrame implements ActionListener{
             }else{
                 if (Proy1.cproductos <= Proy1.productos.length) {
                     if (verificar(Integer.parseInt(codigo)) == false) {
-                        Productos nuevo = new Productos(Integer.parseInt(codigo), nombre, descripcion, Integer.parseInt(cantidad), Double.parseDouble(precio));
+                        Productos nuevo = new Productos(Integer.parseInt(codigo), nombre, descripcion, Integer.parseInt(cantidad), Float.parseFloat(precio));
                         Proy1.AgregarProducto(nuevo);
                         JOptionPane.showMessageDialog(this, "Se agregó correctamente el nuevo Producto");
                         Proy1.LeerProducto();

@@ -20,6 +20,8 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.plot.PlotOrientation;
+//UTIL MATH
+import java.util.*;
 
 //==================PAQUETES===============
 import Clases.Productos;
@@ -144,10 +146,14 @@ public class AProductos extends JPanel implements ActionListener{
         Proy1.ordenamientoProductos(arraytempg);
         //SE MANDAN LOS DATOS PARA LA GRAFICA PONIENDO SOLO 3
         DefaultCategoryDataset datosbarra = new DefaultCategoryDataset();
-        for (int i = 0; i < 3; i++) {
-            if (arraytempg!=null && arraytempg[i].getCantidad() != 0) {
-                datosbarra.setValue(arraytempg[i].getCantidad(), arraytempg[i].getNombre(), String.valueOf(arraytempg[i].getCantidad()));
+        //SE APLICO UN TRYCATCH PARA EVITAR ALGUN ERROR CON LA GRAFICA
+        try {
+            for (int i = 0; i < 3; i++) {
+                if (arraytempg != null && arraytempg[i].getCantidad() != 0) {
+                    datosbarra.setValue(arraytempg[i].getCantidad(), arraytempg[i].getNombre(), String.valueOf(arraytempg[i].getCantidad()));
+                }
             }
+        } catch (Exception e) {
         }
         //SE DIBUJA LA GRAFICA
         JFreeChart barras = ChartFactory.createBarChart("Top 3 - Productos con mas disponibilidad","Productos", "Cantidad", datosbarra,PlotOrientation.VERTICAL,true,false, false);
@@ -213,7 +219,7 @@ public class AProductos extends JPanel implements ActionListener{
             String nombre = jobj.get("nombre").getAsString();
             String descripcion = jobj.get("descripcion").getAsString();
             int cantidad = jobj.get("cantidad").getAsInt();
-            double precio = jobj.get("precio").getAsDouble();
+            float precio = jobj.get("precio").getAsFloat();
             
             Productos nuevo = new Productos(codigo,nombre,descripcion,cantidad,precio);
             Proy1.AgregarProducto(nuevo);

@@ -4,6 +4,8 @@ import Admin.*;
 import Login.Login;
 import VVendedores.VPrincipal;
 import javax.swing.*;
+//DECIMAL FORMAT
+import java.text.DecimalFormat;
 public class Proy1 {
     public static Sucursales[] sucursales = new Sucursales[50];
     public static int csucursales = 0;
@@ -72,6 +74,7 @@ public class Proy1 {
             JOptionPane.showMessageDialog(ap, "LLEGÓ A LA CANTIDAD MAXIMA DE PRODUCTOS");
             System.out.println("LLEGÓ A LA CANTIDAD MAXIMA DE PRODUCTOS");
         }
+        ordenamientoProductosT(productos);
     }
     
     //METODO PARA MOSTRAR LOS PRODUCTOS
@@ -88,13 +91,14 @@ public class Proy1 {
     
     //ARMA UNA MATRIZ DE OBJETOS DE LOS PRODUCTOS PARA MOSTRARLO EN TABLA
     public static Object[][] convertirDProductos(){
+        DecimalFormat df = new DecimalFormat("#.00");
         Object[][] contentp = new Object[Proy1.cproductos][5];
         for (int i = 0; i < Proy1.cproductos; i++) {
             contentp[i][0] = Proy1.productos[i].getCodigo();
             contentp[i][1] = Proy1.productos[i].getNombre();
             contentp[i][2] = Proy1.productos[i].getDescripcion();
             contentp[i][3] = Proy1.productos[i].getCantidad();
-            contentp[i][4] = Proy1.productos[i].getPrecio();
+            contentp[i][4] = df.format(Proy1.productos[i].getPrecio());
         }
         return contentp;
     }
@@ -109,6 +113,22 @@ public class Proy1 {
                         prod[i] = prod[j];
                         prod[j] = aux;
                         i--;
+                    }
+                }
+            }
+        }catch(Exception e){            
+        }
+    }
+    //SE ORDENARAN LOS OBJETOS DE MAYOR CANTIDAD HASTA MENOR CANTIDAD USANDO UN ALGORITMO DE ORDENAMIENTO
+    public static void ordenamientoProductosT(Productos[] prod){
+        try{
+            for (int i = 1; i < prod.length; i++) {
+                for (int j = i - 1; j >= 0; j--) {
+                    if (prod[i].getCodigo() < prod[j].getCodigo()) {
+                        Productos aux = prod[i];
+                        prod[i] = prod[j];
+                        prod[j] = aux;
+                        i++;
                     }
                 }
             }

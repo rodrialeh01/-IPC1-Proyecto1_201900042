@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import javax.swing.*;
 import proy1.Proy1;
 public class Formap extends JFrame implements ActionListener{
@@ -143,6 +144,7 @@ public class Formap extends JFrame implements ActionListener{
         precio = tprecio.getText();
         boolean opcion = false;
         //BOTON BUSCAR
+        DecimalFormat df = new DecimalFormat("#.00");
         if (ae.getSource()==buscar) {            
             for (int i = 0; i < Proy1.productos.length; i++) {
                 //VALIDAR SI EXISTE EL PRODUCTO
@@ -158,7 +160,7 @@ public class Formap extends JFrame implements ActionListener{
                     tnombre.setText(Proy1.productos[i].getNombre());
                     tdescripcion.setText(Proy1.productos[i].getDescripcion());
                     tcantidad.setText(String.valueOf(Proy1.productos[i].getCantidad()));
-                    tprecio.setText(String.valueOf(Proy1.productos[i].getPrecio())); 
+                    tprecio.setText(String.valueOf(df.format(Proy1.productos[i].getPrecio()))); 
                 }
             }
             if (opcion == false) {
@@ -175,7 +177,7 @@ public class Formap extends JFrame implements ActionListener{
                     Proy1.productos[i].setNombre(nombre);
                     Proy1.productos[i].setCantidad(Integer.parseInt(cantidad));
                     Proy1.productos[i].setDescripcion(descripcion);
-                    Proy1.productos[i].setPrecio(Double.parseDouble(precio));
+                    Proy1.productos[i].setPrecio(Float.parseFloat(precio));
                 }
             }            
             JOptionPane.showMessageDialog(this, "Se ha actualizado el Producto con éxito");

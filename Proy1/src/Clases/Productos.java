@@ -6,9 +6,9 @@ public class Productos {
     private String nombre;
     private String descripcion;
     private int cantidad;
-    private double precio;
+    private float precio;
 
-    public Productos(int codigo, String nombre, String descripcion, int cantidad, double precio) {
+    public Productos(int codigo, String nombre, String descripcion, int cantidad, float precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -93,7 +93,7 @@ public class Productos {
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
     

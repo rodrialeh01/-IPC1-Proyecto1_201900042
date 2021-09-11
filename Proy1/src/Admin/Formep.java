@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import javax.swing.*;
 import proy1.Proy1;
 public class Formep extends JFrame implements ActionListener{
@@ -141,6 +142,7 @@ public class Formep extends JFrame implements ActionListener{
         cantidad = tcantidad.getText();
         precio = tprecio.getText();
         boolean opcion = false;
+        DecimalFormat df = new DecimalFormat("#.00");
         //BOTON BUSCAR
         if (ae.getSource()==buscar) {            
             for (int i = 0; i < Proy1.productos.length; i++) {
@@ -151,7 +153,7 @@ public class Formep extends JFrame implements ActionListener{
                     tnombre.setText(Proy1.productos[i].getNombre());
                     tdescripcion.setText(Proy1.productos[i].getDescripcion());
                     tcantidad.setText(String.valueOf(Proy1.productos[i].getCantidad()));
-                    tprecio.setText(String.valueOf(Proy1.productos[i].getPrecio())); 
+                    tprecio.setText(String.valueOf(df.format(Proy1.productos[i].getPrecio()))); 
                 }
             }
             if (opcion == false) {

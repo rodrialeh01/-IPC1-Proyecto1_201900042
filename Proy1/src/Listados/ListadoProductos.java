@@ -18,6 +18,8 @@ import com.itextpdf.text.Image;
 import java.io.*;
 //AWT-SWING
 import javax.swing.JOptionPane;
+//DECIMAL FORMAT
+import java.text.DecimalFormat;
 
 //============PAQUETES============
 import proy1.Proy1;
@@ -164,7 +166,8 @@ public class ListadoProductos {
                 tabla.addCell(columna4);
                 
                 //COLUMNA5 = PRECIOS
-                columna5 = new PdfPCell(new Phrase(String.valueOf(Proy1.productos[i].getPrecio()),Tpequeño));
+                DecimalFormat df = new DecimalFormat("#.00");
+                columna5 = new PdfPCell(new Phrase(String.valueOf(df.format(Proy1.productos[i].getPrecio())),Tpequeño));
                 columna5.setHorizontalAlignment(Element.ALIGN_CENTER);
                 columna5.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 columna5.setBorderColor(negro);
