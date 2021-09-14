@@ -63,6 +63,8 @@ public class Proy1 {
     
     public static Productos[] productos = new Productos[200];
     public static int cproductos = 0;
+    public static int contadorf = 0;
+    public static int contadorm = 0;
     
     //METODO PARA AÑADIR UN PRODUCTO
     public static void AgregarProducto(Productos producto){
@@ -181,8 +183,7 @@ public class Proy1 {
     }
     
     //METODO PARA CONTAR EL GENERO M
-    public static int ContadorCM(){
-        int contadorm = 0;
+    public static int ContadorCM(){        
         for (int i = 0; i < cclientes; i++) {
             if (clientes[i].getGenero().equals("M")) {
                 contadorm++;
@@ -192,8 +193,7 @@ public class Proy1 {
     }
     
     //METODO PARA CONTAR EL GENERO F
-    public static int ContadorCF(){
-        int contadorf = 0;
+    public static int ContadorCF(){        
         for (int i = 0; i < cclientes; i++) {
             if (clientes[i].getGenero().equals("F")) {
                 contadorf++;
@@ -201,6 +201,70 @@ public class Proy1 {
         }
         return contadorf;
     }
+    
+    //FUNCION PARA RETORNAR LOS NOMBRES DE LOS CLIENTES BUSCADO POR MEDIO DEL NOMBRE
+    public static String[] NombresCN(String nombre){
+        String[] nombres = new String[cclientes];
+        for (int i = 0; i < cclientes; i++) {
+            if (clientes[i] != null && clientes[i].getNombre().equals(nombre)) {
+                nombres[i] = clientes[i].getNombre();
+            }       
+        }
+        for (int i = 0; i < nombres.length; i++) {
+            if (nombres[i] != null) {
+                return nombres;
+            }
+        }        
+        return null;
+    }
+    
+    //FUNCION PARA RETORNAR EL NOMBRE DEL CLIENTE POR MEDIO DEL NIT
+    public static String[] NombresCNIT(int nit){
+        String[] nombres = new String[cclientes];
+        for (int i = 0; i<cclientes; i++) {
+            if (clientes[i]!=null && clientes[i].getNit()==nit) {
+                nombres[i] = clientes[i].getNombre();
+            }
+        }
+        for (int i = 0; i < nombres.length; i++) {
+            if (nombres[i] != null) {
+                return nombres;
+            }
+        }        
+        return null;
+    }
+    
+    //FUNCION PARA RETORNAR EL NOMBRE DEL CLIENTE POR MEDIO DEL CORREO
+    public static String[] NombresCC(String correo){
+        String[] nombres = new String[cclientes];
+        for (int i = 0; i < cclientes; i++) {
+            if (clientes[i] !=null && clientes[i].getCorreo().equals(correo)) {
+                nombres[i] = clientes[i].getNombre();
+            }            
+        }
+        for (int i = 0; i < nombres.length; i++) {
+            if (nombres[i] != null) {
+                return nombres;
+            }
+        }        
+        return null;
+    }
+    
+    //FUNCION PARA RETORNAR LOS NOMBRES DE LOS CLIENTES POR MEDIO DEL GENERO
+    public static String[] NombresCG(String genero){
+        String[] nombres = new String[cclientes];
+        if (genero.equals("M") || genero.equals("F")) {
+            for (int i = 0; i < cclientes; i++) {
+                if (clientes[i] != null && clientes[i].getGenero().equals(genero)) {
+                    nombres[i] = clientes[i].getNombre();
+                }
+            }
+        }else{
+            return null;
+        }   
+        return nombres;
+    }
+    
     /**
      * ================================VENDEDORES================================
      */
@@ -287,7 +351,7 @@ public class Proy1 {
     
     //FUNCION PARA QUE RETORNE EL NOMBRE DEL VENDEDOR QUE QUIERE LOGUEAR
     public static String nombrev(int codv){
-        for (int i = 0; i<vendedores.length; i++) {
+        for (int i = 0; i<cvendedores; i++) {
             if (vendedores[i]!=null && vendedores[i].getCodigo()==codv) {
                 return vendedores[i].getNombre();
             }
@@ -297,7 +361,7 @@ public class Proy1 {
     
     //FUNCION PARA QUE RETORNE EL GENERO DEL VENDEDOR QUE QUIERE LOGUEAR
     public static String generov(int codv){
-        for (int i = 0; i<vendedores.length; i++) {
+        for (int i = 0; i<cvendedores; i++) {
             if (vendedores[i]!=null && vendedores[i].getCodigo()==codv) {
                 return vendedores[i].getGenero();
             }
