@@ -44,7 +44,7 @@ public class Login extends JFrame implements ActionListener{
         this.add(img);
         
         //LABEL DE USUARIO
-        us = new JLabel("Usuario: ");
+        us = new JLabel("Código: ");
         us.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         us.setForeground(Color.BLACK);
         us.setBounds(50,130,100,30);

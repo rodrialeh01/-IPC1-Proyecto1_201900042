@@ -2,7 +2,6 @@ package proy1;
 import Clases.*;
 import Admin.*;
 import Login.Login;
-import VVendedores.VPrincipal;
 import javax.swing.*;
 //DECIMAL FORMAT
 import java.text.DecimalFormat;
