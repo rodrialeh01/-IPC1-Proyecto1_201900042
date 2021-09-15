@@ -8,6 +8,7 @@ import javax.swing.*;
 
 //==================PAQUETES===============
 import Admin.Admin;
+import Clases.Vendedores;
 import VVendedores.VPrincipal;
 import proy1.Proy1;
 
@@ -18,6 +19,7 @@ public class Login extends JFrame implements ActionListener{
     JRadioButton admin, vendedor;
     static String usu, contra;
     public static String usuv, genv;
+    public static Vendedores objv;
     JButton inicio;
     public Login(){
         
@@ -108,6 +110,7 @@ public class Login extends JFrame implements ActionListener{
                 } //VERIFICA LA ENTRADA DEL VENDEDOR
                 else if (Proy1.verificarUPV(Integer.parseInt(usu),contra) == true) {
                     usuv = Proy1.nombrev(Integer.parseInt(usu));
+                    objv = Proy1.objvend(Integer.parseInt(usu));
                     if (usuv != null) {
                         genv = Proy1.generov(Integer.parseInt(usu));
                         if (genv.equals("M")) {

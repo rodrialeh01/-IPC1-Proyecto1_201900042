@@ -17,9 +17,9 @@ import proy1.Proy1;
 import Clases.Clientes;
 import Clases.Compras;
 import Clases.Ventas;
+import Listados.Factura;
+import Login.Login;
 import java.text.DecimalFormat;
-import javax.swing.event.*;
-import javax.swing.table.TableModel;
 
 public class VNuevaV extends JPanel implements ActionListener {
 
@@ -429,6 +429,12 @@ public class VNuevaV extends JPanel implements ActionListener {
                 Proy1.AgregarVenta(nueva);
                 Proy1.cventas++;
                 Proy1.LeerVenta();
+                int caja = Login.objv.getCaja();
+                Login.objv.setVentas(Login.objv.getVentas() + 1);
+                Login.objv.AsignarVenta(nueva);
+                Login.objv.MostrarInfoV();
+                Factura factura = new Factura();
+                factura.CrearPDFF(Proy1.cventas);
                 JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
                 f.dispose();
                 VPrincipal vp = new VPrincipal();

@@ -19,7 +19,7 @@ public class Vendedores {
         this.genero = genero;
         this.password = password;
         this.cventas = 0;
-        this.ventasv = new Ventas[cventas +1];        
+        this.ventasv = new Ventas[1000];        
     }
     
     public void MostrarVendedores(){
@@ -33,12 +33,37 @@ public class Vendedores {
         System.out.println("Contraseña: " + password);
     }
     
+    public void MostrarInfoV(){
+        System.out.println("==================================");
+        System.out.println("==            VENDEDOR          ==");
+        System.out.println("Código: " + codigo);
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Caja: " + caja);
+        System.out.println("Ventas: " + ventas);
+        System.out.println("Genero: " + genero);
+        System.out.println("Contraseña: " + password);
+        System.out.println("Tengo estas ventas: ");
+        System.out.println("==================================");
+        System.out.println("==  VENTAS DE " + nombre + "  ==");
+        for (int i = 0; i < cventas; i++) {
+            System.out.println("No. Factura: " + ventasv[i].getNofactura());
+            System.out.println("Nombre del Cliente: " + ventasv[i].getNombre());
+            System.out.println("Fecha: " + ventasv[i].getFecha());
+            System.out.println("NIT: " + ventasv[i].getNit());
+            System.out.println("Total: " + ventasv[i].getTotal());
+            System.out.println("");
+            System.out.println("------------------------------");
+        }
+    }
+    
     public void AsignarVenta(Ventas venta){
-        try {
+        if (cventas < ventasv.length) {
             ventasv[cventas] = venta;
             cventas++;
-        }catch(Exception e){
+        }else{
+            System.out.println("YA MUCHO xd");
         }
+        
     }
     
     public Ventas ventasvendedor(int codigo){

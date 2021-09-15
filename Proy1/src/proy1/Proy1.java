@@ -2,7 +2,7 @@ package proy1;
 import Clases.*;
 import Admin.*;
 import Login.Login;
-import VVendedores.VNuevaV;
+import Listados.Factura;
 import javax.swing.*;
 //DECIMAL FORMAT
 import java.text.DecimalFormat;
@@ -31,10 +31,18 @@ public class Proy1 {
             }
         }
         if (ventas == null) {
-            System.out.println("NO HAY SUCURSALES");
+            System.out.println("NO HAY VENTAS");
         }
     }
     
+    public static Ventas DevolverVenta(int codf){
+        for (int i = 0; i < cventas; i++) {
+            if (ventas[i].getNofactura() == codf) {
+                return ventas[i];
+            }
+        }
+        return null;
+    }
     /**
      * ================================SUCURSALES================================
      */
@@ -465,6 +473,12 @@ public class Proy1 {
         }
         return null;
     }
-    
-    
+    public static Vendedores objvend(int codv){
+        for (int i = 0; i<cvendedores; i++) {
+            if (vendedores[i]!=null && vendedores[i].getCodigo()==codv) {
+                return vendedores[i];
+            }
+        }
+        return null;
+    }
 }
