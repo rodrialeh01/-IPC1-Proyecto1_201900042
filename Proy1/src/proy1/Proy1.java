@@ -2,13 +2,14 @@ package proy1;
 import Clases.*;
 import Admin.*;
 import Login.Login;
+import java.awt.Color;
 import javax.swing.*;
 //DECIMAL FORMAT
 import java.text.DecimalFormat;
 
 
 public class Proy1 {
-    
+    static Color azulitofacha = new Color(13,67,162);
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
         Login l = new Login();
@@ -532,11 +533,10 @@ public class Proy1 {
             matriz[i][3] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getFecha();
             matriz[i][4] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getTotal();
             JLabel nuevo = new JLabel("Visualizar");
-            nuevo.setName(String.valueOf(ventas[i].getNofactura()));
-            String v = "v";
-            matriz[i][5] = v;
+            nuevo.setForeground(azulitofacha);
+            nuevo.setName(String.valueOf(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura()));
+            matriz[i][5] = nuevo;
         }
         return matriz; 
-//        return null;
     }
 }

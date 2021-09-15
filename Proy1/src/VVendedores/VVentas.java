@@ -8,11 +8,16 @@ import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.util.Map;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import proy1.Proy1;
 import Login.Login;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.table.DefaultTableModel;
+import java.net.*;
 
-public class VVentas extends JPanel implements ActionListener{
+public class VVentas extends JPanel implements ActionListener, MouseListener{
     JPanel generalp;
     JButton lg;
     JLabel filtrar, nfacturaf, nitf, nombref, fechaf, filtra2;
@@ -128,28 +133,22 @@ public class VVentas extends JPanel implements ActionListener{
         //TABLA
         //TABLA
         String [] encabezado = {"No. Factura","Nit","Nombre","Fecha","Total","Acciones"};
-//        Object [][] fila1 = {{"1","12345","Juan","15/09/2021","20.00","visualizar"}};
         ventas = Proy1.TablaVentas(Login.objv.getCodigo());
-//        if (ventas != null) {
-//            vfiltrados = new JTable(ventas,encabezado);
-//        }
-        vfiltrados = new JTable(ventas,encabezado);
+        vfiltrados = new JTable();
+        DefaultTableModel d = new DefaultTableModel(ventas,encabezado){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        vfiltrados.setModel(d);    
+        vfiltrados.setDefaultRenderer(Object.class, new TablaVentas());        
         JScrollPane sp= new JScrollPane(vfiltrados);
-        sp.setBounds(50, 220, 1150, 350);
-        //CENTRAR LOS DATOS DE LA TABLA
-        DefaultTableCellRenderer renderc = new DefaultTableCellRenderer();
-        renderc.setHorizontalAlignment(SwingConstants.CENTER);
-        vfiltrados.getColumnModel().getColumn(0).setCellRenderer(renderc);
-        vfiltrados.getColumnModel().getColumn(1).setCellRenderer(renderc);
-        vfiltrados.getColumnModel().getColumn(2).setCellRenderer(renderc);
-        vfiltrados.getColumnModel().getColumn(3).setCellRenderer(renderc);
-        vfiltrados.getColumnModel().getColumn(4).setCellRenderer(renderc);
-        vfiltrados.getColumnModel().getColumn(5).setCellRenderer(renderc);
+        sp.setBounds(50, 220, 1150, 350);       
         vfiltrados.getTableHeader().setFont(new Font("Century Gothic", Font.PLAIN,15));
         vfiltrados.getTableHeader().setBackground(azulfachero);
         vfiltrados.getTableHeader().setForeground(Color.BLACK);
-        vfiltrados.setEnabled(false);
-        vfiltrados.setFont(new Font("Century Gothic", Font.PLAIN,14));
+        vfiltrados.setFont(new Font("Century Gothic", Font.PLAIN,15));
+        vfiltrados.addMouseListener(this);
         generalp.add(sp);
         
         //DISEÑO DEL PANEL
@@ -161,4 +160,48 @@ public class VVentas extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         
     }    
+    
+    //METODOS ABSTRACTOS
+    @Override
+    //METODO PARA DAR CLICK EN EL LABEL QUE SE ENCUENTRA EN LA TABLA
+    public void mouseClicked(MouseEvent me) {
+        //SE OBTIENEN LAS COORDENADAS DE LA TABLA
+        int posy = vfiltrados.getColumnModel().getColumnIndexAtX(me.getX());
+        int posx = me.getY()/vfiltrados.getRowHeight();
+        //VERIFICA SI LAS COORDENADAS ESTAN DENTRO DE LA TABLA
+        if (posx < vfiltrados.getRowCount() && posx >= 0&& posy < vfiltrados.getColumnCount() && posy >=0) {
+            //OBTIENE EL OBJETO SELECCIONADO
+            Object objeto = vfiltrados.getValueAt(posx, posy);
+            //SI EL USUARIO DA CLICK EN EL LABEL ENTONCES ABRE EL ARCHIVO
+            if (objeto instanceof JLabel) {
+                JLabel lbl = (JLabel) objeto;
+                abrirarchivo("Facturas/Factura" + Proy1.DevolverVenta(Integer.parseInt(lbl.getName())).getNofactura() + ".pdf");
+            }            
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+    }
+    //METODO PARA ABRIR LA FACTURA
+    public void abrirarchivo(String ruta){
+        try{
+            File factura = new File (ruta);
+            Desktop.getDesktop().open(factura);
+        }catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
 }
