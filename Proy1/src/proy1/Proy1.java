@@ -120,7 +120,7 @@ public class Proy1 {
         }catch(Exception e){            
         }
     }
-    //SE ORDENARAN LOS OBJETOS DE MAYOR CANTIDAD HASTA MENOR CANTIDAD USANDO UN ALGORITMO DE ORDENAMIENTO
+    //SE ORDENARAN LOS OBJETOS DE MAYOR A MENOR POR MEDIO DEL CODIGO DEL PRODUCTO
     public static void ordenamientoProductosT(Productos[] prod){
         try{
             for (int i = 1; i < prod.length; i++) {
@@ -262,6 +262,21 @@ public class Proy1 {
             return null;
         }   
         return nombres;
+    }
+    
+    //SE OBTIENE CUAL ES EL CODIGO MAS GRANDE DE TODO EL LISTADO DE CLIENTES
+    public static int CodigoMayor(Clientes[] client){
+        int mayor = clientes[0].getCodigo();
+        try {
+            for (int i = 1; i < clientes.length; i++) {
+                if (clientes[i].getCodigo() > mayor) {
+                    mayor = clientes[i].getCodigo();
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return mayor;
     }
     
     /**

@@ -2,6 +2,7 @@ package VVendedores;
 
 //==================LIBRERIAS===============
 //AWT-SWING
+import Clases.Clientes;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -354,6 +355,25 @@ public class VNuevaV extends JPanel implements ActionListener {
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontraron clientes con ese género");
+                }
+            }
+            clientescb.repaint();
+        }else if (ae.getSource()==ncliente) {
+            if (nombre.equals("") && nit.equals("") && correo.equals("") && genero.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
+            }else if (nombre.equals("") || nit.equals("") || correo.equals("") || genero.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
+            }else {
+                if (genero.equals("M") || genero.equals("F") || genero.equals("m") || genero.equals("f")) {
+                    Clientes nuevo = new Clientes((Proy1.CodigoMayor(Proy1.clientes) + 1), nombre,Integer.parseInt(nit),correo, genero.toUpperCase());
+                    Proy1.AgregarCliente(nuevo);
+                    JOptionPane.showMessageDialog(null, "Se agregó al cliente con éxito");
+                    nombreft.setText("");
+                    nitft.setText("");
+                    correoft.setText("");
+                    generoft.setText("");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Por favor en el campo de Género ingrese \"m\", \"f\", \"M\", \"F\"");
                 }
             }
             clientescb.repaint();
