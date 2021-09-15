@@ -418,7 +418,10 @@ public class VNuevaV extends JPanel implements ActionListener {
             JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
             f.dispose();
             VPrincipal vp = new VPrincipal();
-        }else if (ae.getSource()== vender) {
+        }
+        //BOTON DE VENDER
+        else if (ae.getSource()== vender) {
+            //PARA AÑADIR LA FECHA
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             if (clientescb.getSelectedItem().equals("") || Double.parseDouble(total) == 0) {
                 JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y un total mayor a 0");

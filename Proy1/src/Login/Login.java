@@ -97,7 +97,7 @@ public class Login extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        try {
+//        try {
             if (ae.getSource() == inicio) {
                 usu = usuarios.getText();
                 contra = contraseñas.getText();
@@ -129,9 +129,9 @@ public class Login extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
                 }
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
-        }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Ingrese correctamente las credenciales.");
+//        }
     }
     
 }

@@ -9,6 +9,8 @@ import java.awt.font.TextAttribute;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import proy1.Proy1;
+import Login.Login;
 
 public class VVentas extends JPanel implements ActionListener{
     JPanel generalp;
@@ -126,8 +128,12 @@ public class VVentas extends JPanel implements ActionListener{
         //TABLA
         //TABLA
         String [] encabezado = {"No. Factura","Nit","Nombre","Fecha","Total","Acciones"};
-        Object [][] fila1 = {{"1","3780998","Juan","09/09/2021","132.00","Visualizar"}};
-        vfiltrados = new JTable(fila1,encabezado);
+//        Object [][] fila1 = {{"1","12345","Juan","15/09/2021","20.00","visualizar"}};
+        ventas = Proy1.TablaVentas(Login.objv.getCodigo());
+//        if (ventas != null) {
+//            vfiltrados = new JTable(ventas,encabezado);
+//        }
+        vfiltrados = new JTable(ventas,encabezado);
         JScrollPane sp= new JScrollPane(vfiltrados);
         sp.setBounds(50, 220, 1150, 350);
         //CENTRAR LOS DATOS DE LA TABLA

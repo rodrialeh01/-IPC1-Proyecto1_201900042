@@ -10,7 +10,8 @@ public class Vendedores {
     private String password;
     private Ventas[] ventasv;
     private int cventas;
-
+    
+    //CONSTRUCTOR
     public Vendedores(int codigo, String nombre, int caja, int ventas, String genero, String password) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -22,6 +23,7 @@ public class Vendedores {
         this.ventasv = new Ventas[1000];        
     }
     
+    //METODO PARA MOSTRAR LA LISTA DE VENDEDORES
     public void MostrarVendedores(){
         System.out.println("==================================");
         System.out.println("==            VENDEDOR          ==");
@@ -33,6 +35,7 @@ public class Vendedores {
         System.out.println("Contraseña: " + password);
     }
     
+    //MOSTRAR LAS VENTAS ASIGNADAS AL VENDEDOR
     public void MostrarInfoV(){
         System.out.println("==================================");
         System.out.println("==            VENDEDOR          ==");
@@ -56,6 +59,7 @@ public class Vendedores {
         }
     }
     
+    //FUNCION PARA ASIGNARLE LA VENTA AL VENDEDOR
     public void AsignarVenta(Ventas venta){
         if (cventas < ventasv.length) {
             ventasv[cventas] = venta;
@@ -66,12 +70,11 @@ public class Vendedores {
         
     }
     
-    public Ventas ventasvendedor(int codigo){
+    //FUNCION PARA RETORNAR LA MATRIZ DE VENTAS DE LOS VENDEDORES
+    public Ventas[] ventasvendedor(int codigo){
         try{
         if (ventasv != null) {
-            for (int i = 0; i < ventasv.length; i++) {
-                return ventasv[i];
-            }
+            return ventasv;
         }
         }catch(Exception e){
             
@@ -162,5 +165,11 @@ public class Vendedores {
      */
     public void setPassword(String genero) {
         this.password = password;
+    }
+    /**
+     * @return the password
+     */
+    public int getCventas() {
+        return cventas;
     }
 }

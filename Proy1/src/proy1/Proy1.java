@@ -2,52 +2,26 @@ package proy1;
 import Clases.*;
 import Admin.*;
 import Login.Login;
-import Listados.Factura;
 import javax.swing.*;
 //DECIMAL FORMAT
 import java.text.DecimalFormat;
+
+
 public class Proy1 {
     
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
         Login l = new Login();
     }
-    
-    /**
-     * ================================VENTAS================================
-     */
-    
-    public static Ventas[] ventas = new Ventas[1000];
-    public static int cventas = 0;
-    public static void AgregarVenta(Ventas venta){
-        if (cventas < ventas.length) {
-            ventas[cventas] = venta;
-        }
-    }
-    public static void LeerVenta(){
-        for (int i = 0; i < cventas; i++) {
-            if (ventas[i] != null) {
-                ventas[i].MostrarVenta();
-            }
-        }
-        if (ventas == null) {
-            System.out.println("NO HAY VENTAS");
-        }
-    }
-    
-    public static Ventas DevolverVenta(int codf){
-        for (int i = 0; i < cventas; i++) {
-            if (ventas[i].getNofactura() == codf) {
-                return ventas[i];
-            }
-        }
-        return null;
-    }
     /**
      * ================================SUCURSALES================================
      */
+    
+    //SE CREA UN ARREGLO DE SUCURSALES CON UNA CAPACIDAD DE 50 SUCURSALES
     public static Sucursales[] sucursales = new Sucursales[50];
+    //SE CREA EL CONTADOR DE SUCURSALES EN EL SISTEMA
     public static int csucursales = 0;
+    
     //METODO PARA AÑADIR UN NUEVO OBJETO SUCURSALES
     public static void AgregarSucursales(Sucursales sucursal){
         if (csucursales < sucursales.length) {
@@ -93,9 +67,13 @@ public class Proy1 {
      * ================================PRODUCTOS================================
      */
     
+    //SE CREA UN ARREGLO DE PRODUCTOS CON UNA CAPACIDAD DE 200 PRODUCTOS
     public static Productos[] productos = new Productos[200];
+    //SE CREA UN CONTADOR DE PRODUCTOS EN EL SISTEMA
     public static int cproductos = 0;
+    //SE CREA UN CONTADOR DE GENERO FEMENINO PARA LAS GRAFICAS
     public static int contadorf = 0;
+    //SE CREA UN CONTADOR DE GENERO MASCULINO PARA LAS GRAFICAS
     public static int contadorm = 0;
     
     //METODO PARA AÑADIR UN PRODUCTO
@@ -184,9 +162,15 @@ public class Proy1 {
      * ================================COMPRAS=================================
      */
     
+    /**SE CREO UN ARREGLO DE COMPRAS QUE SERA UTILIZADO COMO UN CARRITO PARA LA VENTA DE PRODUCTOS
+     * DONDE SE CREO UN ESPACIO DE 1000 OBJETOS DE FORMA TEMPORAL PARA QUE NO TENGA UN LIMITE EN LA 
+     * COMPRA DE PRODUCTOS AL AGREGARLO AL CARRITO.
+     */
     public static Compras[] compras = new Compras[1000];
+    //CONTADOR DE COMPRAS EN EL SISTEMA
     public static int ccompras = 0;
     
+    //METODO PARA AGREGAR UN NUEVO OBJETO AL ARREGLO DE COMPRAS
     public static void AgregarCompra(Compras compra){
         if (ccompras <compras.length) {
             compras[ccompras]= compra;
@@ -223,7 +207,9 @@ public class Proy1 {
      * ================================CLIENTES================================
      */
     
+    //SE CREA EL ARREGLO DE CLIENTES CON UNA CAPACIDAD MÁXIMA DE 100 CLIENTES
     public static Clientes[] clientes = new Clientes[100];
+    //SE CREA EL CONTADOR DE CLIENTES EN EL SISTEMA
     public static int cclientes = 0;
     
     //METODO PARA AÑADIR UN CLIENTE
@@ -361,6 +347,7 @@ public class Proy1 {
         return mayor;
     }
     
+    //FUNCION PARA RETORNAR EL OBJETO CLIENTE
     public static Clientes DevolverCliente(String nombre){
         for (int i = 0; i < cclientes; i++) {
             if (clientes[i].getNombre().equals(nombre)) {
@@ -374,7 +361,9 @@ public class Proy1 {
      * ================================VENDEDORES================================
      */
     
+    //SE CREA EL ARREGLO DE VENDEDORES CON UN MÁXIMO DE 400 VENDEDORES
     public static Vendedores[] vendedores = new Vendedores[400];
+    //SE CREA EL CONTADOR DE VENDEDORES EN EL SISTEMA
     public static int cvendedores = 0;
     
     //METODO PARA AÑADIR UN VENDEDOR
@@ -473,6 +462,8 @@ public class Proy1 {
         }
         return null;
     }
+    
+    //FUNCIÓN PARA DEVOLVER EL OBJETO VENDEDORES
     public static Vendedores objvend(int codv){
         for (int i = 0; i<cvendedores; i++) {
             if (vendedores[i]!=null && vendedores[i].getCodigo()==codv) {
@@ -480,5 +471,72 @@ public class Proy1 {
             }
         }
         return null;
+    }
+    
+    
+    /**
+     * ================================VENTAS================================
+     */
+    //SE CREA EL ARREGLO DE VENTAS QUE TIENE UNA CAPACIDAD DE REALIZAR 1000 VENTAS
+    public static Ventas[] ventas = new Ventas[1000];
+    //SE CREA EL CONTADOR DE VENTAS
+    public static int cventas = 0;
+    
+    //METODO PARA AÑADIR UN OBJETO VENTAS AL ARREGLO
+    public static void AgregarVenta(Ventas venta){
+        if (cventas < ventas.length) {
+            ventas[cventas] = venta;
+        }
+    }
+    
+    //METODO PARA VISUALIZAR LAS VENTAS EN EL SISTEMA
+    public static void LeerVenta(){
+        for (int i = 0; i < cventas; i++) {
+            if (ventas[i] != null) {
+                ventas[i].MostrarVenta();
+            }
+        }
+        if (ventas == null) {
+            System.out.println("NO HAY VENTAS");
+        }
+    }
+    
+    //FUNCION QUE RETORNA EL OBJETO VENTA 
+    public static Ventas DevolverVenta(int codf){
+        for (int i = 0; i < cventas; i++) {
+            if (ventas[i].getNofactura() == codf) {
+                return ventas[i];
+            }
+        }
+        return null;
+    }
+    
+    public static int posicion(int codigo){
+        int posicion = -1;
+        for (int i = 0; i < cvendedores; i++) {
+            if (vendedores[i].getCodigo() == codigo) {
+                posicion = i;
+            }
+        }
+        return posicion;
+    }
+    
+    //FUNCION PARA CREAR LA TABLA DE VENTAS DE LOS VENDEDORES
+    public static Object[][] TablaVentas(int codigo){
+        int filas = vendedores[posicion(codigo)].getCventas();
+        Object[][] matriz = new Object[filas][6];
+        for (int i = 0; i < matriz.length; i++) {
+            matriz[i][0] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura();
+            matriz[i][1] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNit();
+            matriz[i][2] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNombre();
+            matriz[i][3] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getFecha();
+            matriz[i][4] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getTotal();
+            JLabel nuevo = new JLabel("Visualizar");
+            nuevo.setName(String.valueOf(ventas[i].getNofactura()));
+            String v = "v";
+            matriz[i][5] = v;
+        }
+        return matriz; 
+//        return null;
     }
 }
