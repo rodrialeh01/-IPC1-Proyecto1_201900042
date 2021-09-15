@@ -441,6 +441,25 @@ public class VNuevaV extends JPanel implements ActionListener {
                 //SE MANDA A LLAMAR A LA CLASE FACTURA PARA CREARLA
                 Factura factura = new Factura();
                 factura.CrearPDFF(Proy1.cventas);
+                //SE ELIMINA LOS OBJETOS DEL CARRITO (OBJETOS DE LA CLASE COMPRAS)
+                // CONVIERTE A LOS OBJETOS NULO
+                for (int i = 0; i < Proy1.ccompras; i++) {
+                        Proy1.compras[i] = null;
+                }
+                //HACE QUE DESDE EL ESPACIO NULO EN ADELANTE SE MUEVAN LAS CASILLAS HACIA ARRIBA
+                for (int i = 0; i < Proy1.ccompras - 1; i++) {
+                    if (Proy1.compras[i] == null) {
+                        for (int j = i; j < Proy1.ccompras - 1; j++) {
+                            Proy1.compras[j] = Proy1.compras[j + 1];
+                        }                        
+                    }
+                }
+                //CONTADOR DEL CARRITO VA A SER 0
+                Proy1.ccompras = 0;
+                //SI LA CANTIDAD DE PRODUCTOS ES IGUAL A 0 ENTONCES QUE TOME QUE LA POSICION VA A SER NUL
+                if (Proy1.ccompras == 0) {
+                    Proy1.compras[0] = null;
+                }
                 //REFRESH
                 JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
                 f.dispose();
