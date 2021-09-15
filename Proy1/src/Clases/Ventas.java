@@ -5,10 +5,10 @@ public class Ventas {
     private int nit;
     private String nombre;
     private String fecha;
-    private int total;
+    private double total;
     
     //CONSTRUCTOR
-    public Ventas(int nofactura, int nit, String nombre, String fecha, int total) {
+    public Ventas(int nofactura, int nit, String nombre, String fecha, double total) {
         this.nofactura = nofactura;
         this.nit = nit;
         this.nombre = nombre;
@@ -87,14 +87,14 @@ public class Ventas {
     /**
      * @return the total
      */
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 
     /**
      * @param total the total to set
      */
-    public void setTotal(int total) {
+    public void setTotal(double total) {
         this.total = total;
     }
     

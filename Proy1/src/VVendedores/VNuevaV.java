@@ -2,7 +2,6 @@ package VVendedores;
 
 //==================LIBRERIAS===============
 //AWT-SWING
-import Clases.Clientes;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +14,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 //==================PAQUETES================
 import proy1.Proy1;
+import Clases.Clientes;
+import Clases.Compras;
+import Clases.Ventas;
+import java.text.DecimalFormat;
+import javax.swing.event.*;
+import javax.swing.table.TableModel;
 
 public class VNuevaV extends JPanel implements ActionListener {
 
@@ -34,7 +39,9 @@ public class VNuevaV extends JPanel implements ActionListener {
     JButton agregar, vender;
     JTextField tcodigoap, tcantidadap, ttotal;
     JTable comproductos;
-    Object[][] compras;
+    static Object[][] comprasp;
+    String fecha, total, codigo, cantidad;
+    int ccompras = 0;
 
     public VNuevaV() {
 
@@ -202,7 +209,7 @@ public class VNuevaV extends JPanel implements ActionListener {
         ap.add(Fecha);
 
         //JLABEL DE CONTADOR
-        Contador = new JLabel("No.");
+        Contador = new JLabel("No. \t" + (Proy1.cventas + 1));
         Contador.setBounds(1100, 5, 200, 30);
         Contador.setForeground(Color.BLACK);
         Contador.setFont(new Font("Century Gothic", Font.BOLD, 15));
@@ -240,13 +247,14 @@ public class VNuevaV extends JPanel implements ActionListener {
         agregar = new JButton("Agregar");
         agregar.setBounds(1050, 50, 150, 30);
         agregar.setForeground(Color.BLACK);
+        agregar.addActionListener(this);
         agregar.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         ap.add(agregar);
 
         //TABLA
         String[] encabezado = {"Código", "Nombre", "Cantidad", "Precio", "Subtotal"};
-        Object[][] fila1 = {{"1", "Peluche", "4", "23.00", "92.00"}};
-        comproductos = new JTable(fila1, encabezado);
+        comprasp = Proy1.TableCompras();
+        comproductos = new JTable(comprasp, encabezado);
         JScrollPane sp = new JScrollPane(comproductos);
         sp.setBounds(50, 100, 1150, 230);
         //CENTRAR LOS DATOS DE LA TABLA
@@ -265,10 +273,12 @@ public class VNuevaV extends JPanel implements ActionListener {
         ap.add(sp);
 
         //TEXTFIELD DE TOTAL
-        ttotal = new JTextField();
+        DecimalFormat df = new DecimalFormat("#.00");
+        ttotal = new JTextField(String.valueOf(df.format(Proy1.totals())));
         ttotal.setBounds(960, 330, 240, 30);
         ttotal.setForeground(Color.BLACK);
-        ttotal.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        ttotal.setFont(new Font("Century Gothic", Font.BOLD, 15));
+        ttotal.addActionListener(this);
         ttotal.setEnabled(false);
         ap.add(ttotal);
 
@@ -285,6 +295,7 @@ public class VNuevaV extends JPanel implements ActionListener {
         vender.setForeground(Color.WHITE);
         vender.setBackground(verde);
         vender.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        vender.addActionListener(this);
         ap.add(vender);
 
         //DISEÑO DEL PANEL
@@ -294,10 +305,18 @@ public class VNuevaV extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        //PANEL SUPERIOR
         nombre = nombreft.getText();
         nit = nitft.getText();
         correo = correoft.getText();
         genero = generoft.getText();
+        
+        //PANEL INFERIOR
+        codigo = tcodigoap.getText();
+        cantidad = tcantidadap.getText();
+        fecha = Fecha.getText();
+        total = ttotal.getText();
+        
         //BOTON APLICAR FILTRO
         if (ae.getSource() == aplicarf) {
             //SE LIMPIA EL COMBOBOX
@@ -358,7 +377,9 @@ public class VNuevaV extends JPanel implements ActionListener {
                 }
             }
             clientescb.repaint();
-        }else if (ae.getSource()==ncliente) {
+        }
+        //BOTON NUEVO CLIENTE
+        else if (ae.getSource()==ncliente) {
             if (nombre.equals("") && nit.equals("") && correo.equals("") && genero.equals("")) {
                 JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
             }else if (nombre.equals("") || nit.equals("") || correo.equals("") || genero.equals("")) {
@@ -378,6 +399,40 @@ public class VNuevaV extends JPanel implements ActionListener {
                 }
             }
             clientescb.repaint();
+        }
+        //BOTON AGREGAR
+        else if (ae.getSource()==agregar) {
+            DecimalFormat df = new DecimalFormat("#.00");
+            if (cantidad.equals("") && codigo.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
+            }else{
+                Double subtotal = Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio() * Float.parseFloat(cantidad);
+                Compras nuevo = new Compras(Integer.parseInt(codigo),Proy1.ObtenerProducto(Integer.parseInt(codigo)).getNombre(),Integer.parseInt(cantidad), (float) Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio(),subtotal);
+                Proy1.AgregarCompra(nuevo);
+                tcodigoap.setText("");
+                tcantidadap.setText("");
+                ttotal.setText("");
+                Proy1.ObtenerProducto(Integer.parseInt(codigo)).setCantidad(Proy1.ObtenerProducto(Integer.parseInt(codigo)).getCantidad() - Integer.parseInt(cantidad));
+                ttotal.setText(String.valueOf(df.format(Proy1.totals())));
+            }
+            JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
+            f.dispose();
+            VPrincipal vp = new VPrincipal();
+        }else if (ae.getSource()== vender) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            if (clientescb.getSelectedItem().equals("") || Double.parseDouble(total) == 0) {
+                JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y un total mayor a 0");
+            }else if (clientescb.getSelectedItem().equals("") && Integer.parseInt(total) == 0) {
+                JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y un total mayor a 0");
+            }else{
+                Ventas nueva = new Ventas((Proy1.cventas+1),Proy1.DevolverCliente((String) clientescb.getSelectedItem()).getNit(),Proy1.DevolverCliente((String) clientescb.getSelectedItem()).getNombre(),String.valueOf(LocalDate.now().format(dtf)),Double.parseDouble(total));
+                Proy1.AgregarVenta(nueva);
+                Proy1.cventas++;
+                Proy1.LeerVenta();
+                JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
+                f.dispose();
+                VPrincipal vp = new VPrincipal();
+            }
         }
     }
     

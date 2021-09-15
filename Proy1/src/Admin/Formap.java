@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import javax.swing.*;
 import proy1.Proy1;
+import Admin.Admin;
 public class Formap extends JFrame implements ActionListener{
     JLabel titulo, lcod, lnombre, ldescripcion, lcantidad, lprecio;
     JTextField tcod, tnombre, tdescripcion, tcantidad, tprecio;

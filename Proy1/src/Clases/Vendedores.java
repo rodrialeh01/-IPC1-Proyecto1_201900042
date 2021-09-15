@@ -42,10 +42,14 @@ public class Vendedores {
     }
     
     public Ventas ventasvendedor(int codigo){
+        try{
         if (ventasv != null) {
             for (int i = 0; i < ventasv.length; i++) {
                 return ventasv[i];
             }
+        }
+        }catch(Exception e){
+            
         }
         return null;  
     }

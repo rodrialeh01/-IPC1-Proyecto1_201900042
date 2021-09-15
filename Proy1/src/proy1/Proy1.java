@@ -2,19 +2,44 @@ package proy1;
 import Clases.*;
 import Admin.*;
 import Login.Login;
+import VVendedores.VNuevaV;
 import javax.swing.*;
 //DECIMAL FORMAT
 import java.text.DecimalFormat;
 public class Proy1 {
-    public static Sucursales[] sucursales = new Sucursales[50];
-    public static int csucursales = 0;
+    
     //METODO PARA LLAMAR A LA VENTANA
     public static void main(String[] args) {
         Login l = new Login();
     }
+    
+    /**
+     * ================================VENTAS================================
+     */
+    
+    public static Ventas[] ventas = new Ventas[1000];
+    public static int cventas = 0;
+    public static void AgregarVenta(Ventas venta){
+        if (cventas < ventas.length) {
+            ventas[cventas] = venta;
+        }
+    }
+    public static void LeerVenta(){
+        for (int i = 0; i < cventas; i++) {
+            if (ventas[i] != null) {
+                ventas[i].MostrarVenta();
+            }
+        }
+        if (ventas == null) {
+            System.out.println("NO HAY SUCURSALES");
+        }
+    }
+    
     /**
      * ================================SUCURSALES================================
      */
+    public static Sucursales[] sucursales = new Sucursales[50];
+    public static int csucursales = 0;
     //METODO PARA AÑADIR UN NUEVO OBJETO SUCURSALES
     public static void AgregarSucursales(Sucursales sucursal){
         if (csucursales < sucursales.length) {
@@ -135,6 +160,55 @@ public class Proy1 {
             }
         }catch(Exception e){            
         }
+    }
+    
+    //FUNCION PARA RETORNAR EL OBJETO PRODUCTO POR MEDIO DEL CODIGO
+    public static Productos ObtenerProducto(int codigo) {
+        for (int i = 0; i < cproductos; i++) {
+            if (productos[i] != null && productos[i].getCodigo() == codigo) {
+                return productos[i];
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * ================================COMPRAS=================================
+     */
+    
+    public static Compras[] compras = new Compras[1000];
+    public static int ccompras = 0;
+    
+    public static void AgregarCompra(Compras compra){
+        if (ccompras <compras.length) {
+            compras[ccompras]= compra;
+            ccompras++;
+        }
+    }
+    
+    //MOSTRAR EN PANTALLA LA TABLA DE QUE AGREGA PRODUCTOS
+    public static Object[][] TableCompras(){
+        DecimalFormat df = new DecimalFormat("#.00");
+        Object[][] agregarp = new Object[ccompras][5];
+        for (int i = 0; i < Proy1.ccompras; i++) {
+            agregarp[i][0] = Proy1.compras[i].getCodigo();
+            agregarp[i][1] = Proy1.compras[i].getNombre();
+            agregarp[i][2] = Proy1.compras[i].getCantidad();
+            agregarp[i][3] = df.format(Proy1.compras[i].getPrecio());
+            agregarp[i][4] = df.format(Proy1.compras[i].getSubtotal());
+        }
+        return agregarp;
+    }
+    
+    //SUMA DE LOS SUBTOTALES PARA EL TOTAL
+    public static double totals(){
+        double comprat = 0;
+        if (compras != null) {
+            for (int i = 0; i < ccompras; i++) {
+                comprat += compras[i].getSubtotal();
+            }
+        }        
+        return comprat;
     }
     
     /**
@@ -279,6 +353,15 @@ public class Proy1 {
         return mayor;
     }
     
+    public static Clientes DevolverCliente(String nombre){
+        for (int i = 0; i < cclientes; i++) {
+            if (clientes[i].getNombre().equals(nombre)) {
+                return clientes[i];
+            }
+        }
+        return null;
+    }
+    
     /**
      * ================================VENDEDORES================================
      */
@@ -383,9 +466,5 @@ public class Proy1 {
         return null;
     }
     
-    /**
-     * ================================VENTAS================================
-     */
     
-    public static Ventas[] ventas = new Ventas[1000];
 }

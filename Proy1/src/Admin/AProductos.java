@@ -236,7 +236,7 @@ public class AProductos extends JPanel implements ActionListener{
         }
         //BOTON CREAR PRODUCTO
         else if (ae.getSource()==crearp) {
-            Formcp fcp = new Formcp();
+            Formcp fcp = new Formcp();            
         }
         //BOTON ACTUALIZAR PRODUCTO
         else if (ae.getSource()==actualizarp) {
