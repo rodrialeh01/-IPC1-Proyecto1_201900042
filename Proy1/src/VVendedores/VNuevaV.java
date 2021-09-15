@@ -425,16 +425,23 @@ public class VNuevaV extends JPanel implements ActionListener {
             }else if (clientescb.getSelectedItem().equals("") && Integer.parseInt(total) == 0) {
                 JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y un total mayor a 0");
             }else{
+                //SE CREA UNA VENTA PARA EL VENDEDOR
                 Ventas nueva = new Ventas((Proy1.cventas+1),Proy1.DevolverCliente((String) clientescb.getSelectedItem()).getNit(),Proy1.DevolverCliente((String) clientescb.getSelectedItem()).getNombre(),String.valueOf(LocalDate.now().format(dtf)),Double.parseDouble(total));
                 Proy1.AgregarVenta(nueva);
+                //AUMENTA EL CONTADOR DE VENTAS
                 Proy1.cventas++;
+                //VERIFICAR SI SE CREO LA VENTA
                 Proy1.LeerVenta();
-                int caja = Login.objv.getCaja();
+                //AUMENTA EL CONTADOR DE VENTAS AL VENDEDOR
                 Login.objv.setVentas(Login.objv.getVentas() + 1);
+                //SE LE ASIGNA LA VENTA AL VENDEDOR
                 Login.objv.AsignarVenta(nueva);
+                //MOSTRAR SI SE LE ASIGNO LA VENTA
                 Login.objv.MostrarInfoV();
+                //SE MANDA A LLAMAR A LA CLASE FACTURA PARA CREARLA
                 Factura factura = new Factura();
                 factura.CrearPDFF(Proy1.cventas);
+                //REFRESH
                 JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
                 f.dispose();
                 VPrincipal vp = new VPrincipal();

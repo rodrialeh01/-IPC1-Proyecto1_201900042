@@ -93,7 +93,7 @@ public class AProductos extends JPanel implements ActionListener{
         pg();
         
         //TABLA
-        String [] encabezado = {"Código","Nombre","Cantidad","Descripcion","Precio"};
+        String [] encabezado = {"Código","Nombre","Descripcion","Cantidad","Precio"};
         datos = Proy1.convertirDProductos();
         tablap = new JTable(datos,encabezado);
         JScrollPane sp= new JScrollPane(tablap);
