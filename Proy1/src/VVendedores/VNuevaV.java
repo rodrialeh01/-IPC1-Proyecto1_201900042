@@ -365,6 +365,7 @@ public class VNuevaV extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
             }else {
                 if (genero.equals("M") || genero.equals("F") || genero.equals("m") || genero.equals("f")) {
+                    //SU CODIGO SE AÑADE AUTOMATICAMENTE POR MEDIO DE LA FUNCION CODIGO MAYOR Y SUMANDOLE 1 PARA QUE NO SE TRASLAPEN ESOS CODIGOS
                     Clientes nuevo = new Clientes((Proy1.CodigoMayor(Proy1.clientes) + 1), nombre,Integer.parseInt(nit),correo, genero.toUpperCase());
                     Proy1.AgregarCliente(nuevo);
                     JOptionPane.showMessageDialog(null, "Se agregó al cliente con éxito");

@@ -382,4 +382,10 @@ public class Proy1 {
         }
         return null;
     }
+    
+    /**
+     * ================================VENTAS================================
+     */
+    
+    public static Ventas[] ventas = new Ventas[1000];
 }

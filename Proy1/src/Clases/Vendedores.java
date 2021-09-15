@@ -8,6 +8,8 @@ public class Vendedores {
     private int ventas;
     private String genero;
     private String password;
+    private Ventas[] ventasv;
+    private int cventas;
 
     public Vendedores(int codigo, String nombre, int caja, int ventas, String genero, String password) {
         this.codigo = codigo;
@@ -16,6 +18,8 @@ public class Vendedores {
         this.ventas = ventas;
         this.genero = genero;
         this.password = password;
+        this.cventas = 0;
+        this.ventasv = new Ventas[cventas +1];        
     }
     
     public void MostrarVendedores(){
@@ -27,6 +31,23 @@ public class Vendedores {
         System.out.println("Ventas: " + ventas);
         System.out.println("Genero: " + genero);
         System.out.println("Contraseña: " + password);
+    }
+    
+    public void AsignarVenta(Ventas venta){
+        try {
+            ventasv[cventas] = venta;
+            cventas++;
+        }catch(Exception e){
+        }
+    }
+    
+    public Ventas ventasvendedor(int codigo){
+        if (ventasv != null) {
+            for (int i = 0; i < ventasv.length; i++) {
+                return ventasv[i];
+            }
+        }
+        return null;  
     }
     
     //ENCAPSULAMIENTO
