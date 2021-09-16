@@ -6,28 +6,33 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
-import java.util.Map;
-import javax.swing.*;
-import proy1.Proy1;
-import Login.Login;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+//UTIL
+import java.util.Map;
+//IO
 import java.io.File;
 import java.io.IOException;
-import javax.swing.table.DefaultTableModel;
-import java.net.*;
+
+//===================PAQUETES================
+import proy1.Proy1;
+import Login.Login;
 
 public class VVentas extends JPanel implements ActionListener, MouseListener{
     JPanel generalp;
     JButton lg;
     JLabel filtrar, nfacturaf, nitf, nombref, fechaf, filtra2;
     JTextField nfacturaft, nitft, nombreft,fechaft;
+    String factura, nit, nombre,fecha;
     JButton aplicarf;
     JComboBox clientescb;
     JTable vfiltrados;
     Object[][] ventas;    
     Color azul = new Color(38,36,89);
     Color azulfachero = new Color(97,176,242);
+    String [] encabezado = {"No. Factura","Nit","Nombre","Fecha","Total","Acciones"};
     public VVentas(){
         //PANEL BLANCO
         generalp = new JPanel();
@@ -68,6 +73,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
         nfacturaft.setForeground(Color.BLACK);
         nfacturaft.setBounds(290,45,300,25);
         nfacturaft.setFont(new Font("Century Gothic", Font.PLAIN,15));
+        nfacturaft.addActionListener(this);
         generalp.add(nfacturaft);
         
         //LABEL DE NIT
@@ -82,6 +88,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
         nitft.setForeground(Color.BLACK);
         nitft.setBounds(740,45,300,25);
         nitft.setFont(new Font("Century Gothic", Font.PLAIN,15));
+        nitft.addActionListener(this);
         generalp.add(nitft);
         
         //LABEL DE NOMBRE
@@ -96,6 +103,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
         nombreft.setForeground(Color.BLACK);
         nombreft.setBounds(290,95,300,25);
         nombreft.setFont(new Font("Century Gothic", Font.PLAIN,15));
+        nombreft.addActionListener(this);
         generalp.add(nombreft);
         
         //LABEL DE FECHA
@@ -110,6 +118,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
         fechaft.setForeground(Color.BLACK);
         fechaft.setBounds(740,95,300,25);
         fechaft.setFont(new Font("Century Gothic", Font.PLAIN,15));
+        fechaft.addActionListener(this);
         generalp.add(fechaft);
         
         //BOTON DE APLICAR FILTRO
@@ -117,6 +126,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
         aplicarf.setForeground(Color.BLACK);
         aplicarf.setBounds(190,145,850,25);
         aplicarf.setFont(new Font("Century Gothic", Font.PLAIN,15));
+        aplicarf.addActionListener(this);
         generalp.add(aplicarf);
         
         //LABEL DE FILTRADOS CON SUBRAYADO
@@ -131,16 +141,9 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
         generalp.add(filtra2);
         
         //TABLA
-        //TABLA
-        String [] encabezado = {"No. Factura","Nit","Nombre","Fecha","Total","Acciones"};
         ventas = Proy1.TablaVentas(Login.objv.getCodigo());
         vfiltrados = new JTable();
-        DefaultTableModel d = new DefaultTableModel(ventas,encabezado){
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-        };
-        vfiltrados.setModel(d);    
+        llenar();
         vfiltrados.setDefaultRenderer(Object.class, new TablaVentas());        
         JScrollPane sp= new JScrollPane(vfiltrados);
         sp.setBounds(50, 220, 1150, 350);       
@@ -156,12 +159,31 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
         this.setLayout(null);
     }
     
+    //METODOS ABSTRACTOS
+    //ACTIONLISTENER
     @Override
     public void actionPerformed(ActionEvent ae) {
-        
+        factura = nfacturaft.getText();
+        nombre = nombreft.getText();
+        nit = nitft.getText();
+        fecha = fechaft.getText();
+        if (ae.getSource() == aplicarf) {
+            limpiar();
+            if (factura.equals("") && nombre.equals("") && nit.equals("") && fecha.equals("")) {
+                llenar();
+            }else if (!nombre.equals("") && factura.equals("")  && nit.equals("") && fecha.equals("")) {
+                llenarnombre(nombre);
+            }else if (nombre.equals("") && !factura.equals("")  && nit.equals("") && fecha.equals("")) {
+                llenarnofactura(Integer.parseInt(factura));
+            }else if (nombre.equals("") && factura.equals("")  && !nit.equals("") && fecha.equals("")) {
+                llenarnit(Integer.parseInt(nit));
+            }else if (nombre.equals("") && factura.equals("")  && nit.equals("") && !fecha.equals("")) {
+                llenarfecha(fecha);
+            }
+        }
     }    
     
-    //METODOS ABSTRACTOS
+    //MOUSELISTENER
     @Override
     //METODO PARA DAR CLICK EN EL LABEL QUE SE ENCUENTRA EN LA TABLA
     public void mouseClicked(MouseEvent me) {
@@ -195,13 +217,102 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
     @Override
     public void mouseExited(MouseEvent me) {
     }
-    //METODO PARA ABRIR LA FACTURA
+    //METODO PARA ABRIR LA FACTURA EN PDF
     public void abrirarchivo(String ruta){
         try{
             File factura = new File (ruta);
             Desktop.getDesktop().open(factura);
         }catch(IOException ex){
-            System.out.println(ex);
         }
+    }
+    
+    //METODO PARA LIMPIAR LAS CELDAS
+    public void limpiar(){
+            DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
+            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
+                tabla.removeRow(tabla.getRowCount() - 1);
+            }
+    }
+    
+    //METODO PARA MOSTRAR TODOS LOS DATOS DE LA TABLA
+    public void llenar(){
+        DefaultTableModel d = new DefaultTableModel(ventas,encabezado){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        vfiltrados.setModel(d);
+    }
+    
+    //METODO PARA FILTRAR POR NOMBRE
+    public void llenarnombre(String nombre){
+        Object[][] ventasn = Proy1.TablaNombres(Login.objv.getCodigo(), nombre);
+        DefaultTableModel n = new DefaultTableModel(ventasn, encabezado) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        vfiltrados.setModel(n);
+//        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
+        if (n == null) {
+            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
+                n.removeRow(n.getRowCount() - 1);
+            }
+        }
+        
+    }
+    
+    //METODO PARA FILTRAR POR NO. DE FACTURA
+    public void llenarnofactura(int factura){
+        Object[][] ventasf = Proy1.TablaNoFacturas(Login.objv.getCodigo(), factura);
+        DefaultTableModel f = new DefaultTableModel(ventasf, encabezado) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        vfiltrados.setModel(f);
+//        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
+//        if (ventasn == null) {
+//            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
+//                tabla.removeRow(tabla.getRowCount() - 1);
+//            }
+//        }
+        
+    }
+    
+    //METODO PARA FILTRAR POR FECHA
+    public void llenarfecha(String fecha){
+        Object[][] ventasfe = Proy1.TablaFecha(Login.objv.getCodigo(), fecha);
+        DefaultTableModel fe = new DefaultTableModel(ventasfe, encabezado) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        vfiltrados.setModel(fe);
+//        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
+//        if (ventasn == null) {
+//            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
+//                tabla.removeRow(tabla.getRowCount() - 1);
+//            }
+//        }
+        
+    }
+    
+    //METODO PARA FILTRAR POR NOMBRE
+    public void llenarnit(int nit){
+        Object[][] ventasni = Proy1.TablaNit(Login.objv.getCodigo(), nit);
+        DefaultTableModel ni = new DefaultTableModel(ventasni, encabezado) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        vfiltrados.setModel(ni);
+//        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
+//        if (ventasn == null) {
+//            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
+//                tabla.removeRow(tabla.getRowCount() - 1);
+//            }
+//        }
+        
     }
 }

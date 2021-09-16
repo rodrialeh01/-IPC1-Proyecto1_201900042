@@ -72,12 +72,12 @@ public class Vendedores {
     
     //FUNCION PARA RETORNAR LA MATRIZ DE VENTAS DE LOS VENDEDORES
     public Ventas[] ventasvendedor(int codigo){
-        try{
-        if (ventasv != null) {
-            return ventasv;
-        }
-        }catch(Exception e){
-            
+        try {
+            if (ventasv != null) {
+                return ventasv;
+            }
+        } catch (Exception e) {
+
         }
         return null;  
     }
@@ -161,7 +161,7 @@ public class Vendedores {
     }
 
     /**
-     * @param password the genero to set
+     * @param password the password to set
      */
     public void setPassword(String genero) {
         this.password = password;

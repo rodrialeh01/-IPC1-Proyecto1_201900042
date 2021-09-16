@@ -1,7 +1,9 @@
 package proy1;
+//PAQUETES
 import Clases.*;
 import Admin.*;
 import Login.Login;
+//LIBRERIA AWT-SWING
 import java.awt.Color;
 import javax.swing.*;
 //DECIMAL FORMAT
@@ -526,17 +528,102 @@ public class Proy1 {
     public static Object[][] TablaVentas(int codigo){
         int filas = vendedores[posicion(codigo)].getCventas();
         Object[][] matriz = new Object[filas][6];
+        DecimalFormat df = new DecimalFormat("#.00");
         for (int i = 0; i < matriz.length; i++) {
             matriz[i][0] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura();
             matriz[i][1] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNit();
             matriz[i][2] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNombre();
             matriz[i][3] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getFecha();
-            matriz[i][4] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getTotal();
+            matriz[i][4] = df.format(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getTotal());
             JLabel nuevo = new JLabel("Visualizar");
             nuevo.setForeground(azulitofacha);
             nuevo.setName(String.valueOf(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura()));
             matriz[i][5] = nuevo;
         }
         return matriz; 
+    }
+    
+    //FUNCION PARA RETORNAR LA TABLA SOLO CON LOS NOMBRES SELECCIONADOS
+    public static Object[][] TablaNombres(int codigo, String name){
+        int filas = vendedores[posicion(codigo)].getCventas();
+        Object[][] filtron = new Object[filas][6];
+        DecimalFormat df = new DecimalFormat("#.00");
+        for (int i = 0; i < filas; i++) {
+            if (vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNombre().equals(name)){
+                filtron[i][0] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura();
+                filtron[i][1] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNit();
+                filtron[i][2] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNombre();
+                filtron[i][3] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getFecha();
+                filtron[i][4] = df.format(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getTotal());
+                JLabel nuevo = new JLabel("Visualizar");
+                nuevo.setForeground(azulitofacha);
+                nuevo.setName(String.valueOf(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura()));
+                filtron[i][5] = nuevo;
+            }
+        }
+        return filtron;
+    }
+    
+    //FUNCION PARA RETORNAR LA TABLA SOLO CON LOS NO. DE FACTURA SELECCIONADOS
+    public static Object[][] TablaNoFacturas(int codigo, int factura){
+        int filas = vendedores[posicion(codigo)].getCventas();
+        Object[][] filtronf = new Object[filas][6];
+        DecimalFormat df = new DecimalFormat("#.00");
+        for (int i = 0; i < filas; i++) {
+            if (vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura() == factura){
+                filtronf[i][0] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura();
+                filtronf[i][1] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNit();
+                filtronf[i][2] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNombre();
+                filtronf[i][3] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getFecha();
+                filtronf[i][4] = df.format(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getTotal());
+                JLabel nuevo = new JLabel("Visualizar");
+                nuevo.setForeground(azulitofacha);
+                nuevo.setName(String.valueOf(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura()));
+                filtronf[i][5] = nuevo;
+            }
+        }
+        return filtronf;
+    }
+    
+    //FUNCION PARA RETORNAR LA TABLA SOLO CON LOS NIT SELECCIONADOS
+    public static Object[][] TablaNit(int codigo, int nit){
+        int filas = vendedores[posicion(codigo)].getCventas();
+        Object[][] filtroni = new Object[filas][6];
+        DecimalFormat df = new DecimalFormat("#.00");
+        for (int i = 0; i < filas; i++) {
+            if (vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNit() == nit){
+                filtroni[i][0] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura();
+                filtroni[i][1] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNit();
+                filtroni[i][2] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNombre();
+                filtroni[i][3] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getFecha();
+                filtroni[i][4] = df.format(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getTotal());
+                JLabel nuevo = new JLabel("Visualizar");
+                nuevo.setForeground(azulitofacha);
+                nuevo.setName(String.valueOf(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura()));
+                filtroni[i][5] = nuevo;
+            }
+        }
+        return filtroni;
+    }
+    
+    //FUNCION PARA RETORNAR LA TABLA SOLO CON LAS FECHAS SELECCIONADAS
+    public static Object[][] TablaFecha(int codigo, String fecha){
+        int filas = vendedores[posicion(codigo)].getCventas();
+        Object[][] filtrof = new Object[filas][6];
+        DecimalFormat df = new DecimalFormat("#.00");
+        for (int i = 0; i < filas; i++) {
+            if (vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getFecha().equals(fecha)){
+                filtrof[i][0] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura();
+                filtrof[i][1] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNit();
+                filtrof[i][2] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNombre();
+                filtrof[i][3] = vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getFecha();
+                filtrof[i][4] = df.format(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getTotal());
+                JLabel nuevo = new JLabel("Visualizar");
+                nuevo.setForeground(azulitofacha);
+                nuevo.setName(String.valueOf(vendedores[posicion(codigo)].ventasvendedor(codigo)[i].getNofactura()));
+                filtrof[i][5] = nuevo;
+            }
+        }
+        return filtrof;
     }
 }

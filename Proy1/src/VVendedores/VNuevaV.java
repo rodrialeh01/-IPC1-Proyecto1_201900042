@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+//DECIMAL FORMAT
+import java.text.DecimalFormat;
 
 //==================PAQUETES================
 import proy1.Proy1;
@@ -19,7 +21,7 @@ import Clases.Compras;
 import Clases.Ventas;
 import Listados.Factura;
 import Login.Login;
-import java.text.DecimalFormat;
+
 
 public class VNuevaV extends JPanel implements ActionListener {
 
