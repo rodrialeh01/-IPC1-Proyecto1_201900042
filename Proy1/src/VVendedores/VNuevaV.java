@@ -21,6 +21,8 @@ import Clases.Compras;
 import Clases.Ventas;
 import Listados.Factura;
 import Login.Login;
+import java.io.File;
+import java.io.IOException;
 
 
 public class VNuevaV extends JPanel implements ActionListener {
@@ -465,6 +467,8 @@ public class VNuevaV extends JPanel implements ActionListener {
                 if (Proy1.ccompras == 0) {
                     Proy1.compras[0] = null;
                 }
+                //SE ABRE EL ARCHIVO PDF DE LA FACTURA
+                abrirarchivo("Facturas/Factura" + Proy1.cventas + ".pdf");
                 //REFRESH
                 JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
                 f.dispose();
@@ -482,6 +486,14 @@ public class VNuevaV extends JPanel implements ActionListener {
                 }
             } catch (Exception e) {
             }
+        }
+    }
+    //METODO PARA ABRIR LA FACTURA EN PDF
+    public void abrirarchivo(String ruta){
+        try{
+            File factura = new File (ruta);
+            Desktop.getDesktop().open(factura);
+        }catch(IOException ex){
         }
     }
 }

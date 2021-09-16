@@ -253,8 +253,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
             }
         };
         vfiltrados.setModel(n);
-//        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
-        if (n == null) {
+        if (ventasn == null) {
             for (int i = vfiltrados.getRowCount(); i > 0; i--) {
                 n.removeRow(n.getRowCount() - 1);
             }
@@ -270,14 +269,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
                 return false;
             }
         };
-        vfiltrados.setModel(f);
-//        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
-//        if (ventasn == null) {
-//            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
-//                tabla.removeRow(tabla.getRowCount() - 1);
-//            }
-//        }
-        
+        vfiltrados.setModel(f);        
     }
     
     //METODO PARA FILTRAR POR FECHA
@@ -289,12 +281,6 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
             }
         };
         vfiltrados.setModel(fe);
-//        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
-//        if (ventasn == null) {
-//            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
-//                tabla.removeRow(tabla.getRowCount() - 1);
-//            }
-//        }
         
     }
     
@@ -307,12 +293,6 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
             }
         };
         vfiltrados.setModel(ni);
-//        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
-//        if (ventasn == null) {
-//            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
-//                tabla.removeRow(tabla.getRowCount() - 1);
-//            }
-//        }
         
     }
 }
