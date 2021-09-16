@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import proy1.Proy1;
 import Clases.Ventas;
 import Login.Login;
+import java.awt.Color;
 import java.text.DecimalFormat;
 public class Factura {
     //CREACION DEL DOCUMENTO
@@ -30,6 +31,7 @@ public class Factura {
     public static BaseColor azul = new BaseColor(38,36,89);
     public static BaseColor blanco = new BaseColor(234,255,246);
     public static BaseColor negro = new BaseColor(0,0,0);
+    public static BaseColor blancofull = new BaseColor(255,255,255);
     //TIPOGRAFIA PARA EL PDF
     public static Font Tgrande = new Font(Font.FontFamily.HELVETICA,18,Font.BOLD,azul);
     public static Font Tmediano = new Font(Font.FontFamily.HELVETICA,13,Font.BOLD,blanco);
@@ -145,7 +147,6 @@ public class Factura {
         
         //nombre
         columnaLC = new PdfPCell(new Phrase(Proy1.DevolverVenta(correlativo).getNombre(),Tpequeño));
-//        columnaLC = new PdfPCell(new Phrase("Rodrigo Hernández", Tpequeño));
         columnaLC.setHorizontalAlignment(Element.ALIGN_LEFT);
         columnaLC.setVerticalAlignment(Element.ALIGN_MIDDLE);
         columnaLC.setBorderColor(negro);
@@ -165,7 +166,6 @@ public class Factura {
         
         //nit
         columnaDC = new PdfPCell(new Phrase(String.valueOf(Proy1.DevolverVenta(correlativo).getNit()), Tpequeño));
-//        columnaDC = new PdfPCell(new Phrase("123456", Tpequeño));
         columnaDC.setHorizontalAlignment(Element.ALIGN_LEFT);
         columnaDC.setVerticalAlignment(Element.ALIGN_MIDDLE);
         columnaDC.setBorderColor(negro);
@@ -185,7 +185,6 @@ public class Factura {
         
         //nit
         columnaDF = new PdfPCell(new Phrase(String.valueOf(Proy1.DevolverVenta(correlativo).getFecha()), Tpequeño));
-//        columnaDF = new PdfPCell(new Phrase("15/09/2021", Tpequeño));
         columnaDF.setHorizontalAlignment(Element.ALIGN_LEFT);
         columnaDF.setVerticalAlignment(Element.ALIGN_MIDDLE);
         columnaDF.setBorderColor(negro);
@@ -285,6 +284,8 @@ public class Factura {
                 columnaca.setHorizontalAlignment(Element.ALIGN_CENTER);
                 columnaca.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 columnaca.setBorderColor(negro);
+                columnaca.setBorderColorLeft(blancofull);
+                columnaca.setBorderColorRight(blancofull);
                 columnaca.setPaddingBottom(3);
                 tablaprod.addCell(columnaca);
                 
@@ -299,7 +300,7 @@ public class Factura {
                 columnap.setPaddingBottom(3);
                 tablaprod.addCell(columnap);
                 
-                //COLUMNA5 = GÉNEROS
+                //COLUMNA5 = SUBTOTALES
                 columnast = new PdfPCell(new Phrase(String.valueOf(df.format(Proy1.compras[i].getSubtotal())),Tpequeño));
                 columnast.setHorizontalAlignment(Element.ALIGN_CENTER);
                 columnast.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -311,13 +312,20 @@ public class Factura {
         doc.add(tablaprod);
         
         //COLUMNA TOTAL
-        PdfPTable tablatotal = new PdfPTable(2);
-        tablaprod.setWidthPercentage(50f);
-        tablaprod.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        float[] tamañocolumnatotal = {0.20f, 0.30f};
+        PdfPTable tablatotal = new PdfPTable(3);
+        tablatotal.setWidthPercentage(100f);
+        float[] tamañocolumnatotal = {0.50F,0.20f, 0.30f};
         
         //SE LLAMA AL METODO PARA ADAPTAR EL TAMAÑO DE LAS COLUMNAS DE LA TABLA
         tablatotal.setWidths(tamañocolumnatotal);
+        
+        PdfPCell columnavac = new PdfPCell(new Phrase("",Tpequeño));
+        columnavac.setHorizontalAlignment(Element.ALIGN_CENTER);
+        columnavac.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        columnavac.setBorderColor(negro);
+        columnavac.setPaddingBottom(5);
+        tablatotal.addCell(columnavac);
+        
         PdfPCell columnat = new PdfPCell(new Phrase("Total :",Tmediano));
         columnat.setHorizontalAlignment(Element.ALIGN_CENTER);
         columnat.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -326,7 +334,8 @@ public class Factura {
         columnat.setPaddingBottom(5);
         tablatotal.addCell(columnat);
         
-        PdfPCell columnatr = new PdfPCell(new Phrase(String.valueOf(Proy1.DevolverVenta(correlativo).getTotal()),Tpequeño));
+        DecimalFormat df = new DecimalFormat("#.00");
+        PdfPCell columnatr = new PdfPCell(new Phrase(String.valueOf(df.format(Proy1.DevolverVenta(correlativo).getTotal())),Tpequeño));
         columnatr.setHorizontalAlignment(Element.ALIGN_CENTER);
         columnatr.setVerticalAlignment(Element.ALIGN_MIDDLE);
         columnatr.setBorderColor(negro);
@@ -334,6 +343,7 @@ public class Factura {
         tablatotal.addCell(columnatr);
         
         doc.add(tablatotal);
+        doc.newPage();
         //MENSAJE DE ÉXITO
         JOptionPane.showMessageDialog(null,"Factura creada con éxito");        
     }
