@@ -6,13 +6,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 //DECIMAL FORMAT
 import java.text.DecimalFormat;
+//UTIL.MAP
+import java.util.Map;
+//TIME
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 //==================PAQUETES================
 import proy1.Proy1;
@@ -409,6 +411,8 @@ public class VNuevaV extends JPanel implements ActionListener {
             DecimalFormat df = new DecimalFormat("#.00");
             if (cantidad.equals("") && codigo.equals("")) {
                 JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
+            }else if (cantidad.equals("") || codigo.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
             }else{
                 Double subtotal = Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio() * Float.parseFloat(cantidad);
                 Compras nuevo = new Compras(Integer.parseInt(codigo),Proy1.ObtenerProducto(Integer.parseInt(codigo)).getNombre(),Integer.parseInt(cantidad), (float) Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio(),subtotal);
@@ -428,9 +432,9 @@ public class VNuevaV extends JPanel implements ActionListener {
             //PARA AÑADIR LA FECHA
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             if (clientescb.getSelectedItem().equals("") || Double.parseDouble(total) == 0) {
-                JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y un total mayor a 0");
+                JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y productos añadidos al carrito");
             }else if (clientescb.getSelectedItem().equals("") && Integer.parseInt(total) == 0) {
-                JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y un total mayor a 0");
+                JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y productos añadidos al carrito");
             }else{
                 //SE CREA UNA VENTA PARA EL VENDEDOR
                 Ventas nueva = new Ventas((Proy1.cventas+1),Proy1.DevolverCliente((String) clientescb.getSelectedItem()).getNit(),Proy1.DevolverCliente((String) clientescb.getSelectedItem()).getNombre(),String.valueOf(LocalDate.now().format(dtf)),Double.parseDouble(total));

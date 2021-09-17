@@ -16,6 +16,7 @@ public class Admin extends JFrame implements ActionListener{
         //COLORES
         Color rojo = new Color(191,22,22);
         Color azul = new Color(38,36,89);
+        Color azulitofacha = new Color(13,67,162);
         
         //PANEL1
         Panel = new JPanel();
@@ -61,12 +62,12 @@ public class Admin extends JFrame implements ActionListener{
         this.add(cierre);
         
         //BOTON DE ACTUALIZAR
-        actualizar = new JButton("Actualizar");
+        actualizar = new JButton("Actualizar Ventana");
         actualizar.setFont(new Font("Century Gothic", Font.PLAIN,15));
-        actualizar.setBounds(950,0,150,30);
+        actualizar.setBounds(900,0,200,30);
         actualizar.addActionListener(this);
         actualizar.setVisible(true);        
-        actualizar.setBackground(Color.GRAY);
+        actualizar.setBackground(azulitofacha);
         actualizar.setForeground(Color.WHITE);
         this.add(actualizar);
         
