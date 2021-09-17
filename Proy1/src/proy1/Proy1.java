@@ -8,22 +8,27 @@ import java.awt.Color;
 import javax.swing.*;
 //DECIMAL FORMAT
 import java.text.DecimalFormat;
-
+//IO-SERIALIZABLE
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Proy1 {
+    
+    static ObjectInputStream oiss,oisp,oisc,oisv,oisve;
+    static ObjectOutputStream ooss,oosp,oosc,oosv,oosve;
+    
     static Color azulitofacha = new Color(13,67,162);
-    //METODO PARA LLAMAR A LA VENTANA
-    public static void main(String[] args) {
-        Login l = new Login();
-    }
+    
     /**
      * ================================SUCURSALES================================
      */
     
     //SE CREA UN ARREGLO DE SUCURSALES CON UNA CAPACIDAD DE 50 SUCURSALES
-    public static Sucursales[] sucursales = new Sucursales[50];
+    public static Sucursales[] sucursales;
     //SE CREA EL CONTADOR DE SUCURSALES EN EL SISTEMA
-    public static int csucursales = 0;
+    public static int csucursales = CantidadSucursales();
     
     //METODO PARA AÑADIR UN NUEVO OBJETO SUCURSALES
     public static void AgregarSucursales(Sucursales sucursal){
@@ -35,14 +40,16 @@ public class Proy1 {
             ASucursales as = new ASucursales();
             JOptionPane.showMessageDialog(as, "LLEGÓ A LA CANTIDAD MAXIMA DE SUCURSALES");
         }
+        EscribirSucursales(sucursales);
     }
     
     //METODO PARA MOSTRAR LOS SUCURSALES
     public static void LeerSucursales(){
         System.out.println("=====================================");
         System.out.println("==      LISTADO DE SUCURSALES      ==");
-        for (int i = 0; i < csucursales; i++) {
-            if (sucursales[i] !=null) {
+        System.out.println("CSUCURSALES = " + sucursales.length);
+        for (int i = 0; i < sucursales.length; i++) {
+            if (sucursales[i] != null) {
                 sucursales[i].MostrarSucursales();
             }            
         }
@@ -50,6 +57,21 @@ public class Proy1 {
             System.out.println("NO HAY SUCURSALES");
         }
     }
+    
+    //RETORNAR LA CANTIDAD DE SUCURSALES QUE HAY
+    public static int CantidadSucursales(){
+        int contador = 0;
+        try {
+            for (int i = 0; i < 50; i++) {
+                if (sucursales[i] != null) {
+                    contador++;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return contador;
+    } 
     
     //ARMA UNA MATRIZ DE OBJETOS DE LAS SUCURSALES PARA MOSTRARLO EN TABLA
     public static Object[][] convertirDSucursales() {
@@ -71,13 +93,9 @@ public class Proy1 {
      */
     
     //SE CREA UN ARREGLO DE PRODUCTOS CON UNA CAPACIDAD DE 200 PRODUCTOS
-    public static Productos[] productos = new Productos[200];
+    public static Productos[] productos;
     //SE CREA UN CONTADOR DE PRODUCTOS EN EL SISTEMA
-    public static int cproductos = 0;
-    //SE CREA UN CONTADOR DE GENERO FEMENINO PARA LAS GRAFICAS
-    public static int contadorf = 0;
-    //SE CREA UN CONTADOR DE GENERO MASCULINO PARA LAS GRAFICAS
-    public static int contadorm = 0;
+    public static int cproductos = CantidadProductos();
     
     //METODO PARA AÑADIR UN PRODUCTO
     public static void AgregarProducto(Productos producto){
@@ -90,19 +108,37 @@ public class Proy1 {
             System.out.println("LLEGÓ A LA CANTIDAD MAXIMA DE PRODUCTOS");
         }
         ordenamientoProductosT(productos);
+        EscribirProductos(productos);
     }
     
     //METODO PARA MOSTRAR LOS PRODUCTOS
     public static void LeerProducto(){
         System.out.println("=====================================");
         System.out.println("==       LISTADO DE PRODUCTOS      ==");
-        for (int i = 0; i < cproductos; i++) {
-            productos[i].MostrarProductos();
+        for (int i = 0; i < productos.length; i++) {
+            if (productos[i] != null) {
+                productos[i].MostrarProductos();
+            }            
         }
         if (productos == null) {
             System.out.println("NO HAY PRODUCTOS");
         }
     }
+    
+    //RETORNAR LA CANTIDAD DE PRODUCTOS QUE HAY
+    public static int CantidadProductos(){
+        int contador = 0;
+        try {
+            for (int i = 0; i < 200; i++) {
+                if (productos[i] != null) {
+                    contador++;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return contador;
+    } 
     
     //ARMA UNA MATRIZ DE OBJETOS DE LOS PRODUCTOS PARA MOSTRARLO EN TABLA
     public static Object[][] convertirDProductos(){
@@ -211,9 +247,13 @@ public class Proy1 {
      */
     
     //SE CREA EL ARREGLO DE CLIENTES CON UNA CAPACIDAD MÁXIMA DE 100 CLIENTES
-    public static Clientes[] clientes = new Clientes[100];
+    public static Clientes[] clientes;
     //SE CREA EL CONTADOR DE CLIENTES EN EL SISTEMA
-    public static int cclientes = 0;
+    public static int cclientes = CantidadClientes();    
+    //SE CREA UN CONTADOR DE GENERO FEMENINO PARA LAS GRAFICAS
+    public static int contadorf = 0;
+    //SE CREA UN CONTADOR DE GENERO MASCULINO PARA LAS GRAFICAS
+    public static int contadorm = 0;
     
     //METODO PARA AÑADIR UN CLIENTE
     public static void AgregarCliente(Clientes cliente){
@@ -225,19 +265,37 @@ public class Proy1 {
             JOptionPane.showMessageDialog(ac, "LLEGÓ A LA CANTIDAD MAXIMA DE CLIENTES");
             System.out.println("LLEGÓ A LA CANTIDAD MAXIMA DE CLIENTES");
         }
+        EscribirClientes(clientes);
     }
     
     //METODO PARA MOSTRAR LOS CLIENTES
     public static void LeerCliente(){
         System.out.println("=====================================");
         System.out.println("==       LISTADO DE CLIENTES       ==");
-        for (int i = 0; i < cclientes; i++) {
-            clientes[i].MostrarClientes();
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i] != null) {
+                clientes[i].MostrarClientes();
+            }            
         }
         if (clientes == null) {
             System.out.println("NO HAY CLIENTES");
         }
     }
+    
+    //RETORNAR LA CANTIDAD DE CLIENTES QUE HAY
+    public static int CantidadClientes(){
+        int contador = 0;
+        try {
+            for (int i = 0; i < 100; i++) {
+                if (clientes[i] != null) {
+                    contador++;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return contador;
+    } 
     
     //ARMA UNA MATRIZ DE OBJETOS DE LOS CLIENTES PARA MOSTRARLO EN TABLA
     public static Object[][] convertirDClientes(){
@@ -365,9 +423,9 @@ public class Proy1 {
      */
     
     //SE CREA EL ARREGLO DE VENDEDORES CON UN MÁXIMO DE 400 VENDEDORES
-    public static Vendedores[] vendedores = new Vendedores[400];
+    public static Vendedores[] vendedores;
     //SE CREA EL CONTADOR DE VENDEDORES EN EL SISTEMA
-    public static int cvendedores = 0;
+    public static int cvendedores = CantidadVendedores();
     
     //METODO PARA AÑADIR UN VENDEDOR
     public static void AgregarVendedor(Vendedores vendedor){
@@ -379,19 +437,37 @@ public class Proy1 {
             JOptionPane.showMessageDialog(av, "LLEGÓ A LA CANTIDAD MAXIMA DE VENDEDORES");
             System.out.println("LLEGÓ A LA CANTIDAD MAXIMA DE VENDEDORES");
         }
+        EscribirVendedores(vendedores);
     }
     
     //METODO PARA MOSTRAR LOS VENDEDORES
     public static void LeerVendedor(){
         System.out.println("=====================================");
         System.out.println("==      LISTADO DE VENDEDORES      ==");
-        for (int i = 0; i < cvendedores; i++) {
-            vendedores[i].MostrarVendedores();
+        for (int i = 0; i < vendedores.length; i++) {
+            if (vendedores[i] != null) {
+                vendedores[i].MostrarVendedores();
+            }            
         }
         if (vendedores == null) {
             System.out.println("NO HAY VENDEDORES");
         }
     }
+    
+    //RETORNAR LA CANTIDAD DE CLIENTES QUE HAY
+    public static int CantidadVendedores(){
+        int contador = 0;
+        try {
+            for (int i = 0; i < 400; i++) {
+                if (vendedores[i] != null) {
+                    contador++;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return contador;
+    } 
     
     //ARMA UNA MATRIZ DE OBJETOS DE LOS VENDEDORES PARA MOSTRARLO EN TABLA
     public static Object[][] convertirDVendedores(){
@@ -481,20 +557,21 @@ public class Proy1 {
      * ================================VENTAS================================
      */
     //SE CREA EL ARREGLO DE VENTAS QUE TIENE UNA CAPACIDAD DE REALIZAR 1000 VENTAS
-    public static Ventas[] ventas = new Ventas[1000];
+    public static Ventas[] ventas;
     //SE CREA EL CONTADOR DE VENTAS
-    public static int cventas = 0;
+    public static int cventas = CantidadVentas();
     
     //METODO PARA AÑADIR UN OBJETO VENTAS AL ARREGLO
     public static void AgregarVenta(Ventas venta){
         if (cventas < ventas.length) {
             ventas[cventas] = venta;
         }
+        EscribirVentas(ventas);
     }
     
     //METODO PARA VISUALIZAR LAS VENTAS EN EL SISTEMA
     public static void LeerVenta(){
-        for (int i = 0; i < cventas; i++) {
+        for (int i = 0; i < ventas.length; i++) {
             if (ventas[i] != null) {
                 ventas[i].MostrarVenta();
             }
@@ -503,6 +580,21 @@ public class Proy1 {
             System.out.println("NO HAY VENTAS");
         }
     }
+    
+    //RETORNAR LA CANTIDAD DE CLIENTES QUE HAY
+    public static int CantidadVentas(){
+        int contador = 0;
+        try {
+            for (int i = 0; i < 1000; i++) {
+                if (ventas[i] != null) {
+                    contador++;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return contador;
+    } 
     
     //FUNCION QUE RETORNA EL OBJETO VENTA 
     public static Ventas DevolverVenta(int codf){
@@ -626,4 +718,202 @@ public class Proy1 {
         }
         return filtrof;
     }
+    
+    /**
+     * ================================SERIALIZACIÓN================================
+     */
+    
+    //METODO PARA CREAR EL ARCHIVO BINARIO PARA LA SERIALIZACION DE LAS SUCURSALES
+    public static void EscribirSucursales(Object objects){
+        try{
+            ooss = new ObjectOutputStream(new FileOutputStream("Serializados/Sucursales.bin"));
+            ooss.writeObject(objects);
+            ooss.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    //METODO PARA ABRIR EL ARCHIVO BINARIO SERIALIZADO DONDE SE GUARDO LAS SUCURSALES
+    public static Object CargarSucursales(){
+        Object object;
+        try{
+            oiss = new ObjectInputStream(new FileInputStream("Serializados/Sucursales.bin"));
+            object = oiss.readObject();
+            oiss.close();
+            return object;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    //METODO PARA CREAR EL ARCHIVO BINARIO PARA LA SERIALIZACION DE LOS PRODUCTOS
+    public static void EscribirProductos(Object objectp){
+        try{
+            oosp = new ObjectOutputStream(new FileOutputStream("Serializados/Productos.bin"));
+            oosp.writeObject(objectp);
+            oosp.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    //METODO PARA ABRIR EL ARCHIVO BINARIO SERIALIZADO DONDE SE GUARDO LOS PRODUCTOS
+    public static Object CargarProductos(){
+        Object object;
+        try{
+            oisp = new ObjectInputStream(new FileInputStream("Serializados/Productos.bin"));
+            object = oisp.readObject();
+            oisp.close();
+            return object;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    //METODO PARA CREAR EL ARCHIVO BINARIO PARA LA SERIALIZACION DE LOS CLIENTES
+    public static void EscribirClientes(Object objectc){
+        try{
+            oosc = new ObjectOutputStream(new FileOutputStream("Serializados/Clientes.bin"));
+            oosc.writeObject(objectc);
+            oosc.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    //METODO PARA ABRIR EL ARCHIVO BINARIO SERIALIZADO DONDE SE GUARDO LOS CLIENTES
+    public static Object CargarClientes(){
+        Object object;
+        try{
+            oisc = new ObjectInputStream(new FileInputStream("Serializados/Clientes.bin"));
+            object = oisc.readObject();
+            oisc.close();
+            return object;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    //METODO PARA CREAR EL ARCHIVO BINARIO PARA LA SERIALIZACION DE LOS VENDEDORES
+    public static void EscribirVendedores(Object objectv){
+        try{
+            oosv = new ObjectOutputStream(new FileOutputStream("Serializados/Vendedores.bin"));
+            oosv.writeObject(objectv);
+            oosv.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    //METODO PARA ABRIR EL ARCHIVO BINARIO SERIALIZADO DONDE SE GUARDO LOS VENDEDORES
+    public static Object CargarVendedores(){
+        Object object;
+        try{
+            oisv = new ObjectInputStream(new FileInputStream("Serializados/Vendedores.bin"));
+            object = oisv.readObject();
+            oisv.close();
+            return object;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    //METODO PARA CREAR EL ARCHIVO BINARIO PARA LA SERIALIZACION DE LAS VENTAS
+    public static void EscribirVentas(Object objectv){
+        try{
+            oosve = new ObjectOutputStream(new FileOutputStream("Serializados/Ventas.bin"));
+            oosve.writeObject(objectv);
+            oosve.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    //METODO PARA ABRIR EL ARCHIVO BINARIO SERIALIZADO DONDE SE GUARDO LAS VENTAS
+    public static Object CargarVentas(){
+        Object object;
+        try{
+            oisve = new ObjectInputStream(new FileInputStream("Serializados/Ventas.bin"));
+            object = oisve.readObject();
+            oisve.close();
+            return object;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * ================================MAIN================================
+     */
+    
+    //METODO MAIN PARA LLAMAR A LA VENTANA Y LEER LOS ARCHIVOS SERIALIZADOS
+    public static void main(String[] args) {
+        //ABRIR EL ARCHIVO SERIALIZADO DE SUCURSALES
+        sucursales =(Sucursales[]) CargarSucursales();
+        if (sucursales == null) {
+            System.out.println("No ha sido creado el archivo sucursales.bin");
+            sucursales = new Sucursales[50];
+            csucursales = 0;
+        }else{
+            System.out.println("Se abrio correctamente");
+            LeerSucursales();
+            csucursales = CantidadSucursales();
+            System.out.println(csucursales);
+        }
+        //ABRIR EL ARCHIVO SERIALIZADO DE PRODUCTOS
+        productos = (Productos[]) CargarProductos();
+        if (productos == null) {
+            System.out.println("No ha sido creado el archivo productos.bin");
+            productos = new Productos[200];
+            cproductos = 0;
+        }else{
+            System.out.println("Se abrio correctamente");
+            LeerProducto();
+            cproductos = CantidadProductos();
+            System.out.println(cproductos);
+        }
+        //ABRIR EL ARCHIVO SERIALIZADO DE CLIENTES        
+        clientes = (Clientes[]) CargarClientes();
+        if (clientes == null) {
+            System.out.println("No ha sido creado el archivo clientes.bin");
+            clientes = new Clientes[100];
+            cclientes = 0;
+        }else{
+            System.out.println("Se abrio correctamente");
+            LeerCliente();
+            cclientes = CantidadClientes();
+            System.out.println(cclientes);
+        }
+        //ABRIR EL ARCHIVO SERIALIZADO DE VENDEDORES        
+        vendedores = (Vendedores[]) CargarVendedores();
+        if (vendedores == null) {
+            System.out.println("No ha sido creado el archivo vendedores.bin");
+            vendedores = new Vendedores[400];
+            cvendedores = 0;
+        }else{
+            System.out.println("Se abrio correctamente");
+            LeerVendedor();
+            cvendedores = CantidadVendedores();
+            System.out.println(cvendedores);
+        }
+        //ABRIR EL ARCHIVO SERIALIZADO DE VENTAS        
+        ventas = (Ventas[]) CargarVentas();
+        if (ventas == null) {
+            System.out.println("No ha sido creado el archivo ventas.bin");
+            ventas = new Ventas[1000];
+            cventas = 0;
+        }else{
+            System.out.println("Se abrio correctamente");
+            LeerVenta();
+            cventas = CantidadVentas();
+            System.out.println(cventas);
+        }
+        Login l = new Login();
+    }    
 }

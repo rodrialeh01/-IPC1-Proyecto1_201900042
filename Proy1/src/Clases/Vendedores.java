@@ -1,6 +1,8 @@
 package Clases;
 
-public class Vendedores {
+import java.io.Serializable;
+
+public class Vendedores implements Serializable{
 
     private int codigo;
     private String nombre;

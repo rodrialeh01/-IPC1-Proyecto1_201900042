@@ -1,6 +1,8 @@
 package Clases;
 
-public class Clientes {
+import java.io.Serializable;
+
+public class Clientes implements Serializable{
     private int codigo;
     private String nombre;
     private int nit;

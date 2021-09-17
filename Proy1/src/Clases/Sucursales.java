@@ -1,6 +1,8 @@
 package Clases;
 
-public class Sucursales {
+import java.io.Serializable;
+
+public class Sucursales implements Serializable{
     
     //ATRIBUTOS
     private int codigo;

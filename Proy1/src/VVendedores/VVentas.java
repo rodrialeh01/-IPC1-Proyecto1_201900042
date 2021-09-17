@@ -28,11 +28,11 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
     String factura, nit, nombre,fecha;
     JButton aplicarf;
     JComboBox clientescb;
-    JTable vfiltrados;
-    Object[][] ventas;    
+    static JTable vfiltrados;
+    static Object[][] ventas;    
     Color azul = new Color(38,36,89);
     Color azulfachero = new Color(97,176,242);
-    String [] encabezado = {"No. Factura","Nit","Nombre","Fecha","Total","Acciones"};
+    static String [] encabezado = {"No. Factura","Nit","Nombre","Fecha","Total","Acciones"};
     public VVentas(){
         //PANEL BLANCO
         generalp = new JPanel();
@@ -235,7 +235,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
     }
     
     //METODO PARA MOSTRAR TODOS LOS DATOS DE LA TABLA
-    public void llenar(){
+    public static void llenar(){
         DefaultTableModel d = new DefaultTableModel(ventas,encabezado){
             public boolean isCellEditable(int row, int column){
                 return false;

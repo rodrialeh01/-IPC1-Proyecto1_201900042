@@ -1,6 +1,8 @@
 package Clases;
 
-public class Ventas {
+import java.io.Serializable;
+
+public class Ventas implements Serializable{
     private int nofactura;
     private int nit;
     private String nombre;
