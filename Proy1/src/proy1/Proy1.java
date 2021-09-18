@@ -189,10 +189,16 @@ public class Proy1 {
     
     //FUNCION PARA RETORNAR EL OBJETO PRODUCTO POR MEDIO DEL CODIGO
     public static Productos ObtenerProducto(int codigo) {
-        for (int i = 0; i < cproductos; i++) {
-            if (productos[i] != null && productos[i].getCodigo() == codigo) {
-                return productos[i];
+        try {
+            for (int i = 0; i < cproductos; i++) {
+                if (productos[i] != null && productos[i].getCodigo() == codigo) {
+                    return productos[i];
+                } else {
+                    return null;
+                }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un codigo valido");
         }
         return null;
     }
@@ -866,6 +872,7 @@ public class Proy1 {
             csucursales = CantidadSucursales();
             System.out.println(csucursales);
         }
+        
         //ABRIR EL ARCHIVO SERIALIZADO DE PRODUCTOS
         productos = (Productos[]) CargarProductos();
         if (productos == null) {
@@ -878,6 +885,7 @@ public class Proy1 {
             cproductos = CantidadProductos();
             System.out.println(cproductos);
         }
+        
         //ABRIR EL ARCHIVO SERIALIZADO DE CLIENTES        
         clientes = (Clientes[]) CargarClientes();
         if (clientes == null) {
@@ -890,6 +898,7 @@ public class Proy1 {
             cclientes = CantidadClientes();
             System.out.println(cclientes);
         }
+        
         //ABRIR EL ARCHIVO SERIALIZADO DE VENDEDORES        
         vendedores = (Vendedores[]) CargarVendedores();
         if (vendedores == null) {
@@ -902,6 +911,7 @@ public class Proy1 {
             cvendedores = CantidadVendedores();
             System.out.println(cvendedores);
         }
+        
         //ABRIR EL ARCHIVO SERIALIZADO DE VENTAS        
         ventas = (Ventas[]) CargarVentas();
         if (ventas == null) {

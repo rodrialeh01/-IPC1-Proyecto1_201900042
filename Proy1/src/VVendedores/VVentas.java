@@ -227,11 +227,11 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
     }
     
     //METODO PARA LIMPIAR LAS CELDAS
-    public void limpiar(){
-            DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
-            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
-                tabla.removeRow(tabla.getRowCount() - 1);
-            }
+    public void limpiar() {
+        DefaultTableModel tabla = (DefaultTableModel) vfiltrados.getModel();
+        for (int i = vfiltrados.getRowCount(); i > 0; i--) {
+            tabla.removeRow(tabla.getRowCount() - 1);
+        }
     }
     
     //METODO PARA MOSTRAR TODOS LOS DATOS DE LA TABLA
@@ -252,13 +252,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
                 return false;
             }
         };
-        vfiltrados.setModel(n);
-        if (ventasn == null) {
-            for (int i = vfiltrados.getRowCount(); i > 0; i--) {
-                n.removeRow(n.getRowCount() - 1);
-            }
-        }
-        
+        vfiltrados.setModel(n);      
     }
     
     //METODO PARA FILTRAR POR NO. DE FACTURA
@@ -280,8 +274,7 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
                 return false;
             }
         };
-        vfiltrados.setModel(fe);
-        
+        vfiltrados.setModel(fe);        
     }
     
     //METODO PARA FILTRAR POR NOMBRE
@@ -292,7 +285,6 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
                 return false;
             }
         };
-        vfiltrados.setModel(ni);
-        
+        vfiltrados.setModel(ni);        
     }
 }

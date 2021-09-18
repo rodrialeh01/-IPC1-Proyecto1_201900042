@@ -347,15 +347,19 @@ public class VNuevaV extends JPanel implements ActionListener {
             }
             //SI SE LLENA EL TEXTFIELD DE NIT ENTONCES QUE VERIFIQUE SI EXISTE O NO
             else if (nombre.equals("") && !nit.equals("") && correo.equals("") && genero.equals("")) {
-                if (Proy1.NombresCNIT(Integer.parseInt(nit)) != null) {
-                    for (int i = 0; i < Proy1.NombresCNIT(Integer.parseInt(nit)).length; i++) {
-                        if (Proy1.NombresCNIT(Integer.parseInt(nit))[i] !=null) {
-                            clientescb.addItem(Proy1.NombresCNIT(Integer.parseInt(nit))[i]);
-                            clientescb.setSelectedItem(Proy1.NombresCNIT(Integer.parseInt(nit)));
-                        }                        
-                    }                    
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se encontró un cliente con ese nit");
+                try {
+                    if (Proy1.NombresCNIT(Integer.parseInt(nit)) != null) {
+                        for (int i = 0; i < Proy1.NombresCNIT(Integer.parseInt(nit)).length; i++) {
+                            if (Proy1.NombresCNIT(Integer.parseInt(nit))[i] != null) {
+                                clientescb.addItem(Proy1.NombresCNIT(Integer.parseInt(nit))[i]);
+                                clientescb.setSelectedItem(Proy1.NombresCNIT(Integer.parseInt(nit)));
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se encontró un cliente con ese nit");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Ingrese unicamente numeros enteros");
                 }
             }
             //SI SE LLENA EL TEXTFIELD DE CORREO ENTONCES VERIFIQUE SI EXISTE O NO
@@ -387,52 +391,64 @@ public class VNuevaV extends JPanel implements ActionListener {
         }
         //BOTON NUEVO CLIENTE
         else if (ae.getSource()==ncliente) {
-            if (nombre.equals("") && nit.equals("") && correo.equals("") && genero.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
-            }else if (nombre.equals("") || nit.equals("") || correo.equals("") || genero.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
-            }else {
-                if (genero.equals("M") || genero.equals("F") || genero.equals("m") || genero.equals("f")) {
-                    //SU CODIGO SE AÑADE AUTOMATICAMENTE POR MEDIO DE LA FUNCION CODIGO MAYOR Y SUMANDOLE 1 PARA QUE NO SE TRASLAPEN ESOS CODIGOS
-                    Clientes nuevo = new Clientes((Proy1.CodigoMayor(Proy1.clientes) + 1), nombre,Integer.parseInt(nit),correo, genero.toUpperCase());
-                    Proy1.AgregarCliente(nuevo);
-                    JOptionPane.showMessageDialog(null, "Se agregó al cliente con éxito");
-                    nombreft.setText("");
-                    nitft.setText("");
-                    correoft.setText("");
-                    generoft.setText("");
-                }else{
-                    JOptionPane.showMessageDialog(null, "Por favor en el campo de Género ingrese \"m\", \"f\", \"M\", \"F\"");
+            try {
+                if (nombre.equals("") && nit.equals("") && correo.equals("") && genero.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
+                } else if (nombre.equals("") || nit.equals("") || correo.equals("") || genero.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
+                } else {
+                    if (genero.equals("M") || genero.equals("F") || genero.equals("m") || genero.equals("f")) {
+                        //SU CODIGO SE AÑADE AUTOMATICAMENTE POR MEDIO DE LA FUNCION CODIGO MAYOR Y SUMANDOLE 1 PARA QUE NO SE TRASLAPEN ESOS CODIGOS
+                        Clientes nuevo = new Clientes((Proy1.CodigoMayor(Proy1.clientes) + 1), nombre, Integer.parseInt(nit), correo, genero.toUpperCase());
+                        Proy1.AgregarCliente(nuevo);
+                        JOptionPane.showMessageDialog(null, "Se agregó al cliente con éxito");
+                        nombreft.setText("");
+                        nitft.setText("");
+                        correoft.setText("");
+                        generoft.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Por favor en el campo de Género ingrese \"m\", \"f\", \"M\", \"F\"");
+                    }
                 }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese de manera correcta lo solicitado");
             }
             clientescb.repaint();
         }
         //BOTON AGREGAR
         else if (ae.getSource()==agregar) {
-            DecimalFormat df = new DecimalFormat("#.00");
-            if (cantidad.equals("") && codigo.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
-            }else if (cantidad.equals("") || codigo.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
-            }else if(productovacio(Integer.parseInt(codigo)) == true){
-                JOptionPane.showMessageDialog(null, "No hay disponibilidad del producto que solicita");
-            }else if(resta(Integer.parseInt(cantidad), Integer.parseInt(codigo)) == false){
-                JOptionPane.showMessageDialog(null, "La cantidad que solicita sobrepasa la cantidad de productos disponibles. \n Cantidad del producto disponible: " + Proy1.ObtenerProducto(Integer.parseInt(codigo)).getCantidad());
-            }else{
-                //PARA OBTENER EL SUBTOTAL HACE EL CALCULO DEL PRECIO * CANTIDAD
-                Double subtotal = Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio() * Float.parseFloat(cantidad);
-                //AÑADE EL PRODUCTO A LA CLASE COMPRAS
-                Compras nuevo = new Compras(Integer.parseInt(codigo),Proy1.ObtenerProducto(Integer.parseInt(codigo)).getNombre(),Integer.parseInt(cantidad), (float) Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio(),subtotal);
-                Proy1.AgregarCompra(nuevo);
-                //BORRA EL CONTENIDO DE LOS TEXTFIELD
-                tcodigoap.setText("");
-                tcantidadap.setText("");
-                //LIMPIA EL TEXTFIELD DE TOTAL
-                ttotal.setText("");
-                //VA DISMINUYENDO LA CANTIDAD DE PRODUCTOS EN EL SISTEMA
-                Proy1.ObtenerProducto(Integer.parseInt(codigo)).setCantidad(Proy1.ObtenerProducto(Integer.parseInt(codigo)).getCantidad() - Integer.parseInt(cantidad));
-                //MUESTRA EL TOTAL (DEFINITIVO O PARCIAL (DEPENDE SI YA CONCRETO LA VENTA O NO))
-                ttotal.setText(String.valueOf(df.format(Proy1.totals())));
+            try {
+                DecimalFormat df = new DecimalFormat("#.00");
+                if (cantidad.equals("") && codigo.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
+                } else if (cantidad.equals("") || codigo.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
+                } else if (productovacio(Integer.parseInt(codigo)) == true) {
+                    JOptionPane.showMessageDialog(null, "No hay disponibilidad del producto que solicita");
+                } else if (resta(Integer.parseInt(cantidad), Integer.parseInt(codigo)) == false) {
+                    try {
+                        JOptionPane.showMessageDialog(null, "La cantidad que solicita sobrepasa la cantidad de productos disponibles. \n Cantidad del producto disponible: " + Proy1.ObtenerProducto(Integer.parseInt(codigo)).getCantidad());
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Ingrese un codigo valido");
+                    }
+                } else {
+                    //PARA OBTENER EL SUBTOTAL HACE EL CALCULO DEL PRECIO * CANTIDAD
+                    Double subtotal = Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio() * Float.parseFloat(cantidad);
+                    //AÑADE EL PRODUCTO A LA CLASE COMPRAS
+                    Compras nuevo = new Compras(Integer.parseInt(codigo), Proy1.ObtenerProducto(Integer.parseInt(codigo)).getNombre(), Integer.parseInt(cantidad), (float) Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio(), subtotal);
+                    Proy1.AgregarCompra(nuevo);
+                    //BORRA EL CONTENIDO DE LOS TEXTFIELD
+                    tcodigoap.setText("");
+                    tcantidadap.setText("");
+                    //LIMPIA EL TEXTFIELD DE TOTAL
+                    ttotal.setText("");
+                    //VA DISMINUYENDO LA CANTIDAD DE PRODUCTOS EN EL SISTEMA
+                    Proy1.ObtenerProducto(Integer.parseInt(codigo)).setCantidad(Proy1.ObtenerProducto(Integer.parseInt(codigo)).getCantidad() - Integer.parseInt(cantidad));
+                    //MUESTRA EL TOTAL (DEFINITIVO O PARCIAL (DEPENDE SI YA CONCRETO LA VENTA O NO))
+                    ttotal.setText(String.valueOf(df.format(Proy1.totals())));
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un código valido");
             }
             //REFRESH
             JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -518,31 +534,40 @@ public class VNuevaV extends JPanel implements ActionListener {
             File factura = new File (ruta);
             Desktop.getDesktop().open(factura);
         }catch(IOException ex){
+            JOptionPane.showMessageDialog(null, "No se pudo abrir el archivo");
         }
     }
     
     //VERIFICA SI LA RESTA DE LA CANTIDAD PEDIDA CON LA CANTIDAD DE PRODUCTOS NO SOBREPASE DE 0
     public boolean resta(int cantidad, int codigo){
         int resta = 0;
-        for (int i = 0; i < Proy1.productos.length; i++) {
-            if (Proy1.productos[i] != null && Proy1.productos[i].getCodigo() == codigo) {
-                resta = Proy1.productos[i].getCantidad()-cantidad;
-                if (resta >= 0) {
-                    return true;
+        try {
+            for (int i = 0; i < Proy1.productos.length; i++) {
+                if (Proy1.productos[i] != null && Proy1.productos[i].getCodigo() == codigo) {
+                    resta = Proy1.productos[i].getCantidad() - cantidad;
+                    if (resta >= 0) {
+                        return true;
+                    }
                 }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un codigo valido");
         }
         return false;
     }
     
     //VERIFICA SI EL PRODUCTO TIENE UNA CANTIDAD MAYOR A 0
     public boolean productovacio(int codigo){
-        for (int i = 0; i < Proy1.productos.length; i++) {
-            if (Proy1.productos[i] != null && Proy1.productos[i].getCodigo()== codigo) {
-                if (Proy1.productos[i].getCantidad() == 0) {
-                    return true;
+        try {
+            for (int i = 0; i < Proy1.productos.length; i++) {
+                if (Proy1.productos[i] != null && Proy1.productos[i].getCodigo() == codigo) {
+                    if (Proy1.productos[i].getCantidad() == 0) {
+                        return true;
+                    }
                 }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un codigo valido");
         }
         return false;
     }

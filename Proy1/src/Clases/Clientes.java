@@ -1,14 +1,19 @@
 package Clases;
 
+//==================LIBRERIAS===============
+//IO-SERIALIZABLE
 import java.io.Serializable;
 
 public class Clientes implements Serializable{
+    
+    //ATRIBUTOS
     private int codigo;
     private String nombre;
     private int nit;
     private String correo;
     private String genero;
-
+    
+    //CONSTRUCTOR
     public Clientes(int codigo, String nombre, int nit, String correo, String genero) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -17,6 +22,7 @@ public class Clientes implements Serializable{
         this.genero = genero;
     }
     
+    //METODO PARA MOSTRAR LOS OBJETOS
     public void MostrarClientes(){
         System.out.println("==================================");
         System.out.println("==            CLIENTE          ==");

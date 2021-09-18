@@ -19,6 +19,7 @@ import java.io.FileReader;
 import Clases.Sucursales;
 import proy1.Proy1;
 import Listados.ListadoSucursales;
+import java.io.IOException;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class ASucursales extends JPanel implements ActionListener{
@@ -143,32 +144,29 @@ public class ASucursales extends JPanel implements ActionListener{
     }
     
     //METODO PARA QUE LEA EL ARCHIVO JSON Y LO META DENTRO DE LOS OBJETOS
-    public void convertirjson(String c){
+    public void convertirjson(String c) {
         JsonParser parser = new JsonParser();
         JsonArray ja = parser.parse(c).getAsJsonArray();
-        System.out.println("Tiene : " + ja.size() + " objetos");
         boolean error = false;
-        for (int i = 0; i < ja.size(); i++) {
+            for (int i = 0; i < ja.size(); i++) {
             JsonObject jobj = ja.get(i).getAsJsonObject();
-            
+
             int codigo = jobj.get("codigo").getAsInt();
             String nombre = jobj.get("nombre").getAsString();
             String direccion = jobj.get("direccion").getAsString();
             String correo = jobj.get("correo").getAsString();
             int telefono = jobj.get("telefono").getAsInt();
-            
+
             if (verificar(codigo) == false) {
-                try {
-                    Sucursales nuevo = new Sucursales(codigo, nombre, direccion, correo, telefono);
-                    Proy1.AgregarSucursales(nuevo);
-                    error = false;
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "El archivo seleccionado no es valido");
-                }
-            }else{
+                Sucursales nuevo = new Sucursales(codigo, nombre, direccion, correo, telefono);
+                Proy1.AgregarSucursales(nuevo);
+                error = false;
+
+            } else {
                 error = true;
-            }            
+            }
         }
+
         if (error == true) {
             JOptionPane.showMessageDialog(null, "No se pudieron cargar ciertas sucursales porque ya existen estos codigos de sucursales");
         }

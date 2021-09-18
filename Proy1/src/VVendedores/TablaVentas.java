@@ -1,7 +1,11 @@
 package VVendedores;
+
+//==================LIBRERIAS===============
+//AWT-SWING
 import java.awt.Component;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+
 public class TablaVentas extends DefaultTableCellRenderer{
     //RENDERIZAR LA TABLA PARA QUE PUEDA LEER DE MANERA CORRECTA LOS LABEL
     @Override

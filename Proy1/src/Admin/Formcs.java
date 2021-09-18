@@ -1,11 +1,17 @@
 package Admin;
-import Clases.Sucursales;
-import proy1.Proy1;
+
+//==================LIBRERIAS===============
+//AWT-SWING
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+//==================PAQUETES================
+import Clases.Sucursales;
+import proy1.Proy1;
+
 public class Formcs extends JFrame implements ActionListener{
     JLabel titulo, lcod, lnombre, ldireccion, lcorreo, ltelefono;
     JTextField tcod, tnombre, tdireccion, tcorreo, ttelefono;

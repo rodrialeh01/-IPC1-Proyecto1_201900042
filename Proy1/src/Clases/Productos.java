@@ -1,15 +1,19 @@
 package Clases;
 
+//==================LIBRERIAS===============
+//IO-SERIALIZABLE
 import java.io.Serializable;
 
 public class Productos implements Serializable{
+    
     //ATRIBUTOS
     private int codigo;
     private String nombre;
     private String descripcion;
     private int cantidad;
     private float precio;
-
+    
+    //CONSTRUCTOR
     public Productos(int codigo, String nombre, String descripcion, int cantidad, float precio) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -17,7 +21,8 @@ public class Productos implements Serializable{
         this.cantidad = cantidad;
         this.precio = precio;
     }
-
+    
+    //METODO PARA MOSTRAR LOS OBJETOS
     public void MostrarProductos(){
         System.out.println("==================================");
         System.out.println("==            PRODUCTO          ==");

@@ -1,12 +1,15 @@
 package Clases;
 
 public class Compras {
+    
+    //ATRIBUTOS
     private int codigo;
     private String nombre;
     private int cantidad;
     private float precio;
     private double subtotal;
-
+    
+    //CONSTRUCTOR
     public Compras(int codigo, String nombre, int cantidad, float precio, double subtotal) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -15,6 +18,7 @@ public class Compras {
         this.subtotal = subtotal;
     }
     
+    //ENCAPSULAMIENTO
     /**
      * @return the codigo
      */

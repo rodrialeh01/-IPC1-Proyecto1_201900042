@@ -160,7 +160,6 @@ public class AClientes extends JPanel implements ActionListener{
     public void convertirjson(String c){
         JsonParser parser = new JsonParser();
         JsonArray ja = parser.parse(c).getAsJsonArray();
-        System.out.println("Tiene : " + ja.size() + " objetos");
         boolean error = false;
         for (int i = 0; i < ja.size(); i++) {
             JsonObject jobj = ja.get(i).getAsJsonObject();

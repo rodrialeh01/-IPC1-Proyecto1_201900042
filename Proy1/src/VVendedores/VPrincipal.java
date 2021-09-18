@@ -2,12 +2,14 @@ package VVendedores;
 
 //==================LIBRERIAS===============
 //AWT-SWING
-import Login.Login;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+//==================PAQUETES===============
+import Login.Login;
 
 public class VPrincipal extends JFrame implements ActionListener{
     JButton cerrars;

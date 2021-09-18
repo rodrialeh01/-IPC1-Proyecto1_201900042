@@ -1,5 +1,7 @@
 package Clases;
 
+//==================LIBRERIAS===============
+//IO-SERIALIZABLE
 import java.io.Serializable;
 
 public class Sucursales implements Serializable{
@@ -10,7 +12,8 @@ public class Sucursales implements Serializable{
     private String direccion;
     private String correo;
     private int telefono;
-
+    
+    //CONSTRUCTOR
     public Sucursales(int codigo, String nombre, String direccion, String correo, int telefono) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -19,6 +22,7 @@ public class Sucursales implements Serializable{
         this.telefono = telefono;
     }
     
+    //METODO PARA MOSTRAR LOS OBJETOS
     public void MostrarSucursales(){
         System.out.println("====================================");
         System.out.println("==            SUCURSAL            ==");

@@ -1,11 +1,17 @@
 package Admin;
-import Clases.Productos;
-import proy1.Proy1;
+
+//==================LIBRERIAS===============
+//AWT-SWING
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+//==================PAQUETES================
+import Clases.Productos;
+import proy1.Proy1;
+
 public class Formcp extends JFrame implements ActionListener{
     
     JLabel titulo, lcod, lnombre, ldescripcion, lcantidad, lprecio;

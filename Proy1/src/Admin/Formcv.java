@@ -1,11 +1,17 @@
 package Admin;
-import Clases.Vendedores;
-import proy1.Proy1;
+
+//==================LIBRERIAS===============
+//AWT-SWING
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+//==================PAQUETES================
+import Clases.Vendedores;
+import proy1.Proy1;
+
 public class Formcv extends JFrame implements ActionListener{
     JLabel titulo, lcod, lnombre, lcaja, lventas, lgenero, lpassword;
     JTextField tcod, tnombre, tcaja, tventas, tgenero, tpassword;

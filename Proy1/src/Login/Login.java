@@ -97,6 +97,7 @@ public class Login extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
+        //TRY CATCH PARA EVITAR CUALQUIER POSIBLE ERROR EN LA AUTENTICACION DE USUARIOS
         try {
             if (ae.getSource() == inicio) {
                 usu = usuarios.getText();

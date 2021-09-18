@@ -1,9 +1,12 @@
 package Clases;
 
+//==================LIBRERIAS===============
+//IO-SERIALIZABLE
 import java.io.Serializable;
 
 public class Vendedores implements Serializable{
-
+    
+    //ATRIBUTOS
     private int codigo;
     private String nombre;
     private int caja;
