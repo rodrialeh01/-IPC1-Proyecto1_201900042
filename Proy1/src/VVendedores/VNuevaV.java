@@ -413,6 +413,10 @@ public class VNuevaV extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
             }else if (cantidad.equals("") || codigo.equals("")) {
                 JOptionPane.showMessageDialog(null, "Llene todos lo campos requeridos");
+            }else if(productovacio(Integer.parseInt(codigo)) == true){
+                JOptionPane.showMessageDialog(null, "No hay disponibilidad del producto que solicita");
+            }else if(resta(Integer.parseInt(cantidad), Integer.parseInt(codigo)) == false){
+                JOptionPane.showMessageDialog(null, "La cantidad que solicita sobrepasa la cantidad de productos disponibles. \n Cantidad del producto disponible: " + Proy1.ObtenerProducto(Integer.parseInt(codigo)).getCantidad());
             }else{
                 Double subtotal = Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio() * Float.parseFloat(cantidad);
                 Compras nuevo = new Compras(Integer.parseInt(codigo),Proy1.ObtenerProducto(Integer.parseInt(codigo)).getNombre(),Integer.parseInt(cantidad), (float) Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio(),subtotal);
@@ -453,7 +457,7 @@ public class VNuevaV extends JPanel implements ActionListener {
                 Factura factura = new Factura();
                 factura.CrearPDFF(Proy1.cventas);
                 
-                //SERIALIZACION DE LA ACTUALIZACION DE CAMBIOS EN LOS VENDEDORES Y EN LOS PRODUCTOS
+                //SERIALIZACION DE LA ACTUALIZACION DE CAMBIOS EN LOS VENDEDORES, VENTAS Y EN LOS PRODUCTOS
                 Proy1.EscribirVendedores(Proy1.vendedores);
                 Proy1.EscribirVentas(Proy1.ventas);
                 Proy1.EscribirProductos(Proy1.productos);
@@ -504,5 +508,31 @@ public class VNuevaV extends JPanel implements ActionListener {
             Desktop.getDesktop().open(factura);
         }catch(IOException ex){
         }
+    }
+    
+    //VERIFICA SI LA RESTA DE LA CANTIDAD PEDIDA CON LA CANTIDAD DE PRODUCTOS NO SOBREPASE DE 0
+    public boolean resta(int cantidad, int codigo){
+        int resta = 0;
+        for (int i = 0; i < Proy1.productos.length; i++) {
+            if (Proy1.productos[i] != null && Proy1.productos[i].getCodigo() == codigo) {
+                resta = Proy1.productos[i].getCantidad()-cantidad;
+                if (resta >= 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    //VERIFICA SI EL PRODUCTO TIENE UNA CANTIDAD MAYOR A 0
+    public boolean productovacio(int codigo){
+        for (int i = 0; i < Proy1.productos.length; i++) {
+            if (Proy1.productos[i] != null && Proy1.productos[i].getCodigo()== codigo) {
+                if (Proy1.productos[i].getCantidad() == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
