@@ -15,6 +15,9 @@ import java.util.Map;
 //TIME
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+//IO
+import java.io.File;
+import java.io.IOException;
 
 //==================PAQUETES================
 import proy1.Proy1;
@@ -23,8 +26,6 @@ import Clases.Compras;
 import Clases.Ventas;
 import Listados.Factura;
 import Login.Login;
-import java.io.File;
-import java.io.IOException;
 
 
 public class VNuevaV extends JPanel implements ActionListener {
@@ -418,15 +419,22 @@ public class VNuevaV extends JPanel implements ActionListener {
             }else if(resta(Integer.parseInt(cantidad), Integer.parseInt(codigo)) == false){
                 JOptionPane.showMessageDialog(null, "La cantidad que solicita sobrepasa la cantidad de productos disponibles. \n Cantidad del producto disponible: " + Proy1.ObtenerProducto(Integer.parseInt(codigo)).getCantidad());
             }else{
+                //PARA OBTENER EL SUBTOTAL HACE EL CALCULO DEL PRECIO * CANTIDAD
                 Double subtotal = Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio() * Float.parseFloat(cantidad);
+                //AÑADE EL PRODUCTO A LA CLASE COMPRAS
                 Compras nuevo = new Compras(Integer.parseInt(codigo),Proy1.ObtenerProducto(Integer.parseInt(codigo)).getNombre(),Integer.parseInt(cantidad), (float) Proy1.ObtenerProducto(Integer.parseInt(codigo)).getPrecio(),subtotal);
                 Proy1.AgregarCompra(nuevo);
+                //BORRA EL CONTENIDO DE LOS TEXTFIELD
                 tcodigoap.setText("");
                 tcantidadap.setText("");
+                //LIMPIA EL TEXTFIELD DE TOTAL
                 ttotal.setText("");
+                //VA DISMINUYENDO LA CANTIDAD DE PRODUCTOS EN EL SISTEMA
                 Proy1.ObtenerProducto(Integer.parseInt(codigo)).setCantidad(Proy1.ObtenerProducto(Integer.parseInt(codigo)).getCantidad() - Integer.parseInt(cantidad));
+                //MUESTRA EL TOTAL (DEFINITIVO O PARCIAL (DEPENDE SI YA CONCRETO LA VENTA O NO))
                 ttotal.setText(String.valueOf(df.format(Proy1.totals())));
             }
+            //REFRESH
             JFrame f = (JFrame) SwingUtilities.getWindowAncestor(this);
             f.dispose();
             VPrincipal vp = new VPrincipal();
@@ -440,6 +448,7 @@ public class VNuevaV extends JPanel implements ActionListener {
             }else if (clientescb.getSelectedItem().equals("") && Integer.parseInt(total) == 0) {
                 JOptionPane.showMessageDialog(null, "Tiene que existir un cliente y productos añadidos al carrito");
             }else{
+                //============PROCESO DE VENTA=============
                 //SE CREA UNA VENTA PARA EL VENDEDOR
                 Ventas nueva = new Ventas((Proy1.cventas+1),Proy1.DevolverCliente((String) clientescb.getSelectedItem()).getNit(),Proy1.DevolverCliente((String) clientescb.getSelectedItem()).getNombre(),String.valueOf(LocalDate.now().format(dtf)),Double.parseDouble(total));
                 Proy1.AgregarVenta(nueva);
@@ -461,6 +470,7 @@ public class VNuevaV extends JPanel implements ActionListener {
                 Proy1.EscribirVendedores(Proy1.vendedores);
                 Proy1.EscribirVentas(Proy1.ventas);
                 Proy1.EscribirProductos(Proy1.productos);
+                
                 //SE ELIMINA LOS OBJETOS DEL CARRITO (OBJETOS DE LA CLASE COMPRAS)
                 // CONVIERTE A LOS OBJETOS NULO
                 for (int i = 0; i < Proy1.ccompras; i++) {
@@ -501,6 +511,7 @@ public class VNuevaV extends JPanel implements ActionListener {
             }
         }
     }
+    
     //METODO PARA ABRIR LA FACTURA EN PDF
     public void abrirarchivo(String ruta){
         try{

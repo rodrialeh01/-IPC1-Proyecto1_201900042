@@ -1,11 +1,17 @@
 package Admin;
+//==================LIBRERIAS===============
+//AWT-SWING
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import javax.swing.*;
+//DECIMAL FORMAT
+import java.text.DecimalFormat;
+
+//==================PAQUETES================
 import proy1.Proy1;
+
 public class Formep extends JFrame implements ActionListener{
     JLabel titulo, lcod, lnombre, ldescripcion, lcantidad, lprecio;
     JTextField tcod, tnombre, tdescripcion, tcantidad, tprecio;

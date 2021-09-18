@@ -127,6 +127,7 @@ public class ASucursales extends JPanel implements ActionListener{
                 contenido += linea;
             }
             System.out.println(contenido);
+            //LLAMA AL METODO CONVERTIR JSON
             convertirjson(contenido);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "No se pudo abrir el archivo");
@@ -157,9 +158,13 @@ public class ASucursales extends JPanel implements ActionListener{
             int telefono = jobj.get("telefono").getAsInt();
             
             if (verificar(codigo) == false) {
-                Sucursales nuevo = new Sucursales(codigo, nombre, direccion, correo, telefono);
-                Proy1.AgregarSucursales(nuevo);
-                error = false;
+                try {
+                    Sucursales nuevo = new Sucursales(codigo, nombre, direccion, correo, telefono);
+                    Proy1.AgregarSucursales(nuevo);
+                    error = false;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "El archivo seleccionado no es valido");
+                }
             }else{
                 error = true;
             }            
