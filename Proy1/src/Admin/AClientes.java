@@ -1,4 +1,4 @@
-package Admin;
+   package Admin;
 
 //==================LIBRERIAS===============
 //LECTURA DE UN ARCHIVO JSON
@@ -161,7 +161,7 @@ public class AClientes extends JPanel implements ActionListener{
         JsonParser parser = new JsonParser();
         JsonArray ja = parser.parse(c).getAsJsonArray();
         System.out.println("Tiene : " + ja.size() + " objetos");
-        
+        boolean error = false;
         for (int i = 0; i < ja.size(); i++) {
             JsonObject jobj = ja.get(i).getAsJsonObject();
             
@@ -171,8 +171,16 @@ public class AClientes extends JPanel implements ActionListener{
             String correo = jobj.get("correo").getAsString();
             String genero = jobj.get("genero").getAsString();
             
-            Clientes nuevo = new Clientes(codigo,nombre,nit,correo,genero.toUpperCase());
-            Proy1.AgregarCliente(nuevo);
+            if (verificar(codigo) == false) {
+                Clientes nuevo = new Clientes(codigo, nombre, nit, correo, genero.toUpperCase());
+                Proy1.AgregarCliente(nuevo);
+                error = false;
+            }else{
+                error = true;
+            }            
+        }
+        if (error == true) {
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar ciertos clientes porque ya existen estos codigos de clientes");
         }
         Proy1.LeerCliente();
     }
@@ -231,5 +239,15 @@ public class AClientes extends JPanel implements ActionListener{
             ListadoClientes lc = new ListadoClientes();
             lc.CrearPDFC();
         }
+    }
+    
+    //VERIFICA SI YA EXISTE EL OBJETO
+    public boolean verificar(int cods) {
+        for (int i = 0; i<Proy1.clientes.length; i++) {
+            if (Proy1.clientes[i]!=null && Proy1.clientes[i].getCodigo()==cods) {
+                return true;
+            }
+        }
+        return false;
     }
 }

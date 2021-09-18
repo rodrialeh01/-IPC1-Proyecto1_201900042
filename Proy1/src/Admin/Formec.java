@@ -184,8 +184,8 @@ public class Formec extends JFrame implements ActionListener{
             if (Proy1.cclientes == 0) {
                 Proy1.clientes[0] = null;
             }
-            //ACTUALIZAR EL VECTOR 
-            repaint();
+            //SERIALIZAR LA ELIMINACION DEL OBJETO
+            Proy1.EscribirClientes(Proy1.clientes);
             Proy1.LeerCliente();
             JOptionPane.showMessageDialog(this, "Se ha eliminado al Cliente con éxito");
             this.dispose();

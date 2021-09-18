@@ -185,8 +185,8 @@ public class Formep extends JFrame implements ActionListener{
             if (Proy1.cproductos == 0) {
                 Proy1.productos[0] = null;
             }
-            //ACTUALIZAR EL VECTOR 
-            repaint();
+            //SERIALIZAR LA ELIMINACION DEL OBJETO
+            Proy1.EscribirProductos(Proy1.productos);
             Proy1.LeerSucursales();
             JOptionPane.showMessageDialog(this, "Se ha eliminado el Producto con éxito");
             this.dispose();

@@ -178,6 +178,8 @@ public class Formac extends JFrame implements ActionListener{
                         Proy1.clientes[i].setGenero(genero.toUpperCase());
                     }
                 }
+                //SERIALIZANDO LA ACTUALIZACION DEL OBJETO
+                Proy1.EscribirClientes(Proy1.clientes);
                 JOptionPane.showMessageDialog(this, "Se ha actualizado el Cliente con éxito");
                 this.dispose();
             }else{                

@@ -129,7 +129,6 @@ public class ASucursales extends JPanel implements ActionListener{
             System.out.println(contenido);
             convertirjson(contenido);
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "No se pudo abrir el archivo");
         } finally {
             try {
@@ -147,7 +146,7 @@ public class ASucursales extends JPanel implements ActionListener{
         JsonParser parser = new JsonParser();
         JsonArray ja = parser.parse(c).getAsJsonArray();
         System.out.println("Tiene : " + ja.size() + " objetos");
-        
+        boolean error = false;
         for (int i = 0; i < ja.size(); i++) {
             JsonObject jobj = ja.get(i).getAsJsonObject();
             
@@ -157,8 +156,16 @@ public class ASucursales extends JPanel implements ActionListener{
             String correo = jobj.get("correo").getAsString();
             int telefono = jobj.get("telefono").getAsInt();
             
-            Sucursales nuevo = new Sucursales(codigo,nombre,direccion,correo,telefono);
-            Proy1.AgregarSucursales(nuevo);
+            if (verificar(codigo) == false) {
+                Sucursales nuevo = new Sucursales(codigo, nombre, direccion, correo, telefono);
+                Proy1.AgregarSucursales(nuevo);
+                error = false;
+            }else{
+                error = true;
+            }            
+        }
+        if (error == true) {
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar ciertas sucursales porque ya existen estos codigos de sucursales");
         }
         Proy1.LeerSucursales();
     }
@@ -187,5 +194,14 @@ public class ASucursales extends JPanel implements ActionListener{
             ListadoSucursales ls = new ListadoSucursales();
             ls.CrearPDFS();
         }
+    }
+    //VERIFICA SI YA EXISTE EL OBJETO
+    public boolean verificar(int cod) {
+        for (int i = 0; i<Proy1.sucursales.length; i++) {
+            if (Proy1.sucursales[i]!=null && Proy1.sucursales[i].getCodigo()==cod) {
+                return true;
+            }
+        }
+        return false;
     }
 }

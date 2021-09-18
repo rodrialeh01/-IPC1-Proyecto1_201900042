@@ -179,6 +179,8 @@ public class Formas extends JFrame implements ActionListener{
                     Proy1.sucursales[i].setTelefono(Integer.parseInt(telefono));
                 }
             }
+            //SERIALIZA LA ACTUALIZACION DEL OBJETO
+            Proy1.EscribirSucursales(Proy1.sucursales);
             Proy1.LeerSucursales();
             JOptionPane.showMessageDialog(this, "Se ha actualizado la Sucursal con éxito");
             this.dispose();

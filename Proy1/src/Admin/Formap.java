@@ -180,7 +180,9 @@ public class Formap extends JFrame implements ActionListener{
                     Proy1.productos[i].setDescripcion(descripcion);
                     Proy1.productos[i].setPrecio(Float.parseFloat(precio));
                 }
-            }            
+            }
+            //SERIALIZA LA ACTUALIZACION DEL OBJETO
+            Proy1.EscribirProductos(Proy1.productos);
             JOptionPane.showMessageDialog(this, "Se ha actualizado el Producto con éxito");
             this.dispose();
             Proy1.LeerProducto();

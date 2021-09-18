@@ -207,7 +207,7 @@ public class AVendedores extends JPanel implements ActionListener{
         JsonParser parser = new JsonParser();
         JsonArray ja = parser.parse(c).getAsJsonArray();
         System.out.println("Tiene : " + ja.size() + " objetos");
-        
+        boolean error = false;
         for (int i = 0; i < ja.size(); i++) {
             JsonObject jobj = ja.get(i).getAsJsonObject();
             
@@ -218,8 +218,16 @@ public class AVendedores extends JPanel implements ActionListener{
             String genero = jobj.get("genero").getAsString();
             String password = jobj.get("password").getAsString();
             
-            Vendedores nuevo = new Vendedores(codigo,nombre,caja,ventas,genero.toUpperCase(),password);
-            Proy1.AgregarVendedor(nuevo);
+            if (verificar(codigo) == false) {
+                Vendedores nuevo = new Vendedores(codigo, nombre, caja, ventas, genero.toUpperCase(), password);
+                Proy1.AgregarVendedor(nuevo);
+                error = false;
+            }else{
+                error = true;
+            }            
+        }
+        if (error == true) {
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar ciertos vendedores porque ya existen estos codigos de vendedores");
         }
         Proy1.LeerVendedor();
     }
@@ -248,5 +256,15 @@ public class AVendedores extends JPanel implements ActionListener{
             ListadoVendedores lv = new ListadoVendedores();
             lv.CrearPDFV();
         }
+    }
+    
+    //VERIFICA SI YA EXISTE EL OBJETO
+    public boolean verificar(int cod) {
+        for (int i = 0; i<Proy1.vendedores.length; i++) {
+            if (Proy1.vendedores[i]!=null && Proy1.vendedores[i].getCodigo()==cod) {
+                return true;
+            }
+        }
+        return false;
     }
 }

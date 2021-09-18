@@ -185,7 +185,8 @@ public class Formes extends JFrame implements ActionListener{
             if (Proy1.csucursales == 0) {
                 Proy1.sucursales[0] = null;
             }
-            repaint();
+            //SERIALIZAR LA ELIMINACION DEL OBJETO
+            Proy1.EscribirSucursales(Proy1.sucursales);
             Proy1.LeerSucursales();
             JOptionPane.showMessageDialog(this, "Se ha eliminado la Sucursal con éxito");
             this.dispose();

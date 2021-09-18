@@ -198,6 +198,8 @@ public class Formav extends JFrame implements ActionListener{
                         Proy1.vendedores[i].setPassword(password);
                     }
                 }
+                //SERIALIZANDO EL OBJETO ACTUALIZADO
+                Proy1.EscribirVendedores(Proy1.vendedores);
                 JOptionPane.showMessageDialog(this, "Se ha actualizado el Vendedor con éxito");
                 this.dispose();
             }else{                

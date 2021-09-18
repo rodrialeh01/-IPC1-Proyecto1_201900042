@@ -211,7 +211,7 @@ public class AProductos extends JPanel implements ActionListener{
         JsonParser parser = new JsonParser();
         JsonArray ja = parser.parse(c).getAsJsonArray();
         System.out.println("Tiene : " + ja.size() + " objetos");
-        
+        boolean error = false;
         for (int i = 0; i < ja.size(); i++) {
             JsonObject jobj = ja.get(i).getAsJsonObject();
             
@@ -221,8 +221,16 @@ public class AProductos extends JPanel implements ActionListener{
             int cantidad = jobj.get("cantidad").getAsInt();
             float precio = jobj.get("precio").getAsFloat();
             
-            Productos nuevo = new Productos(codigo,nombre,descripcion,cantidad,precio);
-            Proy1.AgregarProducto(nuevo);
+            if (verificar(codigo) == false) {
+                Productos nuevo = new Productos(codigo, nombre, descripcion, cantidad, precio);
+                Proy1.AgregarProducto(nuevo);
+                error = false;
+            }else{
+                error = true;
+            }            
+        }
+        if (error == true) {
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar ciertos productos porque ya existen estos codigos de producto");
         }
         Proy1.LeerProducto();
     }
@@ -251,5 +259,15 @@ public class AProductos extends JPanel implements ActionListener{
             ListadoProductos lp = new ListadoProductos();
             lp.CrearPDFP();
         }
+    }
+    
+    //VERIFICA SI YA EXISTE EL OBJETO
+    public boolean verificar(int cod) {
+        for (int i = 0; i<Proy1.productos.length; i++) {
+            if (Proy1.productos[i]!=null && Proy1.productos[i].getCodigo()==cod) {
+                return true;
+            }
+        }
+        return false;
     }
 }
