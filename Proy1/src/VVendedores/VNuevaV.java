@@ -452,6 +452,11 @@ public class VNuevaV extends JPanel implements ActionListener {
                 //SE MANDA A LLAMAR A LA CLASE FACTURA PARA CREARLA
                 Factura factura = new Factura();
                 factura.CrearPDFF(Proy1.cventas);
+                
+                //SERIALIZACION DE LA ACTUALIZACION DE CAMBIOS EN LOS VENDEDORES Y EN LOS PRODUCTOS
+                Proy1.EscribirVendedores(Proy1.vendedores);
+                Proy1.EscribirVentas(Proy1.ventas);
+                Proy1.EscribirProductos(Proy1.productos);
                 //SE ELIMINA LOS OBJETOS DEL CARRITO (OBJETOS DE LA CLASE COMPRAS)
                 // CONVIERTE A LOS OBJETOS NULO
                 for (int i = 0; i < Proy1.ccompras; i++) {
