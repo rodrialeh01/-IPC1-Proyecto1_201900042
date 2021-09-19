@@ -193,8 +193,6 @@ public class Proy1 {
             for (int i = 0; i < cproductos; i++) {
                 if (productos[i] != null && productos[i].getCodigo() == codigo) {
                     return productos[i];
-                } else {
-                    return null;
                 }
             }
         } catch (Exception e) {

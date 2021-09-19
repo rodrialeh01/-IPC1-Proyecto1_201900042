@@ -168,7 +168,7 @@ public class Vendedores implements Serializable{
     /**
      * @param password the password to set
      */
-    public void setPassword(String genero) {
+    public void setPassword(String password) {
         this.password = password;
     }
     /**

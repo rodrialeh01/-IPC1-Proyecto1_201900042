@@ -145,10 +145,14 @@ public class AVendedores extends JPanel implements ActionListener{
         Proy1.ordenamientoVendedores(arraytempg);
         //SE MANDAN LOS DATOS PARA LA GRAFICA PONIENDO SOLO 3
         DefaultCategoryDataset datosbarra = new DefaultCategoryDataset();
-        for (int i = 0; i < 3; i++) {
-            if (arraytempg!=null && arraytempg[i].getVentas() != 0) {
-                datosbarra.setValue(arraytempg[i].getVentas(), arraytempg[i].getNombre(), String.valueOf(arraytempg[i].getVentas()));
+        //SE APLICO UN TRYCATCH PARA EVITAR ALGUN ERROR CON LA GRAFICA
+        try {
+            for (int i = 0; i < 3; i++) {
+                if (arraytempg != null && arraytempg[i].getVentas() != 0) {
+                    datosbarra.setValue(arraytempg[i].getVentas(), arraytempg[i].getNombre(), String.valueOf(arraytempg[i].getVentas()));
+                }
             }
+        }catch(Exception e){
         }
         //SE DIBUJA LA GRAFICA
         JFreeChart barras = ChartFactory.createBarChart("Top 3 - Vendedores con más Ventas","Vendedores", "Ventas", datosbarra,PlotOrientation.VERTICAL,true,false, false);

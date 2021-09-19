@@ -46,9 +46,9 @@ public class Formep extends JFrame implements ActionListener{
         this.add(tcod);
         
         //BOTON DE BUSCAR
-        buscar = new JButton("Century Gothic");
+        buscar = new JButton("Buscar");
         buscar.setBounds(280,100,100,30);
-        buscar.setFont(new Font("Arial", Font.PLAIN,18));
+        buscar.setFont(new Font("Century Gothic", Font.PLAIN,18));
         buscar.addActionListener(this);
         buscar.setVisible(true);
         this.add(buscar);
