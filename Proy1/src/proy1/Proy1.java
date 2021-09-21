@@ -504,7 +504,7 @@ public class Proy1 {
         }
     }
     
-    //LOGIN DE LOS VENDEDORES
+    //================LOGIN DE LOS VENDEDORES=================
     
     //VERIFICA SI EXISTE EL VENDEDOR
     public static boolean verificar(int codv) {

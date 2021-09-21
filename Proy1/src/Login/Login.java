@@ -16,7 +16,6 @@ public class Login extends JFrame implements ActionListener{
     JLabel title, us, pas, img;
     static JTextField usuarios;
     static JPasswordField contraseñas;
-    JRadioButton admin, vendedor;
     static String usu, contra;
     public static String usuv, genv;
     public static Vendedores objv;

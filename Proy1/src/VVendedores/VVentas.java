@@ -27,7 +27,6 @@ public class VVentas extends JPanel implements ActionListener, MouseListener{
     JTextField nfacturaft, nitft, nombreft,fechaft;
     String factura, nit, nombre,fecha;
     JButton aplicarf;
-    JComboBox clientescb;
     static JTable vfiltrados;
     static Object[][] ventas;    
     Color azul = new Color(38,36,89);

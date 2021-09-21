@@ -23,9 +23,8 @@ import java.io.IOException;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class ASucursales extends JPanel implements ActionListener{
-    JButton crears, cargars, actualizars, eliminars, exportars, actualizarps;
+    JButton crears, cargars, actualizars, eliminars, exportars;
     static JTable tablas;
-    JPanel esptab;
     static Object[][] datos;
     public ASucursales(){
         //COLORES
