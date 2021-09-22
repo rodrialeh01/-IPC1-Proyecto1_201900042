@@ -156,32 +156,30 @@ public class Proy1 {
     
     //SE ORDENARAN LOS OBJETOS DE MAYOR CANTIDAD HASTA MENOR CANTIDAD USANDO UN ALGORITMO DE ORDENAMIENTO
     public static void ordenamientoProductos(Productos[] prod){
-        try{
-            for (int i = 1; i < prod.length; i++) {
-                for (int j = i - 1; j >= 0; j--) {
-                    if (prod[i].getCantidad() > prod[j].getCantidad()) {
-                        Productos aux = prod[i];
-                        prod[i] = prod[j];
-                        prod[j] = aux;
-                        i--;
-                    }
+        try {
+            for (int i = 1; i < prod.length; i++){ 
+                Productos aux = prod[i];
+                int j = i - 1;
+                while ((j >= 0) && (aux.getCantidad() > prod[j].getCantidad())){  
+                    prod[j + 1] = prod[j]; 
+                    j--;
                 }
+                prod[j + 1] = aux;
             }
-        }catch(Exception e){            
+        } catch (Exception e) {
         }
     }
     //SE ORDENARAN LOS OBJETOS DE MAYOR A MENOR POR MEDIO DEL CODIGO DEL PRODUCTO
     public static void ordenamientoProductosT(Productos[] prod){
         try{
-            for (int i = 1; i < prod.length; i++) {
-                for (int j = i - 1; j >= 0; j--) {
-                    if (prod[i].getCodigo() < prod[j].getCodigo()) {
-                        Productos aux = prod[i];
-                        prod[i] = prod[j];
-                        prod[j] = aux;
-                        i++;
-                    }
+            for (int i = 1; i < prod.length; i++){ 
+                Productos aux = prod[i];
+                int j = i - 1;
+                while ((j >= 0) && (aux.getCodigo() > prod[j].getCodigo())){  
+                    prod[j + 1] = prod[j]; 
+                    j--;
                 }
+                prod[j + 1] = aux;
             }
         }catch(Exception e){            
         }
@@ -488,17 +486,16 @@ public class Proy1 {
     }
     
     //SE ORDENARAN LOS OBJETOS DE MAYOR CANTIDAD DE VENTAS HASTA MENOR CANTIDAD DE VENTAS USANDO UN ALGORITMO DE ORDENAMIENTO
-    public static void ordenamientoVendedores(Vendedores[] ventas){
+    public static void ordenamientoVendedores(Vendedores[] ventasven){
         try{
-            for (int i = 1; i < ventas.length; i++) {
-                for (int j = i - 1; j >= 0; j--) {
-                    if (ventas[i].getVentas() > ventas[j].getVentas()) {
-                        Vendedores aux = ventas[i];
-                        ventas[i] = ventas[j];
-                        ventas[j] = aux;
-                        i--;
-                    }
+            for (int i = 1; i < ventasven.length; i++){ 
+                Vendedores aux = ventasven[i];
+                int j = i - 1;
+                while ((j >= 0) && (aux.getVentas()> ventasven[j].getVentas())){  
+                    ventasven[j + 1] = ventasven[j]; 
+                    j--;
                 }
+                ventasven[j + 1] = aux;
             }
         }catch(Exception e){            
         }
